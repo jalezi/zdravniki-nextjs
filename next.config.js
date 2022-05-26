@@ -8,6 +8,15 @@ const nextConfig = {
   },
   i18n,
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/gp",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
