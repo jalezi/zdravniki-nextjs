@@ -1,7 +1,8 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Head from "next/head";
 import styled from "styled-components";
+
+import SEO from "../components/SEO";
 
 const StyledMain = styled.main`
   background: red;
@@ -9,25 +10,27 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticProps({ locale }) {
+  if (locale === "default") {
+    return { notFound: true };
+  }
+
+  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
       // Will be passed to the page component as props
+      url: PUBLIC_URL,
     },
   };
 }
-export default function Home() {
+export default function Home({ url }) {
   const { t } = useTranslation("common");
-  const headTranslations = t("head", { returnObjects: true });
+  const { title, description } = t("head", { returnObjects: true });
 
   return (
     <>
-      <Head>
-        <title>{headTranslations.title} - Sledilnik</title>
-        <meta name="description" content={headTranslations.description} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <SEO title={title} description={description} url={url} />
       <StyledMain>Hello world</StyledMain>
     </>
   );
