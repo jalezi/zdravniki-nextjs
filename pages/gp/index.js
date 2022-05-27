@@ -5,7 +5,6 @@ import styled from "styled-components";
 import SEO from "../../components/SEO";
 
 const StyledMain = styled.main`
-  background: red;
   height: 100%;
 `;
 export async function getStaticProps({ locale }) {
