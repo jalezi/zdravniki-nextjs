@@ -81,10 +81,6 @@ const StyledImgWrapper = styled.div`
 `;
 
 export async function getStaticProps({ locale }) {
-  if (locale === "default") {
-    return { notFound: true };
-  }
-
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
 
   return {
