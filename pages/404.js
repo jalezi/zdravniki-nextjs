@@ -7,20 +7,17 @@ import styled from "styled-components";
 import SEO from "../components/SEO";
 import image from "../public/doctor-404.png";
 
-const StyledHeader = styled.header`
-  height: 56px;
-  background-color: rgb(38, 197, 237);
-  @media only screen and (min-width: 768px) {
-    height: 64px;
-  }
-`;
+import Header from "./Header";
 
 const StyledMain = styled.main`
-  min-height: calc(100% - 56px);
   display: grid;
   justify-content: center;
   align-content: center;
   grid-gap: 0.75em;
+
+  height: calc(100% - 56px);
+
+  text-align: center;
 
   > * {
     margin-inline: auto;
@@ -29,12 +26,11 @@ const StyledMain = styled.main`
   > h1 {
     font-size: 1.7rem;
     font-weight: 600;
-    text-align: center;
   }
 
   > a {
     text-size-adjust: 100%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: center;
     outline: none;
     background: rgb(33, 37, 41);
@@ -46,6 +42,7 @@ const StyledMain = styled.main`
   }
 
   @media only screen and (min-width: 380px) {
+    font-size: 1rem;
     grid-gap: 1.4em;
 
     > h1 {
@@ -65,19 +62,14 @@ const StyledMain = styled.main`
       padding: 5px 20px;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    max-height: calc(100% - 64px);
+  }
 `;
 
 const StyledImgWrapper = styled.div`
-  max-width: 240px;
-
-  @media only screen and (min-width: 420px) {
-    max-width: 320px;
-  }
-
-  @media only screen and (max-height: 620px) and (orientation: landscape) {
-    max-width: 100px;
-    font-size: 1.5rem;
-  }
+  max-width: 135px;
 `;
 
 export async function getStaticProps({ locale }) {
@@ -101,7 +93,7 @@ export default function Custom404() {
   return (
     <>
       <SEO title={title} description={description} />
-      <StyledHeader>Header</StyledHeader>
+      <Header />
       <StyledMain>
         <h1>{tPageNotFound("h1")}</h1>
         <p>{tPageNotFound("text")}</p>
