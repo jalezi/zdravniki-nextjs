@@ -101,7 +101,7 @@ export default function Custom404() {
           <Image
             alt="not found"
             src={image}
-            srcSet={`/doctor-404.png 1x,/doctor-404@2x.png 2x`}
+            srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
           />
         </StyledImgWrapper>
         <Link href="/">{tPageNotFound("link")}</Link>

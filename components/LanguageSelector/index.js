@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 
-const LANGUAGES_MAP = {
-  sl: "Slovenščina",
-  en: "English",
-  it: "Italiano",
-};
+// const LANGUAGES_MAP = {
+//   sl: "Slovenščina",
+//   en: "English",
+//   it: "Italiano",
+// };
 
 export default function LanguageSelector() {
   const { register, handleSubmit } = useForm();
@@ -29,6 +29,7 @@ export default function LanguageSelector() {
     <form onSubmit={handleSubmit(onSubmit)} onChange={onLngChange}>
       <select
         defaultValue={router.locale}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...register("lngSelector")}
         type="submit"
       >

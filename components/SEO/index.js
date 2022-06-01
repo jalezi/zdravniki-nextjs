@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const SEO = function SEO({ title, description, url }) {
   const socialImgUrl = `${url}/share-card-photo.png`;
-  // console.log({ title, description, url });
   return (
     <Head>
       <title>{title} - Sledilnik</title>
@@ -45,9 +44,9 @@ const SEO = function SEO({ title, description, url }) {
 };
 
 SEO.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  url: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default SEO;
