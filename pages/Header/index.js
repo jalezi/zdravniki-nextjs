@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
+import LanguageSelector from "../../components/LanguageSelector";
 import fbSVG from "../../public/icon-fb.svg";
 import twSVG from "../../public/icon-tw.svg";
 import logo from "../../public/zdravniki-sledilnik-logo.svg";
@@ -103,6 +104,9 @@ const Header = function Header() {
               </a>
             </li>
           </StyledSocialIcons>
+          <li>
+            <LanguageSelector />
+          </li>
         </StyledList>
       </StyledNav>
     </StyledHeader>
