@@ -3,9 +3,14 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 
 import SEO from "../../components/SEO";
+import Header from "../Header";
 
 const StyledMain = styled.main`
-  height: 100%;
+  height: calc(100% - 56px);
+
+  @media only screen and (min-width: 768px) {
+    max-height: calc(100% - 64px);
+  }
 `;
 export async function getStaticProps({ locale }) {
   if (locale === "default") {
@@ -29,6 +34,7 @@ export default function GP({ url }) {
   return (
     <>
       <SEO title={title} description={description} url={url} />
+      <Header />
       <StyledMain>GP</StyledMain>
     </>
   );
