@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 // const LANGUAGES_MAP = {
 //   sl: "Slovenščina",
@@ -9,36 +9,46 @@ import { useForm } from "react-hook-form";
 // };
 
 export default function LanguageSelector() {
-  const { register, handleSubmit } = useForm();
   const hiddenInputRef = useRef();
 
   const router = useRouter();
+  const { handleSubmit, control, setValue } = useForm({
+    defaultValues: { lngSelector: router.locale },
+  });
   const locales = router.locales.filter((lng) => lng !== "default");
 
   const onSubmit = (data) => {
-    // i18n.changeLanguage(data.lngSelector);
     router.push(router.pathname, router.pathname, { locale: data.lngSelector });
   };
 
-  const onLngChange = () => {
+  const onLngChange = (e) => {
+    setValue("lngSelector", e.target.value);
     hiddenInputRef.current.click();
   };
 
   // TODO: where should I put "aria-label='Selected language: English'"
   return (
-    <form onSubmit={handleSubmit(onSubmit)} onChange={onLngChange}>
-      <select
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Controller
+        control={control}
+        name="lngSelector"
         defaultValue={router.locale}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...register("lngSelector")}
-        type="submit"
-      >
-        {locales.map((lng) => (
-          <option key={lng} value={lng}>
-            {lng.toUpperCase()}
-          </option>
-        ))}
-      </select>
+        render={({ field: { value, name, onBlur } }) => (
+          <select
+            name={name}
+            value={value}
+            onBlur={onBlur}
+            onChange={onLngChange}
+          >
+            {locales.map((lng) => (
+              <option key={lng} value={lng}>
+                {lng.toUpperCase()}
+              </option>
+            ))}
+          </select>
+        )}
+      />
+
       <input ref={hiddenInputRef} type="submit" hidden />
     </form>
   );
