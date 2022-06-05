@@ -2,12 +2,15 @@
 /* eslint-disable react/prop-types */
 import { appWithTranslation } from "next-i18next";
 import Head from "next/head";
+import { ThemeProvider } from "styled-components";
+
+import { theme } from "../constants/theme";
 
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Head>
         <style>
           @import
@@ -15,7 +18,7 @@ function MyApp({ Component, pageProps }) {
         </style>
       </Head>
       <Component {...pageProps} />
-    </>
+    </ThemeProvider>
   );
 }
 
