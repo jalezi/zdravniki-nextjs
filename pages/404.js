@@ -2,12 +2,12 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import Link from "next/link";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import Header from "../components/Header";
 import SEO from "../components/SEO";
 import image from "../public/doctor-404.png";
-
-import Header from "./Header";
 
 const StyledMain = styled.main`
   display: grid;
@@ -84,7 +84,7 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-export default function Custom404() {
+export default function Custom404({ url }) {
   const { t: tCommon } = useTranslation("common");
   const { t: tPageNotFound } = useTranslation("pageNotFound");
   const { description } = tCommon("head", { returnObjects: true });
@@ -92,7 +92,7 @@ export default function Custom404() {
 
   return (
     <>
-      <SEO title={title} description={description} />
+      <SEO title={title} description={description} url={url} />
       <Header />
       <StyledMain>
         <h1>{tPageNotFound("h1")}</h1>
@@ -109,3 +109,5 @@ export default function Custom404() {
     </>
   );
 }
+
+Custom404.propTypes = { url: PropTypes.string.isRequired };

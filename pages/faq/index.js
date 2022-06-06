@@ -1,8 +1,8 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 
+import Header from "../../components/Header";
 import SEO from "../../components/SEO";
-import Header from "../Header";
 
 const StyledMain = styled.main`
   height: calc(100% - 56px);
