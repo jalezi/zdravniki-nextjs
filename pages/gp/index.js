@@ -22,7 +22,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common", "header"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
     },

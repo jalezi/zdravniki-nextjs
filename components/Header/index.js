@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -11,6 +12,7 @@ import * as Styled from "./styles";
 
 const Header = function Header() {
   const router = useRouter();
+  const { t: tHeader } = useTranslation("header");
   return (
     <Styled.Header>
       <Link href="/">
@@ -23,14 +25,14 @@ const Header = function Header() {
           <li>
             <Link href="/gp" passHref>
               <Styled.A className={router.pathname === "/gp" ? "active" : ""}>
-                Imenik
+                {tHeader("home")}
               </Styled.A>
             </Link>
           </li>
           <li>
             <Link href="/faq" passHref>
               <Styled.A className={router.pathname === "/faq" ? "active" : ""}>
-                Pojasnila
+                {tHeader("faq")}
               </Styled.A>
             </Link>
           </li>
@@ -39,7 +41,7 @@ const Header = function Header() {
               <Styled.A
                 className={router.pathname === "/about" ? "active" : ""}
               >
-                O projektu
+                {tHeader("about")}
               </Styled.A>
             </Link>
           </li>
@@ -52,7 +54,7 @@ const Header = function Header() {
                 e.target.blur();
               }}
             >
-              Podpri
+              {tHeader("support")}
             </Styled.A>
           </li>
           <li>
