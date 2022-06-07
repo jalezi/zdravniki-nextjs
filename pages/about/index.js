@@ -1,22 +1,29 @@
-import styled from "styled-components";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
 
-import Header from "../../components/Header";
-import SEO from "../../components/SEO";
+import LanguagePageMDX from "../../components/LanguagePageMDX";
+import MDXLayout from "../../layouts/MDXLayout";
 
-const StyledMain = styled.main`
-  height: calc(100% - 56px);
+export async function getStaticProps({ locale }) {
+  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
 
-  @media only screen and (min-width: 768px) {
-    max-height: calc(100% - 64px);
-  }
-`;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+      // Will be passed to the page component as props
+      url: PUBLIC_URL,
+    },
+  };
+}
 
-export default function About() {
+export default function About({ url }) {
+  const router = useRouter();
   return (
-    <>
-      <SEO title="About" />
-      <Header />
-      <StyledMain>About</StyledMain>
-    </>
+    <MDXLayout title="About" description="Some Description" url={url}>
+      <LanguagePageMDX slug="about" name={router.locale} />
+    </MDXLayout>
   );
 }
+
+About.propTypes = { url: PropTypes.string.isRequired };
