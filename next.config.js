@@ -1,5 +1,6 @@
 const { i18n } = require("./next-i18next.config");
 
+// eslint-disable-next-line import/order
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
   options: {
