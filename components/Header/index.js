@@ -1,36 +1,72 @@
-import Image from "next/image";
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import fbSVG from "../../public/icon-fb.svg";
-import twSVG from "../../public/icon-tw.svg";
-import logo from "../../public/zdravniki-sledilnik-logo.svg";
+import FbIcon from "../../assets/svg/icon-fb.svg";
+import TwIcon from "../../assets/svg/icon-tw.svg";
+import Logo from "../../assets/svg/zdravniki-sledilnik-logo.svg";
 import LanguageSelector from "../LanguageSelector";
 
 import * as Styled from "./styles";
 
 const Header = function Header() {
+  const router = useRouter();
   return (
     <Styled.Header>
-      <Image
-        layout="fixed"
-        src={logo}
-        alt="logo zdravniki"
-        width={142}
-        height={64}
-      />
+      <Link href="/">
+        <a>
+          <Logo />
+        </a>
+      </Link>
       <Styled.Nav>
         <Styled.List>
           <li>
-            <Link href="/">Imenik</Link>
+            <Link href="/gp" passHref>
+              <Styled.A className={router.pathname === "/gp" ? "active" : ""}>
+                Imenik
+              </Styled.A>
+            </Link>
           </li>
           <li>
-            <Link href="/faq">Pojasnila</Link>
+            <Link href="/faq" passHref>
+              <Styled.A className={router.pathname === "/faq" ? "active" : ""}>
+                Pojasnila
+              </Styled.A>
+            </Link>
           </li>
           <li>
-            <Link href="/about">O projektu</Link>
+            <Link href="/about" passHref>
+              <Styled.A
+                className={router.pathname === "/about" ? "active" : ""}
+              >
+                O projektu
+              </Styled.A>
+            </Link>
           </li>
-          <li>Podpri</li>
-          <li>Sledilnik.org</li>
+          <li>
+            <Styled.A
+              href="https://covid-19.sledilnik.org/sl/donate"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.target.blur();
+              }}
+            >
+              Podpri
+            </Styled.A>
+          </li>
+          <li>
+            <Styled.A
+              href="https://covid-19.sledilnik.org/sl"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.target.blur();
+              }}
+            >
+              Sledilnik.org
+            </Styled.A>
+          </li>
           <Styled.SocialIcons>
             <li>
               <a
@@ -38,13 +74,7 @@ const Header = function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image
-                  layout="fixed"
-                  src={fbSVG}
-                  alt="facebook logo"
-                  width={24}
-                  height={24}
-                />
+                <FbIcon />
               </a>
             </li>
             <li>
@@ -53,13 +83,7 @@ const Header = function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image
-                  layout="fixed"
-                  src={twSVG}
-                  alt="twitter logo"
-                  width={24}
-                  height={24}
-                />
+                <TwIcon />
               </a>
             </li>
           </Styled.SocialIcons>
