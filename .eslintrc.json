@@ -4,6 +4,7 @@
   },
   "extends": [
     "next/core-web-vitals",
+    "plugin:mdx/recommended",
     "eslint:recommended",
     "airbnb",
     "airbnb/hooks",
@@ -25,7 +26,8 @@
           "src/"
         ]
       }
-    }
+    },
+    "mdx/code-blocks": true
   },
   "rules": {
     "no-unused-vars": "off",
@@ -74,6 +76,7 @@
       1,
       {
         "extensions": [
+          ".mdx",
           ".js",
           ".jsx"
         ]

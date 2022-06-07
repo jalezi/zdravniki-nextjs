@@ -1,0 +1,4 @@
+content/**/*.md
+content/**/*.mdx
+pages/**/*.md
+pages/**/*.mdx
