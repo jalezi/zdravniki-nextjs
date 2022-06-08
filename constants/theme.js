@@ -1,3 +1,7 @@
+const colors = {
+  brand: "#26c5ed",
+};
+
 const theme = {
   primary1: "#51BAF7",
   primary2: "#3CAAEA",
@@ -22,6 +26,20 @@ const theme = {
   bgColor1: "#F4F8F8",
   bgColor2: "#E8EFF0",
   brand: "#26c5ed",
+
+  MD: {
+    textColor: "rgba(0, 0, 0, 0.7)",
+    linkColor: "rgba(0, 0, 0, 0.8)",
+    elementBoxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.15)",
+    linkBoxShadow: `inset 0 0px 0 white, inset 0 -4px ${colors.brand}`,
+    linkBoxShadowHover: `inset 0 0px 0 white, inset 0 -20px ${colors.brand}`,
+    summaryBorder: "#DEDEDE",
+    summaryText: "rgba(0, 0, 0, 0.75)",
+    tableTdBorder: "rgba(0, 0, 0, 0.45)",
+    dataTermBoxShadow: `inset 0 0 0 white, inset 0 -4px ${colors.brand}`,
+    dataTermBoxShadowHover: `inset 0 0 0 white, inset 0 -20px ${colors.brand}`,
+    dataTermBcgColor: "#414040",
+  },
 
   mobileBreakPoint: {
     SP: `380px`,

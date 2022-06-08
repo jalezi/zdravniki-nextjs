@@ -1,22 +1,9 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import AboutEN from "../../content/en/about.mdx";
 import AboutIT from "../../content/it/about.mdx";
 import AboutSL from "../../content/sl/about.mdx";
-
-const Heading = styled.h1`
-  color: green;
-`;
-
-const mdComponents = {
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  h1: (props) => <Heading {...props} />,
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  h2: (props) => <Heading as="h2" {...props} />,
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  h3: (props) => <Heading as="h3" {...props} />,
-};
+import { mdComponents } from "../../layouts/MDXLayout/mdComponents";
 
 const AboutIntlMap = {
   it: AboutIT,
@@ -30,7 +17,7 @@ const PagesIntlMap = {
 
 const LanguagePageMDX = function LanguagePageMDX({ slug, name }) {
   const Page = PagesIntlMap[slug][name];
-  return <Page components={mdComponents} />;
+  return <Page components={mdComponents} id="about-mdx" />;
 };
 
 export default LanguagePageMDX;
