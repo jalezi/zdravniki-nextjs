@@ -30,7 +30,7 @@ export const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 `;
 export const SocialIcons = styled.ul`
   display: flex;
