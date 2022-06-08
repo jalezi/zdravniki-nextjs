@@ -8,6 +8,9 @@ import MDXLayout from "../../layouts/MDXLayout";
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
+  if (locale === "default") {
+    return { notFound: true };
+  }
 
   return {
     props: {
