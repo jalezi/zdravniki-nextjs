@@ -12,6 +12,13 @@ const withMDX = require("@next/mdx")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ["js", "jsx", "md", "mdx"],
+  compiler: {
+    styledComponents: true,
+  },
+  i18n,
+  trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -21,12 +28,6 @@ const nextConfig = {
 
     return config;
   },
-  reactStrictMode: true,
-  compiler: {
-    styledComponents: true,
-  },
-  i18n,
-  trailingSlash: true,
   async redirects() {
     return [
       {
@@ -40,5 +41,4 @@ const nextConfig = {
 
 module.exports = withMDX({
   ...nextConfig,
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 });
