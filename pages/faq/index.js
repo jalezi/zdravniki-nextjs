@@ -1,38 +1,13 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import Header from "../../components/Header";
-import SEO from "../../components/SEO";
+import Section from "../../components/Section";
+import MDXLayout from "../../layouts/MDXLayout";
+import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 
-const StyledMain = styled.main`
-  height: calc(100% - 56px);
-
-  @media only screen and (min-width: 768px) {
-    max-height: calc(100% - 64px);
-  }
-`;
-
-const Section = function Section({ sectionData }) {
-  return sectionData.map((section) => (
-    <div key={`${section.position}-faq`}>
-      <p>{section.position}</p>
-      <h2>{section.question ?? section.term}</h2>
-      <p>{section.answer ?? section.definition}</p>
-      <p>{section.slug}</p>
-    </div>
-  ));
-};
-
-Section.propTypes = {
-  sectionData: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape(QuestionPropType)),
-    PropTypes.arrayOf(PropTypes.shape(GlossaryPropType)),
-  ]),
-};
-
 export async function getStaticProps({ locale }) {
+  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
   if (locale === "default") {
     return { notFound: true };
   }
@@ -41,8 +16,6 @@ export async function getStaticProps({ locale }) {
     `${process.env.CONTENT_ENDPOINT_BASE}/faq/3/?lang=${locale}`
   );
   const data = await response.json();
-
-  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
 
   return {
     props: {
@@ -57,14 +30,17 @@ export async function getStaticProps({ locale }) {
 
 export default function Faq({ url, data }) {
   return (
-    <>
-      <SEO title="FAQ" description="Some description" url={url} />
-      <Header />
-      <StyledMain>
-        {/* <Section sectionData={data.faq} /> */}
-        <Section sectionData={data.glossary} />
-      </StyledMain>
-    </>
+    <MDXLayout title="FAQ" description="Some description" url={url}>
+      <MDXLayoutStyles.H1>Pogosta vprašanja in odgovori</MDXLayoutStyles.H1>
+      <MDXLayoutStyles.P>
+        V primeru, da potrebujete nujno medicinsko pomoč, se obrnite na lokalno
+        urgentno službo oz. pokličite 112.
+      </MDXLayoutStyles.P>
+      <MDXLayoutStyles.H2>Splošno</MDXLayoutStyles.H2>
+      <Section sectionData={data.faq} />
+      <MDXLayoutStyles.H2>Slovar izrazov</MDXLayoutStyles.H2>
+      <Section sectionData={data.glossary} />
+    </MDXLayout>
   );
 }
 

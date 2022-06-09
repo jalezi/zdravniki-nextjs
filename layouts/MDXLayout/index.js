@@ -6,10 +6,10 @@ import { ChildrenPropType } from "../../types";
 
 import * as Styled from "./styles";
 
-export default function MDXLayout({ children, url }) {
+export default function MDXLayout({ children, url, title, description }) {
   return (
     <>
-      <SEO title="About" description="Some description" url={url} />
+      <SEO title={title} description={description} url={url} />
       <Header />
       <Styled.CustomContainer>
         <Styled.StaticPageWrapper>{children}</Styled.StaticPageWrapper>
@@ -20,5 +20,7 @@ export default function MDXLayout({ children, url }) {
 
 MDXLayout.propTypes = {
   url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   children: ChildrenPropType.isRequired,
 };
