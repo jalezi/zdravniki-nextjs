@@ -1,6 +1,9 @@
 import Markdown from "markdown-to-jsx";
 import PropTypes from "prop-types";
+import Tooltip from "rc-tooltip";
 import { useState, useRef } from "react";
+
+import "rc-tooltip/assets/bootstrap.css";
 
 import Check2 from "../../assets/svg/check2.svg";
 import Close from "../../assets/svg/close-dd.svg";
@@ -17,27 +20,30 @@ const CollapsableSection = function CollapsableSection({ section }) {
   const sectionCopy = { ...section };
 
   // in order not to cause error: Hydration failed because the initial UI does not match what was rendered on the server.
-  if (sectionCopy.slug === "contractor") {
-    sectionCopy.answer = sectionCopy?.answer
-      .replaceAll("<ul>", "")
-      .replaceAll("</ul>", "")
-      .replaceAll("<li>", "-  ")
-      .replaceAll("</li>", "");
-  }
+  sectionCopy.answer = sectionCopy.answer
+    ? sectionCopy.answer
+        .replaceAll("<li>", "-  ")
+        .replaceAll("</li>", "")
+        .replace(/<[^>]*>?/gm, "")
+    : undefined;
+  sectionCopy.definition = sectionCopy.definition
+    ? sectionCopy.definition
+        .replaceAll("<li>", "-  ")
+        .replaceAll("</li>", "")
+        .replace(/<[^>]*>?/gm, "")
+    : undefined;
 
-  const key = `${sectionCopy.position}-${sectionCopy.slug}`;
-  const detailsId = `details-${key}`;
-  const contentId = `content-${key}`;
-  const btnCopyId = `btn-copy-${key}`;
-  const btnCheckId = `btn-check-${key}`;
-  const btnExpandId = `btn-expand-${key}`;
-  const btnCloseId = `btn-close-${key}`;
+  const detailsId = sectionCopy.slug;
+  const btnContainerId = `btn-container-${detailsId}`;
 
   const handleCopy = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 1000);
+    // TODO
+
+    navigator.clipboard.writeText(detailsRef.current.id);
   };
 
   const handleExpand = (e) => {
@@ -50,37 +56,53 @@ const CollapsableSection = function CollapsableSection({ section }) {
     setIsExpanded(false);
   };
 
-  const handleDetailsClick = () => {
-    setIsExpanded((prev) => !prev);
+  const handleDetailsClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isCopied || e.target.id === btnContainerId) {
+      return;
+    }
+
+    setIsExpanded((prev) => {
+      detailsRef.current.open = !prev;
+      return !prev;
+    });
   };
 
   return (
-    <MDXLayoutStyles.Details
-      id={detailsId}
-      ref={detailsRef}
-      onClick={handleDetailsClick}
-    >
-      <MDXLayoutStyles.Summary>
+    <MDXLayoutStyles.Details id={detailsId} ref={detailsRef}>
+      <MDXLayoutStyles.Summary onClick={handleDetailsClick}>
         <MDXLayoutStyles.SummaryContentContainer>
           <h3>{sectionCopy.question ?? sectionCopy.term}</h3>
-          <MDXLayoutStyles.ButtonsContainer>
+          <MDXLayoutStyles.ButtonsContainer
+            id={btnContainerId}
+            style={{ cursor: "initial" }}
+          >
             {isCopied ? (
-              <MDXLayoutStyles.IconButton id={btnCheckId} disabled>
-                <Check2 style={{ path: "green" }} alt="Check" />
-              </MDXLayoutStyles.IconButton>
+              <Tooltip placement="top" overlay="Copied!">
+                <MDXLayoutStyles.IconButton disabled>
+                  <Check2 alt="Check" />
+                </MDXLayoutStyles.IconButton>
+              </Tooltip>
             ) : (
-              <MDXLayoutStyles.IconButton id={btnCopyId} onClick={handleCopy}>
-                <Copy alt="Copy" />
-              </MDXLayoutStyles.IconButton>
+              <Tooltip placement="top" overlay="Copy">
+                <MDXLayoutStyles.IconButton onClick={handleCopy}>
+                  <Copy alt="Copy" />
+                </MDXLayoutStyles.IconButton>
+              </Tooltip>
             )}
             {isExpanded ? (
-              <MDXLayoutStyles.IconButton id={btnCloseId} onClick={handleClose}>
+              <MDXLayoutStyles.IconButton
+                onClick={handleClose}
+                disabled={isCopied}
+              >
                 <Close alt="Close" />
               </MDXLayoutStyles.IconButton>
             ) : (
               <MDXLayoutStyles.IconButton
-                id={btnExpandId}
                 onClick={handleExpand}
+                disabled={isCopied}
               >
                 <Expand alt="Expand" />
               </MDXLayoutStyles.IconButton>
@@ -88,9 +110,7 @@ const CollapsableSection = function CollapsableSection({ section }) {
           </MDXLayoutStyles.ButtonsContainer>
         </MDXLayoutStyles.SummaryContentContainer>
       </MDXLayoutStyles.Summary>
-      <Markdown id={contentId}>
-        {sectionCopy.answer ?? sectionCopy.definition}
-      </Markdown>
+      <Markdown>{sectionCopy.answer ?? sectionCopy.definition}</Markdown>
     </MDXLayoutStyles.Details>
   );
 };
