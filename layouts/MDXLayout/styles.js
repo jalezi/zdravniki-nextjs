@@ -82,13 +82,7 @@ export const StaticPageWrapper = styled.div`
 `;
 
 export const Details = styled.details`
-  margin-bottom: 28px;
-
-  > summary:first-of-type {
-    display: list-item;
-    counter-increment: list-item 0;
-    list-style: inside disclosure-closed;
-  }
+  margin-bottom: 24px;
 
   > *:not(summary) {
     display: block;
@@ -108,6 +102,13 @@ export const Details = styled.details`
     margin-top: 27px;
   }
 
+  ul,
+  ol {
+    list-style-type: disc;
+    padding-inline-start: 40px;
+    margin-bottom: 1rem;
+  }
+
   table {
     width: 100%;
     table-layout: fixed;
@@ -122,27 +123,51 @@ export const Details = styled.details`
 `;
 
 export const Summary = styled.summary`
+  display: inline-flex;
   cursor: pointer;
   font-weight: 600;
   color: ${({ theme }) => theme.MD.summaryColor};
 
-  padding-right: 18%;
+  :first-of-type {
+    display: list-item;
+    counter-increment: list-item 0;
+    list-style: inside disclosure-closed;
+  }
 
   h3 {
     display: inline;
+    max-width: 90%;
   }
 
   + *:nth-of-type(1) {
     margin-top: 2px;
     padding-top: 12px;
   }
-  @media only screen and (min-width: 768px) {
-    padding-right: 10%;
-  }
+`;
 
-  /* ::marker,
-  ::-webkit-details-marker {
-    display: none;
-    content: "";
-  } */
+export const SummaryContentContainer = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 93%;
+
+  @media only screen and (min-width: 330px) {
+    width: 95%;
+  }
+  @media only screen and (min-width: 404px) {
+    width: 96%;
+  }
+  @media only screen and (min-width: 526px) {
+    width: 97%;
+  }
+`;
+export const ButtonsContainer = styled.div`
+  display: inline-flex;
+  margin-left: auto;
+  gap: 1rem;
+`;
+
+export const IconButton = styled.button`
+  width: 20px;
+  cursor: pointer;
 `;
