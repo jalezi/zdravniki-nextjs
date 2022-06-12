@@ -20,24 +20,17 @@ const Collapsable = function Collapsable({ section }) {
   const [isExpanded, setIsExpanded] = useState();
   const [isCopied, setIsCopied] = useState();
 
-  const sectionCopy = { ...section };
+  let markdown = section.answer ?? section.definition;
 
   // in order not to cause error: Hydration failed because the initial UI does not match what was rendered on the server.
-  sectionCopy.answer = sectionCopy.answer
-    ? sectionCopy.answer
-        .replaceAll("<li>", "-  ")
-        .replaceAll("</li>", "")
-        .replace(/<[^>]*>?/gm, "")
-    : undefined;
-  sectionCopy.definition = sectionCopy.definition
-    ? sectionCopy.definition
-        .replaceAll("<li>", "-  ")
-        .replaceAll("</li>", "")
-        .replace(/<[^>]*>?/gm, "")
-    : undefined;
+  markdown = markdown
+    .replaceAll("<li>", "-  ")
+    .replaceAll("</li>", "")
+    .replaceAll("<ul>", "")
+    .replaceAll("</ul>", "");
 
   const hash = router.asPath.split("#")[1];
-  const detailsId = sectionCopy.slug;
+  const detailsId = section.slug;
   const btnContainerId = `btn-container-${detailsId}`;
 
   const shouldOpenAndScrollTo = hash === detailsId;
@@ -91,7 +84,7 @@ const Collapsable = function Collapsable({ section }) {
     <MDXLayoutStyles.Details id={detailsId} ref={detailsRef}>
       <MDXLayoutStyles.Summary onClick={handleDetailsClick}>
         <MDXLayoutStyles.SummaryContentContainer>
-          <h3>{sectionCopy.question ?? sectionCopy.term}</h3>
+          <h3>{section.question ?? section.term}</h3>
           <MDXLayoutStyles.ButtonsContainer id={btnContainerId}>
             {isCopied ? (
               <Tooltip placement="top" overlay="Copied!">
@@ -129,7 +122,7 @@ const Collapsable = function Collapsable({ section }) {
           </MDXLayoutStyles.ButtonsContainer>
         </MDXLayoutStyles.SummaryContentContainer>
       </MDXLayoutStyles.Summary>
-      <Markdown>{sectionCopy.answer ?? sectionCopy.definition}</Markdown>
+      <Markdown>{markdown}</Markdown>
     </MDXLayoutStyles.Details>
   );
 };

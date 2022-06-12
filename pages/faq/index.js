@@ -56,7 +56,6 @@ export default function Faq({ url, data }) {
         if (term.slug === el.getAttribute("data-term")) {
           el.setAttribute(
             "data-definition",
-            // term.definition.replace(/<[^>]*>?/gm, "")
             compiler(term.definition)
               .props.children.map((child) => convertDataDefinition(child))
               .flat(Infinity)
