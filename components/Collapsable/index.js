@@ -1,7 +1,8 @@
 import Markdown from "markdown-to-jsx";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import Tooltip from "rc-tooltip";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import "rc-tooltip/assets/bootstrap.css";
 
@@ -13,6 +14,8 @@ import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 
 const Collapsable = function Collapsable({ section }) {
+  const router = useRouter();
+
   const detailsRef = useRef();
   const [isExpanded, setIsExpanded] = useState();
   const [isCopied, setIsCopied] = useState();
@@ -33,8 +36,22 @@ const Collapsable = function Collapsable({ section }) {
         .replace(/<[^>]*>?/gm, "")
     : undefined;
 
+  const hash = router.asPath.split("#")[1];
   const detailsId = sectionCopy.slug;
   const btnContainerId = `btn-container-${detailsId}`;
+
+  const shouldOpenAndScrollTo = hash === detailsId;
+
+  useEffect(() => {
+    if (shouldOpenAndScrollTo) {
+      detailsRef.current.scrollIntoView({
+        top: detailsRef.current.getBoundingClientRect().top,
+        behavior: "smooth",
+      });
+      detailsRef.current.open = true;
+      setIsExpanded(true);
+    }
+  }, [shouldOpenAndScrollTo]);
 
   const handleCopy = (e) => {
     e.preventDefault();
