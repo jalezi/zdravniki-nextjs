@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffect, useState, useRef } from "react";
 
-import "rc-tooltip/assets/bootstrap.css";
-
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 

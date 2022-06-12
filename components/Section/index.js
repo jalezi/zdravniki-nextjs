@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 
-import "rc-tooltip/assets/bootstrap.css";
-
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 import Collapsable from "../Collapsable";
