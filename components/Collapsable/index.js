@@ -1,33 +1,30 @@
 import Markdown from "markdown-to-jsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import Tooltip from "rc-tooltip";
 import { useEffect, useState, useRef } from "react";
 
 import "rc-tooltip/assets/bootstrap.css";
 
-import Check2 from "../../assets/svg/check2.svg";
-import Close from "../../assets/svg/close-dd.svg";
-import Expand from "../../assets/svg/expand-dd.svg";
-import Copy from "../../assets/svg/icon-copy.svg";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 
-const Collapsable = function Collapsable({ section }) {
-  const router = useRouter();
+import SummaryContent from "./SummaryContent";
 
-  const detailsRef = useRef();
-  const [isExpanded, setIsExpanded] = useState();
-  const [isCopied, setIsCopied] = useState();
-
-  let markdown = section.answer ?? section.definition;
-
-  // in order not to cause error: Hydration failed because the initial UI does not match what was rendered on the server.
-  markdown = markdown
+const repairMarkdown = (text = "") =>
+  text
     .replaceAll("<li>", "-  ")
     .replaceAll("</li>", "")
     .replaceAll("<ul>", "")
     .replaceAll("</ul>", "");
+
+const Collapsable = function Collapsable({ section }) {
+  const router = useRouter();
+  const detailsRef = useRef();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
+  // in order not to cause error: Hydration failed because the initial UI does not match what was rendered on the server.
+  const markdown = repairMarkdown(section.answer ?? section.definition);
 
   const hash = router.asPath.split("#")[1];
   const detailsId = section.slug;
@@ -46,14 +43,12 @@ const Collapsable = function Collapsable({ section }) {
     }
   }, [shouldOpenAndScrollTo]);
 
-  const handleCopy = (e) => {
+  const handleCopy = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 1000);
-    // TODO
-
-    navigator.clipboard.writeText(detailsRef.current.id);
+    navigator.clipboard.writeText(id);
   };
 
   const handleExpand = (e) => {
@@ -66,7 +61,7 @@ const Collapsable = function Collapsable({ section }) {
     setIsExpanded(false);
   };
 
-  const handleDetailsClick = (e) => {
+  const handleSummaryClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -82,45 +77,16 @@ const Collapsable = function Collapsable({ section }) {
 
   return (
     <MDXLayoutStyles.Details id={detailsId} ref={detailsRef}>
-      <MDXLayoutStyles.Summary onClick={handleDetailsClick}>
-        <MDXLayoutStyles.SummaryContentContainer>
-          <h3>{section.question ?? section.term}</h3>
-          <MDXLayoutStyles.ButtonsContainer id={btnContainerId}>
-            {isCopied ? (
-              <Tooltip placement="top" overlay="Copied!">
-                <MDXLayoutStyles.IconButton disabled aria-label="copied">
-                  <Check2 alt="Check" />
-                </MDXLayoutStyles.IconButton>
-              </Tooltip>
-            ) : (
-              <Tooltip placement="top" overlay="Copy">
-                <MDXLayoutStyles.IconButton
-                  onClick={handleCopy}
-                  aria-label="copy"
-                >
-                  <Copy alt="Copy" />
-                </MDXLayoutStyles.IconButton>
-              </Tooltip>
-            )}
-            {isExpanded ? (
-              <MDXLayoutStyles.IconButton
-                onClick={handleClose}
-                disabled={isCopied}
-                aria-label="close"
-              >
-                <Close alt="Close" />
-              </MDXLayoutStyles.IconButton>
-            ) : (
-              <MDXLayoutStyles.IconButton
-                onClick={handleExpand}
-                disabled={isCopied}
-                aria-label="expand"
-              >
-                <Expand alt="Expand" />
-              </MDXLayoutStyles.IconButton>
-            )}
-          </MDXLayoutStyles.ButtonsContainer>
-        </MDXLayoutStyles.SummaryContentContainer>
+      <MDXLayoutStyles.Summary onClick={handleSummaryClick}>
+        <SummaryContent
+          title={section.question ?? section.term}
+          btnContainerId={btnContainerId}
+          handleClose={handleClose}
+          handleCopy={handleCopy}
+          handleExpand={handleExpand}
+          isCopied={isCopied}
+          isExpanded={isExpanded}
+        />
       </MDXLayoutStyles.Summary>
       <Markdown>{markdown}</Markdown>
     </MDXLayoutStyles.Details>

@@ -172,4 +172,9 @@ export const IconButton = styled.button`
   width: 23px;
   height: 23px;
   cursor: pointer;
+
+  &.make-smaller {
+    width: 21px;
+    height: 21px;
+  }
 `;
