@@ -75,19 +75,19 @@ const CollapsableSection = function CollapsableSection({ section }) {
       <MDXLayoutStyles.Summary onClick={handleDetailsClick}>
         <MDXLayoutStyles.SummaryContentContainer>
           <h3>{sectionCopy.question ?? sectionCopy.term}</h3>
-          <MDXLayoutStyles.ButtonsContainer
-            id={btnContainerId}
-            style={{ cursor: "initial" }}
-          >
+          <MDXLayoutStyles.ButtonsContainer id={btnContainerId}>
             {isCopied ? (
               <Tooltip placement="top" overlay="Copied!">
-                <MDXLayoutStyles.IconButton disabled>
+                <MDXLayoutStyles.IconButton disabled aria-label="copied">
                   <Check2 alt="Check" />
                 </MDXLayoutStyles.IconButton>
               </Tooltip>
             ) : (
               <Tooltip placement="top" overlay="Copy">
-                <MDXLayoutStyles.IconButton onClick={handleCopy}>
+                <MDXLayoutStyles.IconButton
+                  onClick={handleCopy}
+                  aria-label="copy"
+                >
                   <Copy alt="Copy" />
                 </MDXLayoutStyles.IconButton>
               </Tooltip>
@@ -96,6 +96,7 @@ const CollapsableSection = function CollapsableSection({ section }) {
               <MDXLayoutStyles.IconButton
                 onClick={handleClose}
                 disabled={isCopied}
+                aria-label="close"
               >
                 <Close alt="Close" />
               </MDXLayoutStyles.IconButton>
@@ -103,6 +104,7 @@ const CollapsableSection = function CollapsableSection({ section }) {
               <MDXLayoutStyles.IconButton
                 onClick={handleExpand}
                 disabled={isCopied}
+                aria-label="expand"
               >
                 <Expand alt="Expand" />
               </MDXLayoutStyles.IconButton>
@@ -122,11 +124,21 @@ CollapsableSection.propTypes = {
   ]).isRequired,
 };
 
-const Section = function Section({ sectionData }) {
-  return sectionData.map((section) => {
+const Section = function Section({ sectionData, title }) {
+  const articles = sectionData.map((section) => {
     const key = `${section.position}-${section.slug}`;
-    return <CollapsableSection key={key} section={section} />;
+    return (
+      <article key={key}>
+        <CollapsableSection section={section} />
+      </article>
+    );
   });
+  return (
+    <section>
+      <MDXLayoutStyles.H2>{title}</MDXLayoutStyles.H2>
+      {articles}
+    </section>
+  );
 };
 
 export default Section;
@@ -136,4 +148,5 @@ Section.propTypes = {
     PropTypes.arrayOf(PropTypes.shape(QuestionPropType)),
     PropTypes.arrayOf(PropTypes.shape(GlossaryPropType)),
   ]).isRequired,
+  title: PropTypes.string.isRequired,
 };

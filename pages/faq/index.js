@@ -75,10 +75,8 @@ export default function Faq({ url, data }) {
         V primeru, da potrebujete nujno medicinsko pomoč, se obrnite na lokalno
         urgentno službo oz. pokličite 112.
       </MDXLayoutStyles.P>
-      <MDXLayoutStyles.H2>Splošno</MDXLayoutStyles.H2>
-      <Section sectionData={data.faq} />
-      <MDXLayoutStyles.H2>Slovar izrazov</MDXLayoutStyles.H2>
-      <Section sectionData={data.glossary} />
+      <Section sectionData={data.faq} title="General" />
+      <Section sectionData={data.glossary} title="Glossary" />
       {/* {data.glossary.map((term) => (
         <Markdown key={`${term.slug}-glossary`} id={term.slug} hidden>
           {term.definition}

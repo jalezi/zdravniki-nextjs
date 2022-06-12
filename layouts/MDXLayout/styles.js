@@ -7,25 +7,16 @@ export const H1 = styled.h1`
   margin-bottom: 32px;
   font-size: 28px;
   font-weight: 600;
-  :not(:first-child) {
-    margin-top: 48px;
-  }
 `;
 
 export const H2 = styled.h2`
   margin-bottom: 24px;
   font-size: 21px;
   font-weight: 600;
-  :not(:first-child) {
-    margin-top: 48px;
-  }
 `;
 export const H3 = styled.h3`
   margin-bottom: 24px;
   font-size: 18px;
-  :not(:first-child) {
-    margin-top: 48px;
-  }
 `;
 
 export const P = styled.p`
@@ -66,6 +57,10 @@ export const StaticPageWrapper = styled.div`
     margin: 32px 32px 27px 32px;
   }
 
+  *:where(h2, section):not(:first-child) {
+    margin-top: 48px;
+  }
+
   strong {
     font-weight: 600;
   }
@@ -78,6 +73,16 @@ export const StaticPageWrapper = styled.div`
     span[data-term] {
       ${styledCss.spanDataTermPointerCoarseNoHover}
     }
+  }
+
+  details > summary:first-of-type {
+    display: list-item;
+    counter-increment: list-item 0;
+    list-style: inside disclosure-closed;
+  }
+
+  details[open] > summary:first-of-type {
+    list-style-type: disclosure-open;
   }
 `;
 
@@ -128,12 +133,6 @@ export const Summary = styled.summary`
   font-weight: 600;
   color: ${({ theme }) => theme.MD.summaryColor};
 
-  :first-of-type {
-    display: list-item;
-    counter-increment: list-item 0;
-    list-style: inside disclosure-closed;
-  }
-
   h3 {
     display: inline;
     max-width: 90%;
@@ -165,9 +164,12 @@ export const ButtonsContainer = styled.div`
   display: inline-flex;
   margin-left: auto;
   gap: 1rem;
+  cursor: initial;
+  align-items: center;
 `;
 
 export const IconButton = styled.button`
-  width: 20px;
+  width: 23px;
+  height: 23px;
   cursor: pointer;
 `;
