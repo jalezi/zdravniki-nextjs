@@ -7,6 +7,8 @@ body {
   height: 100%;
   width: 100%;
   font-family: "IBM Plex Sans", "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   color: rgba(0, 0, 0, 0.87);
   background-color: #f4f8f8;
