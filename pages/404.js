@@ -3,81 +3,21 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Image from "next/image";
 import Link from "next/link";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import Header from "../components/Header";
-import SEO from "../components/SEO";
+import ErrorLayout from "../layouts/ErrorLayout";
+import * as Styled from "../layouts/ErrorLayout/styles";
 import image from "../public/doctor-404.png";
-
-const StyledMain = styled.main`
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  grid-gap: 0.75em;
-
-  height: calc(100% - 56px);
-
-  text-align: center;
-
-  > * {
-    margin-inline: auto;
-  }
-
-  > h1 {
-    font-size: 1.7rem;
-    font-weight: 600;
-  }
-
-  > a {
-    text-size-adjust: 100%;
-    font-size: 0.8rem;
-    text-align: center;
-    outline: none;
-    background: rgb(33, 37, 41);
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    border-radius: 100px;
-    padding: 10px 40px;
-    cursor: pointer;
-  }
-
-  @media only screen and (min-width: 380px) {
-    font-size: 1rem;
-    grid-gap: 1.4em;
-
-    > h1 {
-      font-size: 2rem;
-    }
-  }
-
-  @media only screen and (max-height: 420px) and (orientation: landscape) {
-    grid-gap: 0.7em;
-    font-size: 0.8rem;
-    > h1 {
-      font-size: 1.5rem;
-    }
-
-    > a {
-      font-size: 0.8rem;
-      padding: 5px 20px;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    max-height: calc(100% - 64px);
-  }
-`;
-
-const StyledImgWrapper = styled.div`
-  max-width: 135px;
-`;
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "pageNotFound"])),
+      ...(await serverSideTranslations(locale, [
+        "common",
+        "header",
+        "pageNotFound",
+      ])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
     },
@@ -91,22 +31,18 @@ export default function Custom404({ url }) {
   const { title } = tPageNotFound("seo", { returnObjects: true });
 
   return (
-    <>
-      <SEO title={title} description={description} url={url} />
-      <Header />
-      <StyledMain>
-        <h1>{tPageNotFound("h1")}</h1>
-        <p>{tPageNotFound("text")}</p>
-        <StyledImgWrapper>
-          <Image
-            alt="not found"
-            src={image}
-            srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
-          />
-        </StyledImgWrapper>
-        <Link href="/">{tPageNotFound("link")}</Link>
-      </StyledMain>
-    </>
+    <ErrorLayout title={title} description={description} url={url}>
+      <h1>{tPageNotFound("h1")}</h1>
+      <p>{tPageNotFound("text")}</p>
+      <Styled.ImgWrapper>
+        <Image
+          alt="not found"
+          src={image}
+          srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
+        />
+      </Styled.ImgWrapper>
+      <Link href="/">{tPageNotFound("link")}</Link>
+    </ErrorLayout>
   );
 }
 

@@ -7,6 +7,7 @@ import Section from "../../components/Section";
 import MDXLayout from "../../layouts/MDXLayout";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
+import Error from "../_error";
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
@@ -17,6 +18,7 @@ export async function getStaticProps({ locale }) {
   const response = await fetch(
     `${process.env.CONTENT_ENDPOINT_BASE}/faq/3/?lang=${locale}`
   );
+  const errorCode = response.ok ? false : response.statusCode;
   const data = await response.json();
 
   return {
@@ -25,6 +27,7 @@ export async function getStaticProps({ locale }) {
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       data,
+      errorCode,
     },
     revalidate: 10,
   };
@@ -40,7 +43,7 @@ const convertDataDefinition = (definition) => {
   return definition;
 };
 
-export default function Faq({ url, data }) {
+export default function Faq({ url, data, errorCode }) {
   useEffect(() => {
     document.querySelectorAll("main a").forEach((el) => {
       if (/^(https?:)?\/\//.test(el.getAttribute("href"))) {
@@ -66,6 +69,10 @@ export default function Faq({ url, data }) {
       }
     });
   }, [data.glossary]);
+
+  if (errorCode) {
+    return <Error statusCode={errorCode} url={url} />;
+  }
 
   return (
     <MDXLayout title="FAQ" description="Some description" url={url}>
@@ -94,4 +101,5 @@ Faq.propTypes = {
     name: PropTypes.string.isRequired,
     resource_uri: PropTypes.string.isRequired,
   }).isRequired,
+  errorCode: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
 };
