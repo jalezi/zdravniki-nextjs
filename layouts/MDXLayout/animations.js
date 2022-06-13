@@ -1,11 +1,11 @@
 import { keyframes } from "styled-components";
 
 export const showDD = keyframes`
-from {
+  0% {
     transform: translateY(-8px);
     opacity: 0.1;
   }
-  to {
+  100%  {
     transform: translateY(0px);
     opacity: 1;
   }

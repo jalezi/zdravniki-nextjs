@@ -2,25 +2,45 @@
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useRef, useState } from "react";
 
 import FbIcon from "../../assets/svg/icon-fb.svg";
 import TwIcon from "../../assets/svg/icon-tw.svg";
 import Logo from "../../assets/svg/zdravniki-sledilnik-logo.svg";
 import LanguageSelector from "../LanguageSelector";
 
+import Hamburger from "./Hamburger";
 import * as Styled from "./styles";
 
 const Header = function Header() {
+  const headerRef = useRef();
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const { t: tHeader } = useTranslation("header");
+
+  const onHamburgerClick = () => {
+    setOpen((prev) => !prev);
+
+    if (open) {
+      headerRef.current.classList.add("closingMenu");
+      headerRef.current.classList.remove("menuOpen");
+    }
+
+    if (!open) {
+      headerRef.current.classList.remove("closingMenu");
+      headerRef.current.classList.add("menuOpen");
+    }
+  };
+
   return (
-    <Styled.Header>
+    <Styled.Header ref={headerRef}>
       <Link href="/">
         <a>
           <Logo />
         </a>
       </Link>
-      <Styled.Nav>
+      <Hamburger onClick={onHamburgerClick} isOpen={open} />
+      <Styled.Nav isOpen={open}>
         <Styled.List>
           <li>
             <Link href="/gp" passHref>

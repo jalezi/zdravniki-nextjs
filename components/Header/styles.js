@@ -1,24 +1,44 @@
 import styled from "styled-components";
 
+import * as hamburgerCss from "./Hamburger/css";
+
 export const Header = styled.header`
-  top: 0;
-  left: auto;
-  right: 0;
   height: 56px;
   color: ${({ theme }) => theme.textColor2};
   background-color: ${({ theme }) => theme.brand};
 
   display: flex;
+  justify-content: start;
   align-items: center;
-  padding-inline: 1.5rem;
 
+  padding-inline: 0.5rem;
+  overflow: auto;
+
+  &.menuOpen .🍔 {
+    ${hamburgerCss.openLine1}
+    ${hamburgerCss.openLine2}
+    ${hamburgerCss.openLine3}
+  }
+
+  &.closingMenu .🍔 {
+    ${hamburgerCss.closeLine1}
+    ${hamburgerCss.closeLine2}
+    ${hamburgerCss.closeLine3}
+  }
+
+  /* MEDIA QUERIES */
   @media only screen and (min-width: 768px) {
     height: 64px;
+
+    .nav-heading,
+    .🍔 {
+      display: none;
+    }
   }
 `;
 
 export const Nav = styled.nav`
-  margin-left: auto;
+  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
