@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import FbIcon from "../../assets/svg/icon-fb.svg";
 import TwIcon from "../../assets/svg/icon-tw.svg";
 import Logo from "../../assets/svg/zdravniki-sledilnik-logo.svg";
+import useEventListener from "../../hooks/useEventListener";
 import LanguageSelector from "../LanguageSelector";
 
 import Backdrop from "./Backdrop";
@@ -15,9 +16,36 @@ import * as Styled from "./styles";
 
 const Header = function Header() {
   const headerRef = useRef();
+  const bodyRef = useRef();
+  const timeoutRef = useRef();
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(null);
   const router = useRouter();
   const { t: tHeader } = useTranslation("header");
+
+  const handler = (e) => {
+    const scrollMargin = 10;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    if (e.currentTarget.scrollY > scrollMargin) {
+      setIsScrolled(true);
+      timeoutRef.current = setTimeout(() => setIsScrolled(false), 400);
+    }
+
+    if (e.currentTarget.scrollY <= scrollMargin) {
+      setIsScrolled(false);
+    }
+  };
+
+  useEventListener("scroll", handler, bodyRef.current);
+
+  useEffect(() => {
+    // eslint-disable-next-line prefer-destructuring
+    bodyRef.current = window;
+  }, []);
 
   useEffect(() => {
     if (open) document.body.style.overflow = "hidden";
@@ -37,6 +65,15 @@ const Header = function Header() {
       headerRef.current.classList.add("menuOpen");
     }
   };
+
+  useEffect(() => {
+    if (isScrolled) {
+      headerRef.current.classList.add("scrolled");
+    }
+    if (!isScrolled) {
+      headerRef.current.classList.remove("scrolled");
+    }
+  }, [isScrolled]);
 
   const onLinkClick = (e) => {
     e.stopPropagation();

@@ -106,7 +106,10 @@ export const Header = styled.header`
 
   padding-inline: 0.5rem;
 
+  opacity: 1;
   z-index: 100;
+
+  animation: not-scrolled 200ms ease-out;
 
   ${backdrop.Backdrop} {
     position: fixed;
@@ -116,8 +119,17 @@ export const Header = styled.header`
     width: 100vw;
   }
 
-  /* OPEN MENU */
+  /* WINDOW SCROLL */
+  &.scrolled {
+    height: 48px;
+    animation: scrolled 100ms ease-out forwards;
 
+    @media only screen and (min-width: 768px) {
+      height: 56px;
+    }
+  }
+
+  /* OPEN MENU */
   &.menuOpen ${Nav} {
     transform: translateZ(0);
     animation: open-nav-container 1s 0.05s ease-out forwards;
@@ -153,9 +165,9 @@ export const Header = styled.header`
   @media only screen and (min-width: 768px) {
     height: 64px;
 
-    ${Nav} {
+    /* ${Nav} {
       height: 64px;
-    }
+    } */
 
     ${Nav}, ${List}, ${SocialAndLangContainer} {
       position: unset;
@@ -199,9 +211,30 @@ export const Header = styled.header`
       left: 100%;
     }
   }
+
+  @keyframes not-scrolled {
+    0% {
+      height: 56px;
+      @media only screen and (max-width: 768px) {
+        height: 64px;
+      }
+    }
+  }
+
+  @keyframes scrolled {
+    100% {
+      opacity: 0.85;
+      height: 48px;
+
+      @media only screen and (max-width: 768px) {
+        height: 56px;
+      }
+    }
+  }
 `;
 
 export const Logo = styled.a`
+  display: flex;
   margin-left: 1em;
 `;
 
