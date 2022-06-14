@@ -84,9 +84,18 @@ export const SocialIcons = styled.ul`
   a:focus path {
     fill: ${({ theme }) => theme.textColor1};
   }
+
+  @media only screen and (pointer: coarse) {
+    gap: 0.8rem;
+  }
 `;
 
 export const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
   height: 56px;
   color: ${({ theme }) => theme.textColor2};
   background-color: ${({ theme }) => theme.brand};

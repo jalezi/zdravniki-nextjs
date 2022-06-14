@@ -42,7 +42,6 @@ const Header = function Header() {
     e.stopPropagation();
     e.target.blur();
     setOpen(false);
-    headerRef.current.classList.add("closingMenu");
     headerRef.current.classList.remove("menuOpen");
   };
 
