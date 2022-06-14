@@ -42,6 +42,7 @@ export default function LanguageSelector() {
         defaultValue={router.locale}
         render={({ field: { value, name, onBlur } }) => (
           <Select
+            menuPlacement="auto"
             id="lang-selector"
             instanceId="lang-selector"
             options={options}

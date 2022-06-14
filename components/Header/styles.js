@@ -6,7 +6,6 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  /* align-items: center; */
   position: fixed;
   top: 0;
   right: -100%;
@@ -15,7 +14,6 @@ export const Nav = styled.nav`
   z-index: 400;
   background: ${({ theme }) => theme.brand};
   padding: 20px 0 0 15px;
-  overflow: auto;
   transition: all 0.4s ease-in-out;
   will-change: transform;
   margin-left: auto;
@@ -121,8 +119,12 @@ export const Header = styled.header`
   @media only screen and (min-width: 768px) {
     height: 64px;
 
+    ${Nav} {
+      height: 64px;
+    }
+
     ${Nav}, ${List}, ${SocialAndLangContainer} {
-      position: initial;
+      position: unset;
       display: flex;
       align-items: center;
       gap: 1.125rem;

@@ -28,10 +28,15 @@ export const customStyles = {
   }),
   menu: (provided) => ({
     ...provided,
-    width: "auto",
-    minWidth: "100%",
-    marginLeft: "-60%",
+    width: "max-content",
+    marginLeft: "-80%",
     padding: 8,
+    "@media (min-width: 380px)": {
+      marginLeft: "--50%",
+    },
+    "@media (min-width: 768px)": {
+      marginLeft: "-60%",
+    },
   }),
   option: (provided, { isFocused, isSelected, theme }) => {
     let bgColor = isSelected ? theme.appTheme.brand : undefined;
