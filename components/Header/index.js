@@ -38,6 +38,14 @@ const Header = function Header() {
     }
   };
 
+  const onLinkClick = (e) => {
+    e.stopPropagation();
+    e.target.blur();
+    setOpen(false);
+    headerRef.current.classList.add("closingMenu");
+    headerRef.current.classList.remove("menuOpen");
+  };
+
   return (
     <Styled.Header ref={headerRef}>
       <Link href="/">
@@ -77,9 +85,7 @@ const Header = function Header() {
               href="https://covid-19.sledilnik.org/sl/donate"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => {
-                e.target.blur();
-              }}
+              onClick={onLinkClick}
             >
               {tHeader("support")}
             </Styled.A>
@@ -89,9 +95,7 @@ const Header = function Header() {
               href="https://covid-19.sledilnik.org/sl"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => {
-                e.target.blur();
-              }}
+              onClick={onLinkClick}
             >
               Sledilnik.org
             </Styled.A>
@@ -104,6 +108,7 @@ const Header = function Header() {
                     href="https://facebook.com/SledilnikOrg"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={onLinkClick}
                   >
                     <FbIcon />
                   </a>
@@ -113,6 +118,7 @@ const Header = function Header() {
                     href="https://twitter.com/sledilnik"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={onLinkClick}
                   >
                     <TwIcon />
                   </a>
