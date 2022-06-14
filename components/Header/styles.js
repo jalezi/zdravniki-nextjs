@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import * as backdropAnimations from "./Backdrop/animations";
+import * as backdrop from "./Backdrop/styles";
 import * as hamburgerCss from "./Hamburger/css";
 
 export const Nav = styled.nav`
@@ -97,16 +99,39 @@ export const Header = styled.header`
 
   z-index: 100;
 
+  ${backdrop.Backdrop} {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    width: 100vw;
+  }
+
+  /* OPEN MENU */
+
   &.menuOpen ${Nav} {
     transform: translateZ(0);
     animation: open-nav-container 1s 0.05s ease-out forwards;
     will-change: transform;
   }
 
+  &.menuOpen ${backdrop.Backdrop} {
+    animation: ${backdropAnimations.openBackdrop} 1.05s ease-out forwards;
+  }
+
   &.menuOpen .🍔 {
     ${hamburgerCss.openLine1}
     ${hamburgerCss.openLine2}
     ${hamburgerCss.openLine3}
+  }
+
+  /* CLOSING MENU */
+  &.closingMenu ${Nav} {
+    animation: close-nav-container 1s ease-out forwards;
+  }
+
+  &.closingMenu ${backdrop.Backdrop} {
+    animation: ${backdropAnimations.closeBackdrop} 1s ease-out forwards;
   }
 
   &.closingMenu .🍔 {
@@ -149,9 +174,20 @@ export const Header = styled.header`
     }
   }
 
+  /* ANIMATIONS */
   @keyframes open-nav-container {
     100% {
       left: 33%;
+    }
+  }
+
+  @keyframes close-nav-container {
+    0% {
+      left: 33%;
+    }
+    100% {
+      right: -100%;
+      left: 100%;
     }
   }
 `;

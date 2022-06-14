@@ -2,13 +2,14 @@
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import FbIcon from "../../assets/svg/icon-fb.svg";
 import TwIcon from "../../assets/svg/icon-tw.svg";
 import Logo from "../../assets/svg/zdravniki-sledilnik-logo.svg";
 import LanguageSelector from "../LanguageSelector";
 
+import Backdrop from "./Backdrop";
 import Hamburger from "./Hamburger";
 import * as Styled from "./styles";
 
@@ -17,6 +18,11 @@ const Header = function Header() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { t: tHeader } = useTranslation("header");
+
+  useEffect(() => {
+    if (open) document.body.style.overflow = "hidden";
+    if (!open) document.body.style.overflow = "initial";
+  }, [open]);
 
   const onHamburgerClick = () => {
     setOpen((prev) => !prev);
@@ -119,6 +125,7 @@ const Header = function Header() {
           </Styled.SocialAndLangContainer>
         </Styled.List>
       </Styled.Nav>
+      <Backdrop />
     </Styled.Header>
   );
 };
