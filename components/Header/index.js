@@ -35,12 +35,13 @@ const Header = function Header() {
   return (
     <Styled.Header ref={headerRef}>
       <Link href="/">
-        <a>
+        <Styled.Logo>
           <Logo />
-        </a>
+        </Styled.Logo>
       </Link>
       <Hamburger onClick={onHamburgerClick} isOpen={open} />
       <Styled.Nav isOpen={open}>
+        <Styled.Heading>Menu</Styled.Heading>
         <Styled.List>
           <li>
             <Link href="/gp" passHref>
@@ -89,29 +90,33 @@ const Header = function Header() {
               Sledilnik.org
             </Styled.A>
           </li>
-          <Styled.SocialIcons>
+          <Styled.SocialAndLangContainer>
             <li>
-              <a
-                href="https://facebook.com/SledilnikOrg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FbIcon />
-              </a>
+              <Styled.SocialIcons>
+                <li>
+                  <a
+                    href="https://facebook.com/SledilnikOrg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FbIcon />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://twitter.com/sledilnik"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <TwIcon />
+                  </a>
+                </li>
+              </Styled.SocialIcons>
             </li>
             <li>
-              <a
-                href="https://twitter.com/sledilnik"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <TwIcon />
-              </a>
+              <LanguageSelector />
             </li>
-          </Styled.SocialIcons>
-          <li>
-            <LanguageSelector />
-          </li>
+          </Styled.SocialAndLangContainer>
         </Styled.List>
       </Styled.Nav>
     </Styled.Header>
