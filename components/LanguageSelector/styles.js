@@ -5,7 +5,7 @@ export const customStyles = {
     cursor: "pointer",
     borderColor: isFocused ? "transparent" : theme.appTheme.textColor2,
     minHeight: "unset",
-    minWidth: 69.5,
+    minWidth: 72,
     boxShadow: isFocused ? `0 0 0 1px ${theme.appTheme.bgColor1}` : "none",
     opacity: isFocused ? 1 : 0.7,
     "&:hover": {
@@ -56,5 +56,6 @@ export const customStyles = {
     color: theme.appTheme.textColor2,
     textAlign: "center",
     "&:hover": { color: theme.appTheme.textColor1 },
+    width: "max-content",
   }),
 };
