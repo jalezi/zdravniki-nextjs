@@ -6,6 +6,7 @@ import { Suspense } from "react";
 
 import MDXLayout from "../../layouts/MDXLayout";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
+import WaitingMDX from "../../layouts/MDXLayout/WaitingMDX";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 import Error from "../_error";
 
@@ -54,7 +55,7 @@ export default function Faq({ url, data, errorCode }) {
     <MDXLayout title={title} description={description} url={url}>
       <MDXLayoutStyles.H1>{headings.title}</MDXLayoutStyles.H1>
       <MDXLayoutStyles.P>{noticeText}</MDXLayoutStyles.P>
-      <Suspense fallback={<div>Waiting</div>}>
+      <Suspense fallback={<WaitingMDX />}>
         <Sections data={data} />
       </Suspense>
     </MDXLayout>
