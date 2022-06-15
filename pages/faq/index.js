@@ -1,20 +1,17 @@
-import { compiler } from "markdown-to-jsx";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 
 import MDXLayout from "../../layouts/MDXLayout";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 import Error from "../_error";
 
-const Section = dynamic(() => import("../../components/Section"));
-
-const Waiting = function Waiting() {
-  return <div>Loading...</div>;
-};
+const Sections = dynamic(() => import("../../components/Sections"), {
+  suspense: true,
+});
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
@@ -40,45 +37,9 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-const convertDataDefinition = (definition) => {
-  if (definition?.props?.children) {
-    return definition.props.children.map((child) =>
-      convertDataDefinition(child)
-    );
-  }
-
-  return definition;
-};
-
 export default function Faq({ url, data, errorCode }) {
   const { t: tCommon } = useTranslation("common");
   const { t: tFaq } = useTranslation("faq");
-
-  useEffect(() => {
-    document.querySelectorAll("main a").forEach((el) => {
-      if (/^(https?:)?\/\//.test(el.getAttribute("href"))) {
-        el.setAttribute("target", "_blank");
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    document.querySelectorAll("span[data-term]").forEach((el) => {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const term of data.glossary) {
-        if (term.slug === el.getAttribute("data-term")) {
-          el.setAttribute(
-            "data-definition",
-            compiler(term.definition)
-              .props.children.map((child) => convertDataDefinition(child))
-              .flat(Infinity)
-              .join("")
-          );
-          el.setAttribute("tabindex", 0);
-        }
-      }
-    });
-  }, [data.glossary]);
 
   if (errorCode) {
     return <Error statusCode={errorCode} url={url} />;
@@ -93,17 +54,9 @@ export default function Faq({ url, data, errorCode }) {
     <MDXLayout title={title} description={description} url={url}>
       <MDXLayoutStyles.H1>{headings.title}</MDXLayoutStyles.H1>
       <MDXLayoutStyles.P>{noticeText}</MDXLayoutStyles.P>
-      <Suspense fallback={<Waiting />}>
-        <Section sectionData={data.faq} title={headings.general} />
+      <Suspense fallback={<div>Waiting</div>}>
+        <Sections data={data} />
       </Suspense>
-      <Suspense fallback={<Waiting />}>
-        <Section sectionData={data.glossary} title={headings.glossary} />
-      </Suspense>
-      {/* {data.glossary.map((term) => (
-        <Markdown key={`${term.slug}-glossary`} id={term.slug} hidden>
-          {term.definition}
-        </Markdown>
-      ))} */}
     </MDXLayout>
   );
 }

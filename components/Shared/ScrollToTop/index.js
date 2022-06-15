@@ -6,11 +6,11 @@ import useEventListener from "../../../hooks/useEventListener";
 const ScrollToTop = function ScrollToTop({ Component }) {
   const [show, setShow] = useState(false);
   const componentRef = useRef();
-  const countRef = useRef(0);
+  const scrollYRef = useRef(0);
 
+  const scrollMargin = 100;
   const handler = (e) => {
-    const scrollMargin = 100;
-
+    scrollYRef.current = e.currentTarget.scrollY;
     if (e.currentTarget.scrollY > scrollMargin) {
       setShow(true);
     }
@@ -23,10 +23,9 @@ const ScrollToTop = function ScrollToTop({ Component }) {
   useEventListener("scroll", handler);
 
   useEffect(() => {
-    if (countRef.current > 1) {
+    if (scrollYRef > 100) {
       componentRef.current.classList.remove("first");
     }
-    countRef.current = +1;
   }, []);
 
   const handleClick = () => {
@@ -39,7 +38,7 @@ const ScrollToTop = function ScrollToTop({ Component }) {
       role="button"
       onClick={handleClick}
       show={show}
-      className={countRef.current < 1 ? "first" : ""}
+      className={scrollYRef.current > 1 ? "" : "first"}
     >
       Up
     </Component>
