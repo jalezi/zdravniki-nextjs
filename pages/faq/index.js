@@ -1,13 +1,20 @@
 import { compiler } from "markdown-to-jsx";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-import Section from "../../components/Section";
 import MDXLayout from "../../layouts/MDXLayout";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
 import { GlossaryPropType, QuestionPropType } from "../../types";
 import Error from "../_error";
+
+const Section = dynamic(() => import("../../components/Section"));
+
+const Waiting = function Waiting() {
+  return <div>Loading...</div>;
+};
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
@@ -23,7 +30,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header"])),
+      ...(await serverSideTranslations(locale, ["common", "header", "faq"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       data,
@@ -44,6 +51,9 @@ const convertDataDefinition = (definition) => {
 };
 
 export default function Faq({ url, data, errorCode }) {
+  const { t: tCommon } = useTranslation("common");
+  const { t: tFaq } = useTranslation("faq");
+
   useEffect(() => {
     document.querySelectorAll("main a").forEach((el) => {
       if (/^(https?:)?\/\//.test(el.getAttribute("href"))) {
@@ -74,15 +84,21 @@ export default function Faq({ url, data, errorCode }) {
     return <Error statusCode={errorCode} url={url} />;
   }
 
+  const title = tFaq("seo.title");
+  const description = tCommon("head.description");
+  const noticeText = tFaq("notice");
+  const headings = tFaq("headings", { returnObjects: true });
+
   return (
-    <MDXLayout title="FAQ" description="Some description" url={url}>
-      <MDXLayoutStyles.H1>Pogosta vprašanja in odgovori</MDXLayoutStyles.H1>
-      <MDXLayoutStyles.P>
-        V primeru, da potrebujete nujno medicinsko pomoč, se obrnite na lokalno
-        urgentno službo oz. pokličite 112.
-      </MDXLayoutStyles.P>
-      <Section sectionData={data.faq} title="General" />
-      <Section sectionData={data.glossary} title="Glossary" />
+    <MDXLayout title={title} description={description} url={url}>
+      <MDXLayoutStyles.H1>{headings.title}</MDXLayoutStyles.H1>
+      <MDXLayoutStyles.P>{noticeText}</MDXLayoutStyles.P>
+      <Suspense fallback={<Waiting />}>
+        <Section sectionData={data.faq} title={headings.general} />
+      </Suspense>
+      <Suspense fallback={<Waiting />}>
+        <Section sectionData={data.glossary} title={headings.glossary} />
+      </Suspense>
       {/* {data.glossary.map((term) => (
         <Markdown key={`${term.slug}-glossary`} id={term.slug} hidden>
           {term.definition}
