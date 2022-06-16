@@ -15,7 +15,7 @@ const Heading = dynamic(() =>
   import("../../layouts/MDXLayout/styles").then((mod) => mod.H1)
 );
 const Notice = dynamic(() =>
-  import("../../layouts/MDXLayout/styles").then((mod) => mod.P)
+  import("../../layouts/MDXLayout/styles").then((mod) => mod.Notice)
 );
 const Error = dynamic(() => import("../_error"));
 

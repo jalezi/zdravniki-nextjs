@@ -8,6 +8,9 @@ import { theme } from "../constants/theme";
 
 import "../styles/globals.css";
 
+// ? maybe can be moved to faq
+import "rc-tooltip/assets/bootstrap.css";
+
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>

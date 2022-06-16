@@ -23,6 +23,10 @@ export const P = styled.p`
   ${styledCss.paragraph}
 `;
 
+export const Notice = styled(P)`
+  font-size: 1rem;
+`;
+
 export const Ul = styled.ul`
   padding-inline-start: 40px;
   margin-bottom: 1rem;
