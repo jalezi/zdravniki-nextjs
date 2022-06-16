@@ -96,6 +96,7 @@ export const Header = styled.header`
   right: 0;
 
   height: 56px;
+  transition: height 200ms ease-out;
   color: ${({ theme }) => theme.textColor2};
   background-color: ${({ theme }) => theme.brand};
 
@@ -108,8 +109,6 @@ export const Header = styled.header`
   opacity: 1;
   z-index: 100;
 
-  animation: not-scrolled 200ms ease-out;
-
   ${backdrop.Backdrop} {
     position: fixed;
     top: 0;
@@ -120,12 +119,9 @@ export const Header = styled.header`
 
   /* WINDOW SCROLL */
   &.scrolled {
+    opacity: 0.8;
     height: 48px;
-    animation: scrolled 100ms ease-out forwards;
-
-    @media only screen and (min-width: 768px) {
-      height: 56px;
-    }
+    transition: height 200ms ease-out, opacity 200ms ease-out;
   }
 
   /* OPEN MENU */
@@ -163,8 +159,15 @@ export const Header = styled.header`
   /* MEDIA QUERIES */
   @media only screen and (min-width: 768px) {
     height: 64px;
+    transition: height 200ms ease-out;
 
-    ${Nav}, ${List}, ${SocialAndLangContainer} {
+    &.scrolled {
+      opacity: 0.8;
+      height: 56px;
+      transition: height 200ms ease-out, opacity 200ms ease-out;
+    }
+    ${Nav},
+    ${List}, ${SocialAndLangContainer} {
       display: flex;
       align-items: center;
       flex-direction: row;
@@ -206,26 +209,6 @@ export const Header = styled.header`
     100% {
       right: -100%;
       left: 100%;
-    }
-  }
-
-  @keyframes not-scrolled {
-    0% {
-      height: 56px;
-      @media only screen and (max-width: 768px) {
-        height: 64px;
-      }
-    }
-  }
-
-  @keyframes scrolled {
-    100% {
-      opacity: 0.85;
-      height: 48px;
-
-      @media only screen and (max-width: 768px) {
-        height: 56px;
-      }
     }
   }
 `;

@@ -84,6 +84,14 @@ export const StaticPageWrapper = styled.div`
   details[open] > summary:first-of-type {
     list-style-type: disclosure-open;
   }
+
+  details > summary + * {
+    visibility: hidden;
+  }
+
+  details[open] > summary + * {
+    visibility: visible;
+  }
 `;
 
 export const Details = styled.details`

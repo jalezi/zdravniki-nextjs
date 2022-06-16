@@ -24,7 +24,7 @@ const Header = function Header() {
   const { t: tHeader } = useTranslation("header");
 
   const handler = (e) => {
-    const scrollMargin = 10;
+    const scrollMargin = 100;
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
