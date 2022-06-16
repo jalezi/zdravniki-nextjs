@@ -19,7 +19,7 @@ export const customStyles = {
   }),
   dropdownIndicator: (provided, { theme }) => ({
     ...provided,
-    color: theme.appTheme.textColor2,
+    color: theme.appTheme.black,
     paddingBlock: "0.25rem",
     paddingInline: "0.25rem",
     "&:hover": {
@@ -53,7 +53,7 @@ export const customStyles = {
   },
   singleValue: (provided, { theme }) => ({
     ...provided,
-    color: theme.appTheme.textColor2,
+    color: theme.appTheme.black,
     textAlign: "center",
     "&:hover": { color: theme.appTheme.textColor1 },
     width: "max-content",

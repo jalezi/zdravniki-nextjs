@@ -15,11 +15,10 @@ export const Nav = styled.nav`
   left: 100%;
   z-index: 400;
   background: ${({ theme }) => theme.brand};
-  padding: 20px 0 0 15px;
+  padding: 20px 0 20px 15px;
   transition: all 0.4s ease-in-out;
   will-change: transform;
   margin-left: auto;
-  height: 100%;
 `;
 
 export const Heading = styled.h2`
@@ -46,7 +45,7 @@ export const SocialAndLangContainer = styled.ul`
   align-items: center;
 
   margin-top: auto;
-  margin-bottom: 1rem;
+  max-width: 33%;
 `;
 
 export const SocialIcons = styled.ul`
@@ -165,33 +164,31 @@ export const Header = styled.header`
   @media only screen and (min-width: 768px) {
     height: 64px;
 
-    /* ${Nav} {
-      height: 64px;
-    } */
-
     ${Nav}, ${List}, ${SocialAndLangContainer} {
-      position: unset;
       display: flex;
       align-items: center;
+      flex-direction: row;
       gap: 1.125rem;
 
-      flex-direction: row;
       padding: 0;
-      margin-bottom: 0;
+      margin-block: auto;
+    }
+
+    ${Nav} {
+      position: unset;
+      justify-content: start;
+    }
+
+    ${List} {
+      max-width: initial;
+    }
+    ${SocialAndLangContainer} {
+      max-width: initial;
     }
 
     ${Nav} ${Heading},
     .🍔 {
       display: none;
-    }
-
-    ${List} {
-      margin-top: 0;
-      flex-grow: 0;
-    }
-
-    ${SocialAndLangContainer} {
-      margin-right: 0.5rem;
     }
   }
 

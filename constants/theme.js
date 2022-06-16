@@ -21,7 +21,7 @@ const theme = {
   warning: "#F7D070",
   error: "#D64545",
   textColor1: "rgba(0, 0, 0, 0.87)",
-  textColor2: "rgba(0,0,0,0.56)",
+  textColor2: "rgba(0,0,0,0.66)",
   textColor3: "#212529",
   bgColor1: "#F4F8F8",
   bgColor2: "#E8EFF0",

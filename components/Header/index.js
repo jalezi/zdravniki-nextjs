@@ -85,8 +85,8 @@ const Header = function Header() {
   return (
     <Styled.Header ref={headerRef}>
       <Link href="/">
-        <Styled.Logo>
-          <Logo />
+        <Styled.Logo role="link" aria-label="link to home">
+          <Logo role="link" aria-label="link to home" />
         </Styled.Logo>
       </Link>
       <Hamburger onClick={onHamburgerClick} isOpen={open} />
@@ -136,36 +136,36 @@ const Header = function Header() {
               Sledilnik.org
             </Styled.A>
           </li>
-          <Styled.SocialAndLangContainer>
-            <li>
-              <Styled.SocialIcons>
-                <li>
-                  <a
-                    href="https://facebook.com/SledilnikOrg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={onLinkClick}
-                  >
-                    <FbIcon />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://twitter.com/sledilnik"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={onLinkClick}
-                  >
-                    <TwIcon />
-                  </a>
-                </li>
-              </Styled.SocialIcons>
-            </li>
-            <li>
-              <LanguageSelector />
-            </li>
-          </Styled.SocialAndLangContainer>
         </Styled.List>
+        <Styled.SocialAndLangContainer>
+          <li>
+            <Styled.SocialIcons>
+              <li>
+                <a
+                  href="https://facebook.com/SledilnikOrg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onLinkClick}
+                >
+                  <FbIcon role="link" aria-label="link to facebook" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/sledilnik"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={onLinkClick}
+                >
+                  <TwIcon role="link" aria-label="link to twitter" />
+                </a>
+              </li>
+            </Styled.SocialIcons>
+          </li>
+          <li>
+            <LanguageSelector />
+          </li>
+        </Styled.SocialAndLangContainer>
       </Styled.Nav>
       <Backdrop />
     </Styled.Header>
