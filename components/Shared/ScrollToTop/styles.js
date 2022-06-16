@@ -12,7 +12,7 @@ export const Button = styled.button`
   border-radius: 50%;
   opacity: 0.8;
   cursor: pointer;
-  z-index: 1098;
+  z-index: 99;
 
   animation: ${({ show }) =>
       show ? "show-scroll-to-top" : "hide-scroll-to-top"}
@@ -42,4 +42,13 @@ export const Button = styled.button`
       right: -60px;
     }
   }
+`;
+
+export const IconContainer = styled.div`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 `;

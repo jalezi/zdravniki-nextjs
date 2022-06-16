@@ -3,12 +3,14 @@ import { useEffect, useRef, useState } from "react";
 
 import useEventListener from "../../../hooks/useEventListener";
 
+import { IconContainer } from "./styles";
+
 const ScrollToTop = function ScrollToTop({ Component }) {
   const [show, setShow] = useState(false);
   const componentRef = useRef();
   const scrollYRef = useRef(0);
 
-  const scrollMargin = 100;
+  const scrollMargin = 200;
   const handler = (e) => {
     scrollYRef.current = e.currentTarget.scrollY;
     if (e.currentTarget.scrollY > scrollMargin) {
@@ -23,7 +25,7 @@ const ScrollToTop = function ScrollToTop({ Component }) {
   useEventListener("scroll", handler);
 
   useEffect(() => {
-    if (scrollYRef > 100) {
+    if (scrollYRef > scrollMargin) {
       componentRef.current.classList.remove("first");
     }
   }, []);
@@ -40,7 +42,7 @@ const ScrollToTop = function ScrollToTop({ Component }) {
       show={show}
       className={scrollYRef.current > 1 ? "" : "first"}
     >
-      Up
+      <IconContainer>^</IconContainer>
     </Component>
   );
 };
