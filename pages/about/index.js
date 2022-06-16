@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -14,7 +15,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header"])),
+      ...(await serverSideTranslations(locale, ["common", "header", "about"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
     },
@@ -23,6 +24,10 @@ export async function getStaticProps({ locale }) {
 
 export default function About({ url }) {
   const router = useRouter();
+  const { t: tCommon } = useTranslation("common");
+  const { t: tAbout } = useTranslation("about");
+  const title = tAbout("seo.title");
+  const description = tCommon("head.description");
 
   useEffect(() => {
     document.querySelectorAll("main a").forEach((el) => {
@@ -33,7 +38,7 @@ export default function About({ url }) {
   }, []);
 
   return (
-    <MDXLayout title="About" description="Some Description" url={url}>
+    <MDXLayout title={title} description={description} url={url}>
       <LanguagePageMDX slug="about" name={router.locale} />
     </MDXLayout>
   );
