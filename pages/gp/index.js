@@ -1,10 +1,11 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import styled from "styled-components";
 
-import Header from "../../components/Header";
-import SEO from "../../components/SEO";
+const Header = dynamic(() => import("../../components/Header"));
+const SEO = dynamic(() => import("../../components/SEO"));
 
 const StyledMain = styled.main`
   height: calc(100% - 56px);

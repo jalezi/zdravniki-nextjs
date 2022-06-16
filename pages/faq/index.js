@@ -4,15 +4,20 @@ import dynamic from "next/dynamic";
 import PropTypes from "prop-types";
 import { Suspense } from "react";
 
-import MDXLayout from "../../layouts/MDXLayout";
-import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
-import WaitingMDX from "../../layouts/MDXLayout/WaitingMDX";
 import { GlossaryPropType, QuestionPropType } from "../../types";
-import Error from "../_error";
 
 const Sections = dynamic(() => import("../../components/Sections"), {
   suspense: true,
 });
+const MDXLayout = dynamic(() => import("../../layouts/MDXLayout"));
+const WaitingMDX = dynamic(() => import("../../layouts/MDXLayout/WaitingMDX"));
+const Heading = dynamic(() =>
+  import("../../layouts/MDXLayout/styles").then((mod) => mod.H1)
+);
+const Notice = dynamic(() =>
+  import("../../layouts/MDXLayout/styles").then((mod) => mod.P)
+);
+const Error = dynamic(() => import("../_error"));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
@@ -53,8 +58,8 @@ export default function Faq({ url, data, errorCode }) {
 
   return (
     <MDXLayout title={title} description={description} url={url}>
-      <MDXLayoutStyles.H1>{headings.title}</MDXLayoutStyles.H1>
-      <MDXLayoutStyles.P>{noticeText}</MDXLayoutStyles.P>
+      <Heading>{headings.title}</Heading>
+      <Notice>{noticeText}</Notice>
       <Suspense fallback={<WaitingMDX />}>
         <Sections data={data} />
       </Suspense>

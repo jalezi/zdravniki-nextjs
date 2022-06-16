@@ -1,11 +1,14 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
-import LanguagePageMDX from "../../components/LanguagePageMDX";
-import MDXLayout from "../../layouts/MDXLayout";
+const LanguagePageMDX = dynamic(() =>
+  import("../../components/LanguagePageMDX")
+);
+const MDXLayout = dynamic(() => import("../../layouts/MDXLayout"));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;

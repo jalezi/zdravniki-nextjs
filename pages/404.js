@@ -1,12 +1,14 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import PropTypes from "prop-types";
 
-import ErrorLayout from "../layouts/ErrorLayout";
 import * as Styled from "../layouts/ErrorLayout/styles";
 import image from "../public/doctor-404.png";
+
+const ErrorLayout = dynamic(() => import("../layouts/ErrorLayout"));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
