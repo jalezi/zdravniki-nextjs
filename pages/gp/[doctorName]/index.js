@@ -5,15 +5,11 @@ import { useRouter } from "next/router";
 import { PropTypes } from "prop-types";
 import slugify from "slugify";
 import styled from "styled-components";
+import useSWR from "swr";
 
 import { DOCTORS_CSV_URL } from "../../../constants/csvURL";
-import {
-  createPopulateDoctorWithInstitution,
-  fetchAllRaw,
-  fetchRawCsv,
-  findDoctorByTypeAndSlugifyName,
-} from "../../../lib";
-import { DoctorFromCsvPropType } from "../../../types";
+import { fetchRawCsvAndParse, getDoctorData } from "../../../lib";
+import { DoctorPropType } from "../../../types";
 
 const Header = dynamic(() => import("../../../components/Header"));
 const SEO = dynamic(() => import("../../../components/SEO"));
@@ -27,8 +23,8 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  const doctors = await fetchRawCsv(DOCTORS_CSV_URL);
-  const paths = doctors.data
+  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL);
+  const paths = doctors
     .map((doctor) => ({
       params: { doctorName: slugify(doctor.doctor, { lower: true }) },
     }))
@@ -45,15 +41,13 @@ export async function getStaticProps({ locale, params }) {
   const { PUBLIC_URL } = process.env;
 
   const slug = params.doctorName;
-  const [doctors, institutions] = await fetchAllRaw();
+  const { doctors, updatedAt } = await getDoctorData({
+    field: "doctor",
+    value: slug,
+    isSlug: true,
+  });
 
-  const populateWithInstitution =
-    createPopulateDoctorWithInstitution(institutions);
-  const doctor = findDoctorByTypeAndSlugifyName(doctors, "gp", slug)?.map(
-    populateWithInstitution
-  );
-
-  if (!doctor || doctor?.length === 0) {
+  if (!doctors) {
     return { notFound: true };
   }
 
@@ -62,29 +56,44 @@ export async function getStaticProps({ locale, params }) {
       ...(await serverSideTranslations(locale, ["common", "header"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
-      doctor,
+      doctors,
+      updatedAt,
     },
     revalidate: 1, // find optimum number in seconds
   };
 }
 
-export default function DoctorName({ url, doctor }) {
+export default function DoctorName({ url, doctors, updatedAt }) {
   const { t } = useTranslation("common");
   const { title, description } = t("head", { returnObjects: true });
-
   const router = useRouter();
 
+  const {
+    query: { doctorName },
+  } = router;
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data } = useSWR(
+    `/api/gp?field=doctor&&value=${doctorName}&&isSlug=true`,
+    fetcher,
+    {
+      fallbackData: { url, doctors, updatedAt },
+      refreshInterval: 30_000,
+    }
+  );
+
   const goBack = () => {
-    router.push("/gp", "/gp", { scroll: false });
+    router.push("/gp/", "/gp/", { scroll: false });
   };
 
   return (
     <>
       <SEO title={title} description={description} url={url} />
-      <Header />
+      <Header />{" "}
       <StyledMain>
         <h1>Doctor Name</h1>
-        {doctor.map((dr) =>
+        <p>Updated At: {data.updatedAt}</p>
+        {data.doctors.map((dr) =>
           Object.entries(dr).map(([key, value]) => (
             <p key={`${value}${key}`}>
               {key}: {value}
@@ -101,5 +110,6 @@ export default function DoctorName({ url, doctor }) {
 
 DoctorName.propTypes = {
   url: PropTypes.string.isRequired,
-  doctor: PropTypes.arrayOf(DoctorFromCsvPropType).isRequired,
+  doctors: PropTypes.arrayOf(DoctorPropType).isRequired,
+  updatedAt: PropTypes.number.isRequired,
 };

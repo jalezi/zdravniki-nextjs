@@ -4,14 +4,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { PropTypes } from "prop-types";
 import styled from "styled-components";
+import useSWR from "swr";
 
-import {
-  createPopulateDoctorWithInstitution,
-  fetchAllRaw,
-  findDoctorByType,
-  toSlug,
-} from "../../lib";
-import { DoctorFromCsvPropType } from "../../types";
+import { PER_PAGE } from "../../constants/common";
+import { getDoctorData, toSlug } from "../../lib";
+import { DoctorPropType } from "../../types";
 
 const Error = dynamic(() => import("../_error"));
 const Header = dynamic(() => import("../../components/Header"));
@@ -34,28 +31,33 @@ export async function getStaticProps({ locale }) {
   }
 
   const { PUBLIC_URL } = process.env;
-  const [doctors, institutions] = await fetchAllRaw();
-  const populateWithInstitution =
-    createPopulateDoctorWithInstitution(institutions);
-
-  const gpDoctors = findDoctorByType(doctors, "gp")?.map(
-    populateWithInstitution
-  );
+  const { doctors, updatedAt } = await getDoctorData({
+    field: "type",
+    value: "gp",
+  });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "header"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
-      doctors: gpDoctors,
+      doctors: doctors.slice(0, PER_PAGE) ?? null,
+      updatedAt,
+      revalidate: 1,
     },
   };
 }
 
-export default function Gp({ url, doctors }) {
+export default function Gp({ url, doctors, updatedAt }) {
   const { t } = useTranslation("common");
 
-  if (!doctors) {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data } = useSWR("/api/gp", fetcher, {
+    fallbackData: { url, doctors, updatedAt },
+    refreshInterval: 30_000,
+  });
+
+  if (!doctors && data.doctors) {
     return <Error statusCode={500} url={url} />;
   }
 
@@ -91,8 +93,9 @@ export default function Gp({ url, doctors }) {
       <Header />
       <StyledMain>
         <h1>General Practicians</h1>
+        <p>Updated At: {data.updatedAt}</p>
         <br />
-        {doctors.map(drJsx)}
+        {data.doctors.map(drJsx)}
         <br />
       </StyledMain>
     </>
@@ -101,5 +104,6 @@ export default function Gp({ url, doctors }) {
 
 Gp.propTypes = {
   url: PropTypes.string.isRequired,
-  doctors: PropTypes.arrayOf(DoctorFromCsvPropType).isRequired,
+  doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
+  updatedAt: PropTypes.number.isRequired,
 };
