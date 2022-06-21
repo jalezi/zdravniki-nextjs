@@ -5,7 +5,10 @@ import { useRouter } from "next/router";
 import { PropTypes } from "prop-types";
 import slugify from "slugify";
 import styled from "styled-components";
-import useSWR from "swr";
+import useSWR, {
+  SWRConfig,
+  // unstable_serialize as unstableSerialize,
+} from "swr";
 
 import { DOCTORS_CSV_URL } from "../../../constants/csvURL";
 import { fetchRawCsvAndParse, getDoctorData } from "../../../lib";
@@ -23,7 +26,7 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL);
+  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL, { type: "gp" });
   const paths = doctors
     .map((doctor) => ({
       params: { doctorName: slugify(doctor.doctor, { lower: true }) },
@@ -42,6 +45,7 @@ export async function getStaticProps({ locale, params }) {
 
   const slug = params.doctorName;
   const { doctors, updatedAt } = await getDoctorData({
+    type: "gp",
     field: "doctor",
     value: slug,
     isSlug: true,
@@ -56,31 +60,46 @@ export async function getStaticProps({ locale, params }) {
       ...(await serverSideTranslations(locale, ["common", "header"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
-      doctors,
-      updatedAt,
+      fallback: {
+        [`/api/gp/${slug}`]: { doctors, updatedAt },
+      },
     },
-    revalidate: 1, // find optimum number in seconds
+    revalidate: 1,
   };
 }
 
-export default function DoctorName({ url, doctors, updatedAt }) {
-  const { t } = useTranslation("common");
-  const { title, description } = t("head", { returnObjects: true });
+const DoctorCard = function DoctorCard() {
   const router = useRouter();
 
   const {
     query: { doctorName },
   } = router;
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data } = useSWR(
-    `/api/gp?field=doctor&&value=${doctorName}&&isSlug=true`,
-    fetcher,
-    {
-      fallbackData: { url, doctors, updatedAt },
-      refreshInterval: 30_000,
-    }
+  const { data } = useSWR(() => doctorName && `/api/gp/${doctorName}`);
+
+  const doctor = data.doctors[0];
+
+  return (
+    <div>
+      <h2>{doctor?.doctor}</h2>
+    </div>
   );
+};
+
+export default function DoctorName({ url, fallback }) {
+  const { t } = useTranslation("common");
+  const { title, description } = t("head", { returnObjects: true });
+  const router = useRouter();
+
+  const fetcher = async (resource, init) => {
+    const res = await fetch(resource, init);
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data.message);
+    }
+    return data;
+  };
 
   const goBack = () => {
     router.push("/gp/", "/gp/", { scroll: false });
@@ -89,18 +108,12 @@ export default function DoctorName({ url, doctors, updatedAt }) {
   return (
     <>
       <SEO title={title} description={description} url={url} />
-      <Header />{" "}
+      <Header />
       <StyledMain>
-        <h1>Doctor Name</h1>
-        <p>Updated At: {data.updatedAt}</p>
-        {data.doctors.map((dr) =>
-          Object.entries(dr).map(([key, value]) => (
-            <p key={`${value}${key}`}>
-              {key}: {value}
-            </p>
-          ))
-        )}
-        <button type="button" onClick={goBack}>
+        <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
+          <DoctorCard />
+        </SWRConfig>
+        <button type="button" onClick={goBack} style={{ cursor: "pointer" }}>
           Nazaj
         </button>
       </StyledMain>
@@ -108,8 +121,12 @@ export default function DoctorName({ url, doctors, updatedAt }) {
   );
 }
 
+DoctorName.defaultProps = { fallback: undefined };
+
 DoctorName.propTypes = {
   url: PropTypes.string.isRequired,
-  doctors: PropTypes.arrayOf(DoctorPropType).isRequired,
-  updatedAt: PropTypes.number.isRequired,
+  fallback: PropTypes.shape({
+    doctors: PropTypes.arrayOf(DoctorPropType),
+    updatedAt: PropTypes.number,
+  }),
 };

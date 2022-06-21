@@ -1,14 +1,16 @@
 import { getDoctorData } from "../../../lib";
 
 export default async function handler(req, res) {
-  const { query } = req;
-  const { field, value, isSlug } = query;
+  const { url } = req;
+  // console.log("/api/gp", url,);
 
+  const type = url.split("/")[2];
   res.status(200).json(
     await getDoctorData({
-      field: field ?? "type",
-      value: value ?? "gp",
-      isSlug: Boolean(isSlug === "true"),
+      type,
+      field: "",
+      value: "",
+      isSlug: false,
     })
   );
 }

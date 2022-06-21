@@ -31,27 +31,32 @@ export async function getStaticProps({ locale }) {
   }
 
   const { PUBLIC_URL } = process.env;
-  const { doctors, updatedAt } = await getDoctorData({
-    field: "type",
-    value: "gp",
-  });
+  const { doctors, updatedAt } = await getDoctorData({ type: "gp" });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "header"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
-      doctors: doctors.slice(0, PER_PAGE) ?? null,
+      doctors: doctors.slice(0, PER_PAGE),
       updatedAt,
-      revalidate: 1,
     },
+    revalidate: 1,
   };
 }
 
 export default function Gp({ url, doctors, updatedAt }) {
   const { t } = useTranslation("common");
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = async (fetchUrl) => {
+    const res = await fetch(fetchUrl);
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data.message);
+    }
+    return data;
+  };
   const { data } = useSWR("/api/gp", fetcher, {
     fallbackData: { url, doctors, updatedAt },
     refreshInterval: 30_000,
