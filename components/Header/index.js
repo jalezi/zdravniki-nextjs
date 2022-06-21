@@ -52,10 +52,12 @@ const Header = function Header({ noAnimation }) {
     bodyRef.current = window;
   }, []);
 
-  useEffect(() => {
-    if (open) document.body.style.overflow = "hidden";
-    if (!open) document.body.style.overflow = "initial";
-  }, [open]);
+  if (open && bodyRef.current) {
+    document.body.style.overflow = "hidden";
+  }
+  if (!open && bodyRef.current) {
+    document.body.style.overflow = "initial";
+  }
 
   const onHamburgerClick = () => {
     setOpen((prev) => !prev);
@@ -71,14 +73,12 @@ const Header = function Header({ noAnimation }) {
     }
   };
 
-  useEffect(() => {
-    if (isScrolled) {
-      headerRef.current.classList.add("scrolled");
-    }
-    if (!isScrolled) {
-      headerRef.current.classList.remove("scrolled");
-    }
-  }, [isScrolled]);
+  if (isScrolled) {
+    headerRef.current?.classList.add("scrolled");
+  }
+  if (!isScrolled) {
+    headerRef.current?.classList.remove("scrolled");
+  }
 
   const onLinkClick = (e) => {
     e.stopPropagation();
