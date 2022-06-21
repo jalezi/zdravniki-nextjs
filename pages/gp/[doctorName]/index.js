@@ -16,10 +16,10 @@ const Header = dynamic(() => import("../../../components/Header"));
 const SEO = dynamic(() => import("../../../components/SEO"));
 
 const StyledMain = styled.main`
-  height: calc(100% - 56px);
+  height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
 
   @media only screen and (min-width: 768px) {
-    max-height: calc(100% - 64px);
+    max-height: calc(100% - ${({ theme }) => theme.headerHeight});
   }
 `;
 

@@ -41,6 +41,9 @@ const theme = {
     dataTermBcgColor: "#414040",
   },
 
+  mobileHeaderHeight: "56px",
+  headerHeight: "64px",
+
   mobileBreakPoint: {
     SP: `380px`,
     M: `420px`,

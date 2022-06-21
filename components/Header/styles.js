@@ -95,7 +95,7 @@ export const Header = styled.header`
   left: 0;
   right: 0;
 
-  height: 56px;
+  height: ${({ theme }) => theme.mobileHeaderHeight};
   transition: height 200ms ease-out;
   color: ${({ theme }) => theme.textColor2};
   background-color: ${({ theme }) => theme.brand};
@@ -158,12 +158,12 @@ export const Header = styled.header`
 
   /* MEDIA QUERIES */
   @media only screen and (min-width: 768px) {
-    height: 64px;
+    height: ${({ theme }) => theme.headerHeight};
     transition: height 200ms ease-out;
 
     &.scrolled {
       opacity: 0.8;
-      height: 56px;
+      height: ${({ theme }) => theme.mobileHeaderHeight};
       transition: height 200ms ease-out, opacity 200ms ease-out;
     }
     ${Nav},

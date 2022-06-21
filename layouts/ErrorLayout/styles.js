@@ -6,7 +6,7 @@ export const Main = styled.main`
   align-content: center;
   grid-gap: 0.75em;
 
-  height: calc(100% - 56px);
+  height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
 
   text-align: center;
 
@@ -55,7 +55,7 @@ export const Main = styled.main`
   }
 
   @media only screen and (min-width: 768px) {
-    max-height: calc(100% - 64px);
+    max-height: calc(100% - ${({ theme }) => theme.headerHeight});
   }
 `;
 
