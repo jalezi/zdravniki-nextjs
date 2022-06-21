@@ -2,25 +2,16 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
-import styled from "styled-components";
 import useSWR from "swr";
 
 import { PER_PAGE } from "../../constants/common";
+import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData } from "../../lib";
 import { DoctorPropType } from "../../types";
 
-const DoctorCards = dynamic(import("../../components/DoctorCards"));
+// const DoctorCards = dynamic(import("../../components/DoctorCards"));
 const Error = dynamic(() => import("../_error"));
-const Header = dynamic(() => import("../../components/Header"));
-const SEO = dynamic(() => import("../../components/SEO"));
-
-const StyledMain = styled.main`
-  height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
-
-  @media only screen and (min-width: 768px) {
-    max-height: calc(100% -${({ theme }) => theme.headerHeight});
-  }
-`;
+const HomeLayout = dynamic(import("../../layouts/HomeLayout"));
 
 export async function getStaticProps({ locale }) {
   if (locale === "default") {
@@ -67,17 +58,19 @@ export default function Gp({ url, doctors, updatedAt }) {
   const { title, description } = t("head", { returnObjects: true });
 
   return (
-    <>
-      <SEO title={title} description={description} url={url} />
-      <Header noAnimation />
-      <StyledMain>
-        <h1>General Practicians</h1>
-        <p>Updated At: {data.updatedAt}</p>
-        <br />
-        <DoctorCards doctors={data.doctors} />
-        <br />
-      </StyledMain>
-    </>
+    <HomeLayout title={title} description={description} url={url}>
+      <Styled.MapContainer>
+        <h2>Map</h2>
+      </Styled.MapContainer>
+      <Styled.ListContainer>
+        <h2>List</h2>
+      </Styled.ListContainer>
+      {/* <h1>General Practicians</h1>
+      <p>Updated At: {data.updatedAt}</p>
+      <br />
+      <DoctorCards doctors={data.doctors} />
+      <br /> */}
+    </HomeLayout>
   );
 }
 

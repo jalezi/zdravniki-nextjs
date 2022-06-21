@@ -28,7 +28,7 @@ const DoctorCards = function DoctorCards({ doctors }) {
       <br />
     </div>
   );
-  return <div>{doctors.map(drJsx)}</div>;
+  return <div style={{ overflow: "auto" }}>{doctors.map(drJsx)}</div>;
 };
 
 DoctorCards.propTypes = {
