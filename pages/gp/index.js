@@ -1,15 +1,15 @@
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { PropTypes } from "prop-types";
 import styled from "styled-components";
 import useSWR from "swr";
 
 import { PER_PAGE } from "../../constants/common";
-import { getDoctorData, toSlug } from "../../lib";
+import { getDoctorData } from "../../lib";
 import { DoctorPropType } from "../../types";
 
+const DoctorCards = dynamic(import("../../components/DoctorCards"));
 const Error = dynamic(() => import("../_error"));
 const Header = dynamic(() => import("../../components/Header"));
 const SEO = dynamic(() => import("../../components/SEO"));
@@ -45,18 +45,19 @@ export async function getStaticProps({ locale }) {
   };
 }
 
+const fetcher = async (fetchUrl) => {
+  const res = await fetch(fetchUrl);
+  const data = await res.json();
+
+  if (res.status !== 200) {
+    throw new Error(data.message);
+  }
+  return data;
+};
+
 export default function Gp({ url, doctors, updatedAt }) {
   const { t } = useTranslation("common");
 
-  const fetcher = async (fetchUrl) => {
-    const res = await fetch(fetchUrl);
-    const data = await res.json();
-
-    if (res.status !== 200) {
-      throw new Error(data.message);
-    }
-    return data;
-  };
   const { data } = useSWR("/api/gp", fetcher, {
     fallbackData: { url, doctors, updatedAt },
     refreshInterval: 30_000,
@@ -68,30 +69,6 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { title, description } = t("head", { returnObjects: true });
 
-  const drJsx = (dr) => (
-    <div key={dr.doctor + dr.id_inst}>
-      <br />
-      {Object.entries(dr).map(([key, value]) => {
-        if (key === "doctor") {
-          return (
-            <p key={`${value}${key}S`}>
-              <span>{key}: </span>
-              <Link href={`/gp/${toSlug(value)}`} key={`${value}${key}L`}>
-                {value}
-              </Link>
-            </p>
-          );
-        }
-        return (
-          <p key={`${value}${key}M`}>
-            {key}: {value}
-          </p>
-        );
-      })}
-      <br />
-    </div>
-  );
-
   return (
     <>
       <SEO title={title} description={description} url={url} />
@@ -100,7 +77,7 @@ export default function Gp({ url, doctors, updatedAt }) {
         <h1>General Practicians</h1>
         <p>Updated At: {data.updatedAt}</p>
         <br />
-        {data.doctors.map(drJsx)}
+        <DoctorCards doctors={data.doctors} />
         <br />
       </StyledMain>
     </>

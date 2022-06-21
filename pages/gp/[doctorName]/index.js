@@ -5,15 +5,13 @@ import { useRouter } from "next/router";
 import { PropTypes } from "prop-types";
 import slugify from "slugify";
 import styled from "styled-components";
-import useSWR, {
-  SWRConfig,
-  // unstable_serialize as unstableSerialize,
-} from "swr";
+import { SWRConfig } from "swr";
 
 import { DOCTORS_CSV_URL } from "../../../constants/csvURL";
 import { fetchRawCsvAndParse, getDoctorData } from "../../../lib";
 import { DoctorPropType } from "../../../types";
 
+const DoctorCard = dynamic(import("../../../components/DoctorCard"));
 const Header = dynamic(() => import("../../../components/Header"));
 const SEO = dynamic(() => import("../../../components/SEO"));
 
@@ -68,38 +66,20 @@ export async function getStaticProps({ locale, params }) {
   };
 }
 
-const DoctorCard = function DoctorCard() {
-  const router = useRouter();
+const fetcher = async (resource, init) => {
+  const res = await fetch(resource, init);
+  const data = await res.json();
 
-  const {
-    query: { doctorName },
-  } = router;
-
-  const { data } = useSWR(() => doctorName && `/api/gp/${doctorName}`);
-
-  const doctor = data.doctors[0];
-
-  return (
-    <div>
-      <h2>{doctor?.doctor}</h2>
-    </div>
-  );
+  if (res.status !== 200) {
+    throw new Error(data.message);
+  }
+  return data;
 };
 
 export default function DoctorName({ url, fallback }) {
   const { t } = useTranslation("common");
   const { title, description } = t("head", { returnObjects: true });
   const router = useRouter();
-
-  const fetcher = async (resource, init) => {
-    const res = await fetch(resource, init);
-    const data = await res.json();
-
-    if (res.status !== 200) {
-      throw new Error(data.message);
-    }
-    return data;
-  };
 
   const goBack = () => {
     router.push("/gp/", "/gp/", { scroll: false });
