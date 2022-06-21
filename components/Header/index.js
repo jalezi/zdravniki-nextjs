@@ -2,6 +2,7 @@
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
 import FbIcon from "../../assets/svg/icon-fb.svg";
@@ -14,7 +15,7 @@ import Backdrop from "./Backdrop";
 import Hamburger from "./Hamburger";
 import * as Styled from "./styles";
 
-const Header = function Header() {
+const Header = function Header({ noAnimation }) {
   const headerRef = useRef();
   const bodyRef = useRef();
   const timeoutRef = useRef();
@@ -24,6 +25,10 @@ const Header = function Header() {
   const { t: tHeader } = useTranslation("header");
 
   const handler = (e) => {
+    if (noAnimation) {
+      return;
+    }
+
     const scrollMargin = 100;
 
     if (timeoutRef.current) {
@@ -173,3 +178,9 @@ const Header = function Header() {
 };
 
 export default Header;
+
+Header.defaultProps = { noAnimation: false };
+
+Header.propTypes = {
+  noAnimation: PropTypes.bool,
+};

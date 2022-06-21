@@ -72,7 +72,7 @@ export default function Gp({ url, doctors, updatedAt }) {
   return (
     <>
       <SEO title={title} description={description} url={url} />
-      <Header />
+      <Header noAnimation />
       <StyledMain>
         <h1>General Practicians</h1>
         <p>Updated At: {data.updatedAt}</p>
