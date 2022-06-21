@@ -82,7 +82,7 @@ export default function DoctorName({ url, fallback }) {
   const router = useRouter();
 
   const goBack = () => {
-    router.push("/gp/", "/gp/", { scroll: false });
+    router.back();
   };
 
   return (
