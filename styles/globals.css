@@ -1,5 +1,7 @@
 :root {
   font-size: 100%;
+  --mobilePaddingTop: 56px;
+  --paddingTop: 64px;
 }
 
 html,
@@ -18,12 +20,12 @@ div#__next {
   height: 100%;
   width: 100%;
 
-  padding-top: 64px;
+  padding-top: var(--mobilePaddingTopmobile);
 }
 
 @media only screen and (min-width: 768px) {
   div#__next {
-    padding-top: 72px;
+    padding-top: var(--paddingTop);
   }
 }
 

@@ -42,7 +42,7 @@ export const A = styled.a`
 
 // Names of CustomContainer and StaticPageWrapper matches classes from 'style.scss' from https://covid-19.sledilnik.org/ website project
 export const CustomContainer = styled("main")(({ theme }) => ({
-  margin: "24px auto 0 auto",
+  margin: "48px auto 0 auto",
   maxWidth: "730px",
   background: theme.white,
   lineHeight: 1.7,
