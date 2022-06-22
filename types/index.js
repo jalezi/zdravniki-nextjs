@@ -27,7 +27,7 @@ export const GlossaryPropType = {
   position: PropTypes.number,
 };
 
-// just for reference, most likely it will be deletete
+// just for reference, most likely it will be deleted
 export const DoctorFromCsvPropType = PropTypes.shape({
   doctor: PropTypes.string,
   type: PropTypes.string,
