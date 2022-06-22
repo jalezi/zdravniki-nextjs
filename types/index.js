@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
+import StyleProp from "react-style-proptype";
 /*
- todo remove from production
+ ? remove proptypes from production
  see: https://www.npmjs.com/package/babel-plugin-transform-react-remove-prop-types
  see: https://nextjs.org/docs/advanced-features/customizing-babel-config
+
+ I have tried. Atm it removes only 3kB from the bundle. But with declaring ".babelrc" we are loosing SWC compiler.
  */
-import StyleProp from "react-style-proptype"; // todo remove from production with https://www.npmjs.com/package/babel-plugin-transform-react-remove-prop-types
 
 export const StylePropType = StyleProp;
 
