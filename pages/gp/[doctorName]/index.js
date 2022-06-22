@@ -11,7 +11,7 @@ import { DOCTORS_CSV_URL } from "../../../constants/csvURL";
 import { fetchRawCsvAndParse, getDoctorData } from "../../../lib";
 import { DoctorPropType } from "../../../types";
 
-const DoctorCard = dynamic(import("../../../components/DoctorCard"));
+const DoctorCard = dynamic(() => import("../../../components/DoctorCard"));
 const Header = dynamic(() => import("../../../components/Header"));
 const SEO = dynamic(() => import("../../../components/SEO"));
 
