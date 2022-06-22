@@ -21,6 +21,15 @@ export const MapContainer = styled.div`
   background: red;
   height: calc(100% - 64px);
   z-index: 9;
+
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .leaflet-tile-pane {
+    filter: hue-rotate(40deg) saturate(0.4) contrast(0.6) brightness(1.2);
+  }
 `;
 export const ListContainer = styled.div`
   position: absolute;

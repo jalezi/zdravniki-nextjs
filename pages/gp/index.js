@@ -63,11 +63,7 @@ export default function Gp({ url, doctors, updatedAt }) {
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
-        <MapWithNoSSR
-          center={MAP.GEO_LOCATION.SL_CENTER}
-          zoom={MAP.ZOOM}
-          style={{ height: "100%", width: "100%" }}
-        />
+        <MapWithNoSSR center={MAP.GEO_LOCATION.SL_CENTER} zoom={MAP.ZOOM} />
       </Styled.MapContainer>
       <Styled.ListContainer>
         <h2>List</h2>
