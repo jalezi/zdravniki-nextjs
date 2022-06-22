@@ -48,16 +48,8 @@ const Header = function Header({ noAnimation }) {
   useEventListener("scroll", handler, bodyRef.current);
 
   useEffect(() => {
-    // eslint-disable-next-line prefer-destructuring
     bodyRef.current = window;
   }, []);
-
-  if (open && bodyRef.current) {
-    document.body.style.overflow = "hidden";
-  }
-  if (!open && bodyRef.current) {
-    document.body.style.overflow = "initial";
-  }
 
   const onHamburgerClick = () => {
     setOpen((prev) => !prev);
