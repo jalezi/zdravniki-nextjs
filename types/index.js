@@ -1,4 +1,12 @@
 import PropTypes from "prop-types";
+/*
+ todo remove from production
+ see: https://www.npmjs.com/package/babel-plugin-transform-react-remove-prop-types
+ see: https://nextjs.org/docs/advanced-features/customizing-babel-config
+ */
+import StyleProp from "react-style-proptype"; // todo remove from production with https://www.npmjs.com/package/babel-plugin-transform-react-remove-prop-types
+
+export const StylePropType = StyleProp;
 
 export const ChildrenPropType = PropTypes.oneOfType([
   PropTypes.arrayOf(PropTypes.node),

@@ -4,14 +4,13 @@ import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
-import { PER_PAGE } from "../../constants/common";
+import { MAP, PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData } from "../../lib";
 import { DoctorPropType } from "../../types";
 
-// const DoctorCards = dynamic(import("../../components/DoctorCards"));
 const Error = dynamic(() => import("../_error"));
-const HomeLayout = dynamic(import("../../layouts/HomeLayout"));
+const HomeLayout = dynamic(() => import("../../layouts/HomeLayout"));
 
 export async function getStaticProps({ locale }) {
   if (locale === "default") {
@@ -44,6 +43,10 @@ const fetcher = async (fetchUrl) => {
 };
 
 export default function Gp({ url, doctors, updatedAt }) {
+  const MapWithNoSSR = dynamic(() => import("../../components/Map"), {
+    ssr: false,
+  });
+
   const { t } = useTranslation("common");
 
   const { data } = useSWR("/api/gp", fetcher, {
@@ -60,16 +63,15 @@ export default function Gp({ url, doctors, updatedAt }) {
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
-        <h2>Map</h2>
+        <MapWithNoSSR
+          center={MAP.GEO_LOCATION.SL_CENTER}
+          zoom={MAP.ZOOM}
+          style={{ height: "100%", width: "100%" }}
+        />
       </Styled.MapContainer>
       <Styled.ListContainer>
         <h2>List</h2>
       </Styled.ListContainer>
-      {/* <h1>General Practicians</h1>
-      <p>Updated At: {data.updatedAt}</p>
-      <br />
-      <DoctorCards doctors={data.doctors} />
-      <br /> */}
     </HomeLayout>
   );
 }
