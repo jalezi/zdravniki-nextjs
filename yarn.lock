@@ -4873,7 +4873,7 @@ prettier@2.6.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
   integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5007,6 +5007,13 @@ react-select@^5.3.2:
     memoize-one "^5.0.0"
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
+
+react-style-proptype@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.2.tgz#d8e998e62ce79ec35b087252b90f19f1c33968a0"
+  integrity sha512-ywYLSjNkxKHiZOqNlso9PZByNEY+FTyh3C+7uuziK0xFXu9xzdyfHwg4S9iyiRRoPCR4k2LqaBBsWVmSBwCWYQ==
+  dependencies:
+    prop-types "^15.5.4"
 
 react-transition-group@^4.3.0:
   version "4.4.2"
