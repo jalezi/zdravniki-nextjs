@@ -38,5 +38,6 @@ export const ListContainer = styled.div`
   right: 0;
   background: yellow;
   height: 100%;
+  overflow-y: auto;
   z-index: 10;
 `;

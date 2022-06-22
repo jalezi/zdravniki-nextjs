@@ -6,7 +6,7 @@ import useSWR from "swr";
 
 import { MAP, PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
-import { getDoctorData } from "../../lib";
+import { getDoctorData, sortByField } from "../../lib";
 import { DoctorPropType } from "../../types";
 
 const Error = dynamic(() => import("../_error"));
@@ -60,13 +60,24 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { title, description } = t("head", { returnObjects: true });
 
+  const sortedDoctors = data.doctors.sort(sortByField("doctor"));
+
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
-        <MapWithNoSSR center={MAP.GEO_LOCATION.SL_CENTER} zoom={MAP.ZOOM} />
+        <MapWithNoSSR
+          doctors={sortedDoctors}
+          center={MAP.GEO_LOCATION.SL_CENTER}
+          zoom={MAP.ZOOM}
+        />
       </Styled.MapContainer>
       <Styled.ListContainer>
         <h2>List</h2>
+        {sortedDoctors.map((doctor) => (
+          <p key={doctor.doctor + doctor.inst_id + Math.random() * Date.now()}>
+            {doctor.doctor}
+          </p>
+        ))}
       </Styled.ListContainer>
     </HomeLayout>
   );

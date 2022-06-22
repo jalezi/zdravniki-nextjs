@@ -6,9 +6,15 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 import { MAP } from "../../constants/common";
-import { ChildrenPropType, StylePropType } from "../../types/index";
+import {
+  ChildrenPropType,
+  DoctorPropType,
+  StylePropType,
+} from "../../types/index";
 
-export default function Map({ children, center, zoom, style }) {
+import { DoctorMarker } from "./Markers";
+
+export function Map({ children, center, zoom, style }) {
   return (
     <MapContainer
       center={center}
@@ -35,7 +41,7 @@ Map.defaultProps = {
 
 Map.propTypes = {
   children: ChildrenPropType,
-  center: PropTypes.oneOf([
+  center: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.number),
     PropTypes.shape({
       lat: PropTypes.number,
@@ -46,3 +52,46 @@ Map.propTypes = {
   style: StylePropType,
   zoom: PropTypes.number,
 };
+
+const withMap = function withMap(Component) {
+  const DoctorsMap = function DoctorsMap({ center, zoom, doctors }) {
+    const markers = doctors?.map((doctor) => {
+      const key = doctor.doctor + doctor.inst_id + Math.random() * Date.now();
+      return (
+        <DoctorMarker
+          key={key}
+          center={[doctor.lat, doctor.lon]}
+          doctor={doctor}
+        />
+      );
+    });
+
+    return (
+      <Component center={center} zoom={zoom}>
+        {markers}
+      </Component>
+    );
+  };
+
+  DoctorsMap.defaultProps = {
+    center: MAP.GEO_LOCATION.SL_CENTER,
+    zoom: MAP.ZOOM,
+  };
+
+  DoctorsMap.propTypes = {
+    center: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.number),
+      PropTypes.shape({
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+        alt: PropTypes.number,
+      }),
+    ]),
+    doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
+    zoom: PropTypes.number,
+  };
+
+  return DoctorsMap;
+};
+
+export default withMap(Map);
