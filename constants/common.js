@@ -42,3 +42,18 @@ export const MAP = {
   GEO_LOCATION: { SL_CENTER, GET_CURRENT_POSITION_OPTIONS },
   BOUNDS,
 };
+
+// INSTITUTIONS
+export const DUMMY_INSTITUTION = {
+  unit: "",
+  name: "",
+  website: "",
+  phone: "",
+  lat: SL_CENTER[0],
+  lon: SL_CENTER[1],
+  address: "",
+  city: "",
+  post: "0000 Neznan",
+  municipalityPart: "",
+  municipality: "",
+};
