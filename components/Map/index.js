@@ -10,13 +10,7 @@ const withMap = function withMap(Component) {
   const DoctorsMap = function DoctorsMap({ center, zoom, doctors }) {
     const markers = doctors?.map((doctor) => {
       const key = doctor.doctor + doctor.inst_id + Math.random() * Date.now();
-      return (
-        <DoctorMarker
-          key={key}
-          center={[doctor.lat, doctor.lon]}
-          doctor={doctor}
-        />
-      );
+      return <DoctorMarker key={key} doctor={doctor} />;
     });
 
     return (
