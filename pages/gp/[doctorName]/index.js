@@ -17,9 +17,11 @@ const SEO = dynamic(() => import("../../../components/SEO"));
 
 const StyledMain = styled.main`
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
+  padding-top: ${({ theme }) => theme.mobileHeaderHeight};
 
   @media only screen and (min-width: 768px) {
-    max-height: calc(100% - ${({ theme }) => theme.headerHeight});
+    height: calc(100% - ${({ theme }) => theme.headerHeight});
+    padding-top: ${({ theme }) => theme.headerHeight};
   }
 `;
 
