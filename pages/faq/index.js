@@ -39,7 +39,7 @@ export async function getStaticProps({ locale }) {
       data,
       errorCode,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 }
 
