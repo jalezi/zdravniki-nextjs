@@ -49,12 +49,14 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { t } = useTranslation("common");
 
-  const { data } = useSWR("/api/gp", fetcher, {
+  const { data, error } = useSWR("/api/gp", fetcher, {
     fallbackData: { url, doctors, updatedAt },
     refreshInterval: 30_000,
+    // ? use onErrorRetry
   });
 
-  if (!doctors && data.doctors) {
+  if (error) {
+    // TODO use some kind of logger for error.status
     return <Error statusCode={500} url={url} />;
   }
 
