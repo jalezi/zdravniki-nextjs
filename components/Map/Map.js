@@ -12,11 +12,13 @@ import {
   StylePropType,
 } from "../../types/index";
 
-export function Map({ children, center, zoom, style }) {
+export function Map({ center, children, maxZoom, minZoom, style, zoom }) {
   return (
     <MapContainer
       attributionControl={false}
       center={center}
+      maxZoom={maxZoom}
+      minZoom={minZoom}
       style={style}
       zoom={zoom}
     >
@@ -33,13 +35,17 @@ export function Map({ children, center, zoom, style }) {
 Map.defaultProps = {
   center: MAP.GEO_LOCATION.SL_CENTER,
   children: undefined,
+  maxZoom: MAP.MAX_ZOOM,
+  minZoom: MAP.MIN_ZOOM,
   style: undefined,
   zoom: MAP.ZOOM,
 };
 
 Map.propTypes = {
-  children: ChildrenPropType,
   center: GeoLocationType,
+  children: ChildrenPropType,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
   style: StylePropType,
   zoom: PropTypes.number,
 };
