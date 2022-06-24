@@ -22,7 +22,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header"])),
+      ...(await serverSideTranslations(locale, ["common", "header", "map"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       doctors: doctors.slice(0, PER_PAGE),

@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import PropTypes from "prop-types";
 import { createRef } from "react";
 import { Popup } from "react-leaflet";
@@ -7,6 +6,7 @@ import { MAP } from "../../constants/common";
 import { DoctorPropType } from "../../types/index";
 
 import { Map } from "./Map";
+import MapTotalResults from "./MapTotalResults";
 import MarkerClusterGroup, {
   createClusterCustomIcon,
 } from "./MarkerClusterGroup";
@@ -42,6 +42,7 @@ const withMap = function withMap(Component) {
         >
           {markers}
         </MarkerClusterGroup>
+        <MapTotalResults number={doctors.length} />
       </Component>
     );
   };
