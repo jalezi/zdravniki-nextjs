@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
-import { PER_PAGE } from "../../constants/common";
+// import { PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
 import { DoctorPropType } from "../../types";
@@ -18,14 +18,14 @@ export async function getStaticProps({ locale }) {
   }
 
   const { PUBLIC_URL } = process.env;
-  const { doctors, updatedAt } = await getDoctorData({ type: "gp" });
+  const { updatedAt } = await getDoctorData({ type: "gp" });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common", "header", "map"])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
-      doctors: doctors.slice(0, PER_PAGE),
+      doctors: [],
       updatedAt,
     },
     revalidate: 1,
@@ -50,10 +50,12 @@ export default function Gp({ url, doctors, updatedAt }) {
   const { t } = useTranslation("common");
 
   const { data, error } = useSWR("/api/gp", fetcher, {
-    fallbackData: { url, doctors, updatedAt },
+    fallbackData: { doctors, updatedAt },
     refreshInterval: 30_000,
     // ? use onErrorRetry
   });
+
+  const sortedDoctors = data.doctors.sort(sortByField("doctor"));
 
   if (error) {
     // TODO use some kind of logger for error.status
@@ -62,12 +64,14 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { title, description } = t("head", { returnObjects: true });
 
-  const sortedDoctors = data.doctors.sort(sortByField("doctor"));
-
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
-        <MapWithNoSSR doctors={sortedDoctors} />
+        {data.doctors.length === 0 ? (
+          <div>Loading...</div>
+        ) : (
+          <MapWithNoSSR doctors={sortedDoctors} />
+        )}
       </Styled.MapContainer>
       <Styled.ListContainer>
         <h2>List</h2>
