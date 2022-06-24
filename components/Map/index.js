@@ -4,7 +4,7 @@ import { createRef } from "react";
 import { Popup } from "react-leaflet";
 
 import { MAP } from "../../constants/common";
-import { DoctorPropType } from "../../types/index";
+import { DoctorPropType, GeoLocationType } from "../../types/index";
 
 import { Map } from "./Map";
 import MarkerClusterGroup, {
@@ -47,14 +47,7 @@ const withMap = function withMap(Component) {
   };
 
   DoctorsMap.propTypes = {
-    center: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.shape({
-        lat: PropTypes.number,
-        lng: PropTypes.number,
-        alt: PropTypes.number,
-      }),
-    ]),
+    center: GeoLocationType,
     doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
     zoom: PropTypes.number,
   };

@@ -95,3 +95,12 @@ export const DoctorPropType = PropTypes.shape({
 });
 
 export const AcceptsPropType = PropTypes.oneOf(["y", "n"]);
+
+export const GeoLocationType = PropTypes.oneOfType([
+  PropTypes.arrayOf(PropTypes.number),
+  PropTypes.shape({
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+    alt: PropTypes.number,
+  }),
+]);

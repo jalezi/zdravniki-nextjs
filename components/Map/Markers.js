@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { CircleMarker as ReactLeafletCM } from "react-leaflet";
 
 import { theme } from "../../constants/theme";
-import { AcceptsPropType } from "../../types";
+import { AcceptsPropType, GeoLocationType } from "../../types";
 
 export const CircleMarker = ReactLeafletCM;
 
@@ -34,13 +34,6 @@ DoctorMarker.defaultProps = { Popup: undefined };
 
 DoctorMarker.propTypes = {
   accepts: AcceptsPropType.isRequired,
-  center: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
-    PropTypes.shape({
-      lat: PropTypes.number,
-      lng: PropTypes.number,
-      alt: PropTypes.number,
-    }),
-  ]).isRequired,
+  center: GeoLocationType.isRequired,
   Popup: PropTypes.element,
 };

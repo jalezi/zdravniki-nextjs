@@ -6,7 +6,11 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 import { MAP } from "../../constants/common";
-import { ChildrenPropType, StylePropType } from "../../types/index";
+import {
+  ChildrenPropType,
+  GeoLocationType,
+  StylePropType,
+} from "../../types/index";
 
 export function Map({ children, center, zoom, style }) {
   return (
@@ -35,14 +39,7 @@ Map.defaultProps = {
 
 Map.propTypes = {
   children: ChildrenPropType,
-  center: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.number),
-    PropTypes.shape({
-      lat: PropTypes.number,
-      lng: PropTypes.number,
-      alt: PropTypes.number,
-    }),
-  ]),
+  center: GeoLocationType,
   style: StylePropType,
   zoom: PropTypes.number,
 };
