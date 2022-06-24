@@ -93,3 +93,5 @@ export const DoctorPropType = PropTypes.shape({
   lon: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
 });
+
+export const AcceptsPropType = PropTypes.oneOf(["y", "n"]);
