@@ -1,3 +1,4 @@
+import { darken } from "polished";
 import styled from "styled-components";
 
 export const Main = styled.main`
@@ -29,6 +30,53 @@ export const MapContainer = styled.div`
 
   .leaflet-tile-pane {
     filter: hue-rotate(40deg) saturate(0.4) contrast(0.6) brightness(1.2);
+  }
+  /* by @bananica */
+  .marker-cluster-small div,
+  .marker-cluster-medium div,
+  .marker-cluster-large div {
+    background-color: inherit;
+    span {
+      background-color: inherit;
+      display: block;
+      border-radius: 100%;
+      text-shadow: 0 0 3px #ffffff90;
+    }
+  }
+
+  .marker-cluster-accepts-0 {
+    background-color: #d32f2f54;
+    span {
+      color: ${() => darken(0.6, "#d32f2f")};
+    }
+  }
+
+  .marker-cluster-accepts-25 {
+    background-color: #ef741f54;
+    span {
+      color: ${() => darken(0.6, "#ef741f")};
+    }
+  }
+
+  .marker-cluster-accepts-50 {
+    background-color: #ffa80054;
+    span: {
+      color: ${() => darken(0.6, "#ffa800")};
+    }
+  }
+
+  .marker-cluster-accepts-75 {
+    background-color: #aeb11854;
+    span {
+      color: ${() => darken(0.6, "#aeb118")};
+    }
+  }
+
+  .marker-cluster-accepts-100 {
+    background-color: #2e7d3257;
+    span {
+      color: ${() => darken(0.6, "#2e7d32")};
+    }
   }
 `;
 export const ListContainer = styled.div`
