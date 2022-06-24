@@ -15,10 +15,10 @@ import {
 export function Map({ children, center, zoom, style }) {
   return (
     <MapContainer
-      center={center}
-      zoom={zoom}
       attributionControl={false}
+      center={center}
       style={style}
+      zoom={zoom}
     >
       <AttributionControl prefix="" />
       <TileLayer
@@ -31,8 +31,8 @@ export function Map({ children, center, zoom, style }) {
 }
 
 Map.defaultProps = {
-  children: undefined,
   center: MAP.GEO_LOCATION.SL_CENTER,
+  children: undefined,
   style: undefined,
   zoom: MAP.ZOOM,
 };

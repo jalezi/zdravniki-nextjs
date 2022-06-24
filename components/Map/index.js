@@ -4,7 +4,7 @@ import { createRef } from "react";
 import { Popup } from "react-leaflet";
 
 import { MAP } from "../../constants/common";
-import { DoctorPropType, GeoLocationType } from "../../types/index";
+import { DoctorPropType } from "../../types/index";
 
 import { Map } from "./Map";
 import MarkerClusterGroup, {
@@ -13,7 +13,7 @@ import MarkerClusterGroup, {
 import { DoctorMarker } from "./Markers";
 
 const withMap = function withMap(Component) {
-  const DoctorsMap = function DoctorsMap({ center, zoom, doctors }) {
+  const DoctorsMap = function DoctorsMap({ doctors }) {
     const markers = doctors?.map((doctor) => {
       const key = doctor.doctor + doctor.inst_id + Math.random() * Date.now();
       const ref = createRef();
@@ -30,7 +30,12 @@ const withMap = function withMap(Component) {
     });
 
     return (
-      <Component center={center} zoom={zoom}>
+      <Component
+        center={MAP.GEO_LOCATION.SL_CENTER}
+        maxZoom={MAP.MAX_ZOOM}
+        minZoom={MAP.MIN_ZOOM}
+        zoom={MAP.ZOOM}
+      >
         <MarkerClusterGroup
           iconCreateFunction={createClusterCustomIcon}
           maxClusterRadius={40}
@@ -41,15 +46,8 @@ const withMap = function withMap(Component) {
     );
   };
 
-  DoctorsMap.defaultProps = {
-    center: MAP.GEO_LOCATION.SL_CENTER,
-    zoom: MAP.ZOOM,
-  };
-
   DoctorsMap.propTypes = {
-    center: GeoLocationType,
     doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
-    zoom: PropTypes.number,
   };
 
   return DoctorsMap;

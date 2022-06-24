@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
-import { MAP, PER_PAGE } from "../../constants/common";
+import { PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
 import { DoctorPropType } from "../../types";
@@ -67,11 +67,7 @@ export default function Gp({ url, doctors, updatedAt }) {
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
-        <MapWithNoSSR
-          doctors={sortedDoctors}
-          center={MAP.GEO_LOCATION.SL_CENTER}
-          zoom={MAP.ZOOM}
-        />
+        <MapWithNoSSR doctors={sortedDoctors} />
       </Styled.MapContainer>
       <Styled.ListContainer>
         <h2>List</h2>
