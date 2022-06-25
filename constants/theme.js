@@ -28,7 +28,8 @@ const theme = {
   brand: "#26c5ed",
 
   FILTER: {
-    backgroundColor: "#ffffff",
+    backgroundColor1: "#ffffff",
+    backgroundColor2: "#E8EFF0",
   },
 
   CARDS: {

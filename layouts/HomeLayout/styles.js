@@ -80,17 +80,18 @@ export const MapContainer = styled.div`
   }
 `;
 
-export const FilterContainer = styled.div`
+export const FiltersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   position: absolute;
-  top: calc(100% - 64px);
+  bottom: 0;
   left: 0;
   right: 0;
-  background: ${({ theme }) => theme.FILTER.backgroundColor};
-  height: 64px;
+  background: ${({ theme }) => theme.FILTER.backgroundColor1};
+  height: fit-content;
+  padding-block: 8px;
   z-index: 20;
-
-  display: flex;
-  align-items: center;
 `;
 export const ListContainer = styled.div`
   position: absolute;

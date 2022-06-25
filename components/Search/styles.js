@@ -9,7 +9,7 @@ export const SearchContainer = styled.div`
   height: 48px;
   border: 1px solid ${({ theme }) => theme.INPUTS.border};
   border-radius: 25px;
-  flex-grow: 1;
+  /* flex-grow: 1; */
   margin-inline: 1em;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
@@ -73,7 +73,7 @@ export const SearchSuffixIcon = styled(IconButtonBase)`
 `;
 
 export const SearchPrefixIcon = styled(IconButtonBase).attrs(() => ({
-  disabled: "true",
+  disabled: true,
 }))`
   left: 5px;
 `;
