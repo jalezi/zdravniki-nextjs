@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
+import Search from "../../components/Search";
 // import { PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
@@ -73,6 +74,9 @@ export default function Gp({ url, doctors, updatedAt }) {
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
       </Styled.MapContainer>
+      <Styled.FilterContainer>
+        <Search />
+      </Styled.FilterContainer>
       <Styled.ListContainer>
         <h2>List</h2>
         {sortedDoctors.map((doctor) => (

@@ -79,6 +79,19 @@ export const MapContainer = styled.div`
     }
   }
 `;
+
+export const FilterContainer = styled.div`
+  position: absolute;
+  top: calc(100% - 64px);
+  left: 0;
+  right: 0;
+  background: ${({ theme }) => theme.FILTER.backgroundColor};
+  height: 64px;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+`;
 export const ListContainer = styled.div`
   position: absolute;
   top: calc(100% - 64px);
