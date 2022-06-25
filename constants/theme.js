@@ -27,10 +27,18 @@ const theme = {
   bgColor2: "#E8EFF0",
   brand: "#26c5ed",
 
+  FILTER: {
+    backgroundColor: "#ffffff",
+  },
+
   CARDS: {
     acceptsY: "#95C83F",
     acceptsDarkY: "#81B130",
     acceptsN: "#DC3435",
+  },
+
+  BUTTONS: {
+    backgroundHover: "rgba(0, 0, 0, 0.04)",
   },
 
   INPUTS: {
