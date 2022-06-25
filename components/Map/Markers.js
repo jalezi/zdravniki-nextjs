@@ -13,7 +13,9 @@ export const CircleMarker = ReactLeafletCM;
 */
 export const DoctorMarker = forwardRef(({ accepts, center, Popup }, ref) => {
   const isDrAccepting = accepts === "y";
-  const fillColor = isDrAccepting ? theme.success : theme.error;
+  const fillColor = isDrAccepting
+    ? theme.MARKERS.acceptsY
+    : theme.MARKERS.acceptsN;
 
   return (
     <CircleMarker

@@ -1,5 +1,8 @@
 const colors = {
+  accent: "#09AFDA",
   brand: "#26c5ed",
+  textLight: "#777C80",
+  lightGrey: "#CDCDCD",
 };
 
 const theme = {
@@ -17,15 +20,28 @@ const theme = {
   grey6: "#DCE1E7",
   black: "#000000",
   white: "#FFFFFF",
-  success: "#2E7D32",
-  warning: "#F7D070",
-  error: "#D32F2F",
   textColor1: "rgba(0, 0, 0, 0.87)",
   textColor2: "rgba(0,0,0,0.66)",
   textColor3: "#212529",
   bgColor1: "#F4F8F8",
   bgColor2: "#E8EFF0",
   brand: "#26c5ed",
+
+  CARDS: {
+    acceptsY: "#95C83F",
+    acceptsDarkY: "#81B130",
+    acceptsN: "#DC3435",
+  },
+
+  INPUTS: {
+    border: "#C4D4D7",
+    placeholder: "#C4D4D7",
+  },
+
+  MARKERS: {
+    acceptsY: "#2E7D32",
+    acceptsN: "#D32F2F",
+  },
 
   MD: {
     textColor: "rgba(0, 0, 0, 0.7)",
