@@ -19,7 +19,7 @@ const Search = function Search() {
 
   return (
     <Styled.SearchContainer>
-      <Styled.SearchPrefixIcon>
+      <Styled.SearchPrefixIcon as="span">
         <SearchIcon />
       </Styled.SearchPrefixIcon>
       <Styled.InputSearch
