@@ -27,6 +27,11 @@ const theme = {
   bgColor2: "#E8EFF0",
   brand: "#26c5ed",
 
+  LIST_HEADER: {
+    color: "#6c7074",
+    borderBottomColor: "#c4d4d7",
+  },
+
   FILTER: {
     backgroundColor1: "#ffffff",
     backgroundColor2: "#E8EFF0",
