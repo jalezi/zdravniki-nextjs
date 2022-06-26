@@ -41,12 +41,23 @@ export const OuterContainer = styled.div.attrs({ tabIndex: 0 })`
   border-bottom-left-radius: 25px;
   font-size: 0.875rem;
   cursor: pointer;
+  line-height: 21px;
 `;
 
 export const FlexBase = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+export const VerticalSeparator = styled.hr`
+  margin: 0px;
+  flex-shrink: 0;
+  border-style: solid;
+  height: auto;
+  align-self: stretch;
+  border-width: 1px;
+  border-color: rgb(193, 212, 215);
 `;
 
 export const Info = styled(FlexBase)`

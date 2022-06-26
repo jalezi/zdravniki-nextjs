@@ -35,6 +35,7 @@ const Filters = function Filters() {
         <Styled.Info>
           <GPIcon />
           <span>družinski zdravnik</span>
+          <Styled.VerticalSeparator />
           <AllIcon />
         </Styled.Info>
       </Styled.Summary>
