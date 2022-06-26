@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 
-import CloseIcon from "../../assets/svg/icon-close.svg";
 import SearchIcon from "../../assets/svg/icon-search.svg";
 
 import * as Styled from "./styles";
@@ -33,7 +32,7 @@ const Search = function Search() {
       />
       {value && (
         <Styled.SearchSuffixIcon onClick={handleClear}>
-          <CloseIcon />
+          <Styled.CloseIcon />
         </Styled.SearchSuffixIcon>
       )}
     </Styled.SearchContainer>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import CloseIconSVG from "../../assets/svg/icon-close.svg";
+
 const scaleUpRatio = 16 / 14;
 const scaleDownRatio = 14 / 16;
 const scaleUp = (size) => size * scaleUpRatio;
@@ -76,4 +78,8 @@ export const SearchPrefixIcon = styled(IconButtonBase).attrs(() => ({
   disabled: true,
 }))`
   left: 5px;
+`;
+
+export const CloseIcon = styled(CloseIconSVG)`
+  height: 12px;
 `;
