@@ -88,7 +88,7 @@ export const FiltersContainer = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: ${({ theme }) => theme.FILTER.backgroundColor1};
+  background: ${({ theme }) => theme.bgColor1};
   height: fit-content;
   padding-block: 8px;
   z-index: 20;
@@ -102,18 +102,7 @@ export const ListContainer = styled.div`
   height: ${({ open }) => (open ? "auto" : "0px")};
   /* padding-block: ${({ open }) => (open ? "8px" : "0px")}; */
 
-  background: yellow;
+  background: ${({ theme }) => theme.bgColor1};
   transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   z-index: 10;
-  > header {
-    background: red;
-    width: 100%;
-    padding-block: 8px;
-    height: 36px;
-  }
-
-  > div {
-    height: calc(100% - 93px);
-    overflow-y: auto;
-  }
 `;

@@ -5,6 +5,7 @@ import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
 import Filters from "../../components/Filters";
+import List from "../../components/List";
 import Search from "../../components/Search";
 // import { PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
@@ -50,7 +51,6 @@ export default function Gp({ url, doctors, updatedAt }) {
   });
 
   const { t: tCommon } = useTranslation("common");
-  const { t: tMap } = useTranslation("map");
 
   const { data, error } = useSWR("/api/gp", fetcher, {
     fallbackData: { doctors, updatedAt },
@@ -67,6 +67,18 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { title, description } = tCommon("head", { returnObjects: true });
 
+  const groupedByLetter = sortedDoctors.reduce((acc, doctor) => {
+    const firstLetter = doctor.doctor.charAt(0).toUpperCase();
+
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = [];
+    }
+
+    acc[firstLetter].push(doctor);
+
+    return acc;
+  }, {});
+
   return (
     <HomeLayout title={title} description={description} url={url}>
       <Styled.MapContainer>
@@ -81,18 +93,7 @@ export default function Gp({ url, doctors, updatedAt }) {
         <Search />
       </Styled.FiltersContainer>
       <Styled.ListContainer open>
-        <header>
-          <span>{tMap("totalResults", { count: sortedDoctors.length })}</span>
-        </header>
-        <div>
-          {sortedDoctors.map((doctor) => (
-            <p
-              key={doctor.doctor + doctor.inst_id + Math.random() * Date.now()}
-            >
-              {doctor.doctor}
-            </p>
-          ))}
-        </div>
+        <List doctorGroups={groupedByLetter} />
       </Styled.ListContainer>
     </HomeLayout>
   );
