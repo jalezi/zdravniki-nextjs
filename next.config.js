@@ -21,9 +21,24 @@ const nextConfig = {
   trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
+      loader: "@svgr/webpack",
+      options: {
+        prettier: false,
+        svgo: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: "preset-default",
+              params: {
+                overrides: { removeViewBox: false },
+              },
+            },
+          ],
+        },
+        titleProp: true,
+      },
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
     });
 
     return config;
