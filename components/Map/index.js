@@ -1,3 +1,4 @@
+import L from "leaflet";
 import PropTypes from "prop-types";
 import { createRef } from "react";
 import { Popup } from "react-leaflet";
@@ -29,9 +30,14 @@ const withMap = function withMap(Component) {
       );
     });
 
+    const corner1 = L.latLng(...Object.values(MAP.BOUNDS.southWest));
+    const corner2 = L.latLng(...Object.values(MAP.BOUNDS.northEast));
+    const bounds = L.latLngBounds(corner1, corner2);
+
     return (
       <Component
         center={MAP.GEO_LOCATION.SL_CENTER}
+        maxBounds={bounds}
         maxZoom={MAP.MAX_ZOOM}
         minZoom={MAP.MIN_ZOOM}
         zoom={MAP.ZOOM}
