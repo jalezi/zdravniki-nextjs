@@ -6,6 +6,7 @@ import { Popup } from "react-leaflet";
 import { MAP } from "../../constants/common";
 import { DoctorPropType } from "../../types/index";
 
+import LocateControl from "./LocateControl";
 import { Map } from "./Map";
 import MapTotalResults from "./MapTotalResults";
 import MarkerClusterGroup, {
@@ -34,6 +35,19 @@ const withMap = function withMap(Component) {
     const corner2 = L.latLng(...Object.values(MAP.BOUNDS.northEast));
     const bounds = L.latLngBounds(corner1, corner2);
 
+    /*
+      Safari does not not work with Leaflet 1.7.1
+      https://github.com/domoritz/leaflet-locatecontrol#safari-does-not-work-with-leaflet-171
+    */
+    const isSafari = () => {
+      const ua = navigator.userAgent.toLowerCase();
+      return (
+        ua.indexOf("safari") !== -1 &&
+        ua.indexOf("chrome") === -1 &&
+        ua.indexOf("android") === -1
+      );
+    };
+
     return (
       <Component
         center={MAP.GEO_LOCATION.SL_CENTER}
@@ -49,6 +63,10 @@ const withMap = function withMap(Component) {
           {markers}
         </MarkerClusterGroup>
         <MapTotalResults number={doctors.length} />
+
+        {!isSafari && (
+          <LocateControl flyTo initialZoomLevel={13} returnToPrevBounds />
+        )}
       </Component>
     );
   };
