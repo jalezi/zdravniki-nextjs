@@ -49,7 +49,8 @@ export default function Gp({ url, doctors, updatedAt }) {
     ssr: false,
   });
 
-  const { t } = useTranslation("common");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tMap } = useTranslation("map");
 
   const { data, error } = useSWR("/api/gp", fetcher, {
     fallbackData: { doctors, updatedAt },
@@ -64,7 +65,7 @@ export default function Gp({ url, doctors, updatedAt }) {
     return <Error statusCode={500} url={url} />;
   }
 
-  const { title, description } = t("head", { returnObjects: true });
+  const { title, description } = tCommon("head", { returnObjects: true });
 
   return (
     <HomeLayout title={title} description={description} url={url}>
@@ -79,13 +80,19 @@ export default function Gp({ url, doctors, updatedAt }) {
         <Filters />
         <Search />
       </Styled.FiltersContainer>
-      <Styled.ListContainer>
-        <h2>List</h2>
-        {sortedDoctors.map((doctor) => (
-          <p key={doctor.doctor + doctor.inst_id + Math.random() * Date.now()}>
-            {doctor.doctor}
-          </p>
-        ))}
+      <Styled.ListContainer open>
+        <header>
+          <span>{tMap("totalResults", { count: sortedDoctors.length })}</span>
+        </header>
+        <div>
+          {sortedDoctors.map((doctor) => (
+            <p
+              key={doctor.doctor + doctor.inst_id + Math.random() * Date.now()}
+            >
+              {doctor.doctor}
+            </p>
+          ))}
+        </div>
       </Styled.ListContainer>
     </HomeLayout>
   );

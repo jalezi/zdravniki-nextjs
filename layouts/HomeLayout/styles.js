@@ -95,11 +95,25 @@ export const FiltersContainer = styled.div`
 `;
 export const ListContainer = styled.div`
   position: absolute;
-  top: calc(100% - 64px);
+  top: 0px;
   left: 0;
   right: 0;
+  bottom: 64px;
+  height: ${({ open }) => (open ? "auto" : "0px")};
+  /* padding-block: ${({ open }) => (open ? "8px" : "0px")}; */
+
   background: yellow;
-  height: 100%;
-  overflow-y: auto;
+  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   z-index: 10;
+  > header {
+    background: red;
+    width: 100%;
+    padding-block: 8px;
+    height: 36px;
+  }
+
+  > div {
+    height: calc(100% - 93px);
+    overflow-y: auto;
+  }
 `;
