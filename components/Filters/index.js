@@ -17,9 +17,15 @@ const Filters = function Filters() {
   return (
     <Styled.OuterContainer ref={ref} onClick={handleClick} open={open}>
       <Styled.Filters open={open}>
-        <div>neki</div>
-        <div>neki</div>
-        <div>neki</div>
+        <Styled.Filter as="ul">
+          <Styled.FilterItem>družinski zdravnik</Styled.FilterItem>
+        </Styled.Filter>
+        <Styled.Filter>
+          <Styled.FilterItem>neki</Styled.FilterItem>
+        </Styled.Filter>
+        <Styled.Filter>
+          <Styled.FilterItem>neki</Styled.FilterItem>
+        </Styled.Filter>
       </Styled.Filters>
       <Styled.Summary open={open}>
         <Styled.FlexBase>

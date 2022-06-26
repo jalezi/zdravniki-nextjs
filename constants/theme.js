@@ -30,6 +30,9 @@ const theme = {
   FILTER: {
     backgroundColor1: "#ffffff",
     backgroundColor2: "#E8EFF0",
+    backgroundColor3: "#DAE5E7",
+    backgroundColor4: "#212529",
+    backgroundColor5: "#104856",
   },
 
   CARDS: {

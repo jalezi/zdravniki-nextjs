@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Filters = styled.nav`
-  display: flex;
+  display: ${({ open }) => (open ? "flex" : "none")};
+  flex-direction: column;
+  gap: 8px;
   padding: 0 16px;
   height: 100%;
   width: 100%;
@@ -9,7 +11,6 @@ export const Filters = styled.nav`
   border-top-left-radius: 25px;
   padding-top: 16px;
   padding-bottom: 8px;
-  display: ${({ open }) => (open ? "block" : "none")};
 `;
 
 export const Summary = styled.div`
@@ -50,4 +51,27 @@ export const FlexBase = styled.div`
 
 export const Info = styled(FlexBase)`
   opacity: 0.5;
+`;
+
+export const Filter = styled.div`
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 4px;
+  border-radius: 25px;
+  background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
+`;
+
+export const FilterItem = styled.span`
+  display: flex;
+  align-items: center;
+  margin: 2px;
+  padding: 2px;
+  height: 100%;
+  border-radius: 25px;
+  background-color: ${({ theme }) => theme.FILTER.backgroundColor4};
+  color: ${({ theme }) => theme.white};
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding-inline: 6px;
 `;
