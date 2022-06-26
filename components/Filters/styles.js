@@ -11,6 +11,14 @@ export const Filters = styled.nav`
   border-top-left-radius: 25px;
   padding-top: 16px;
   padding-bottom: 8px;
+
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    position: initial;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
 `;
 
 export const Summary = styled.div`
@@ -24,6 +32,10 @@ export const Summary = styled.div`
   padding-top: ${({ open }) => (open ? "8px" : "0")};
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 export const OuterContainer = styled.div.attrs({ tabIndex: 0 })`
@@ -42,6 +54,10 @@ export const OuterContainer = styled.div.attrs({ tabIndex: 0 })`
   font-size: 0.875rem;
   cursor: pointer;
   line-height: 21px;
+
+  @media screen and (min-width: 768px) {
+    /* display: none; */
+  }
 `;
 
 export const FlexBase = styled.div`
@@ -68,7 +84,7 @@ export const Filter = styled.div`
   display: flex;
   align-items: center;
   height: 48px;
-  padding: 4px;
+  padding: 2px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
 `;

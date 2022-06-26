@@ -92,7 +92,7 @@ export default function Gp({ url, doctors, updatedAt }) {
         <Filters />
         <Search />
       </Styled.FiltersContainer>
-      <Styled.ListContainer open>
+      <Styled.ListContainer>
         <List doctorGroups={groupedByLetter} />
       </Styled.ListContainer>
     </HomeLayout>

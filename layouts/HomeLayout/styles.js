@@ -1,6 +1,25 @@
 import { darken } from "polished";
 import styled from "styled-components";
 
+/*
+.container {  display: grid;
+  grid-template-columns: 1fr 450px;
+  grid-template-rows: 300px 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "filters filters"
+    "map list";
+}
+
+.filters { grid-area: filters; }
+
+.map { grid-area: map; }
+
+.list { grid-area: list; }
+
+*/
+
 export const Main = styled.main`
   position: fixed;
   top: ${({ theme }) => theme.mobileHeaderHeight};
@@ -9,8 +28,16 @@ export const Main = styled.main`
   width: 100%;
 
   @media only screen and (min-width: 768px) {
-    top: ${({ theme }) => theme.headerHeight};
-    height: calc(100% - ${({ theme }) => theme.headerHeight});
+    top: calc(${({ theme }) => theme.headerHeight});
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 450px;
+    grid-template-rows: 64px 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "filters filters"
+      "map list";
   }
 `;
 
@@ -22,6 +49,11 @@ export const MapContainer = styled.div`
   background: red;
   height: calc(100% - 64px);
   z-index: 9;
+
+  @media only screen and (min-width: 768px) {
+    position: initial;
+    grid-area: map;
+  }
 
   .leaflet-container {
     height: 100%;
@@ -92,6 +124,16 @@ export const FiltersContainer = styled.div`
   height: fit-content;
   padding-block: 8px;
   z-index: 20;
+
+  @media only screen and (min-width: 768px) {
+    position: initial;
+    grid-area: filters;
+    z-index: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    background: ${({ theme }) => theme.white};
+  }
 `;
 export const ListContainer = styled.div`
   position: absolute;
@@ -105,4 +147,10 @@ export const ListContainer = styled.div`
   background: ${({ theme }) => theme.bgColor1};
   transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   z-index: 10;
+
+  @media only screen and (min-width: 768px) {
+    height: 100%;
+    grid-area: list;
+    z-index: 1;
+  }
 `;

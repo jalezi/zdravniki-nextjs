@@ -5,8 +5,6 @@ export const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 10px 24px;
-  /* border-bottom: 1px solid ${({ theme }) =>
-    theme.LIST_HEADER.borderBottomColor}; */
   color: ${({ theme }) => theme.LIST_HEADER.color};
   font-size: 0.75rem;
   line-height: 0.75rem;
@@ -20,6 +18,10 @@ export const DoctorsContainer = styled.div`
   flex-direction: column;
   height: calc(100% - 93px);
   overflow-y: auto;
+
+  @media screen and (min-width: 768px) {
+    height: calc(100% - 106px);
+  }
 `;
 
 export const HeadingBase = styled.div`
@@ -34,4 +36,8 @@ export const HeadingBase = styled.div`
   font-size: 0.875rem;
   line-height: 0.875rem;
   font-weight: 500;
+
+  @media only screen and (min-width: 768px) {
+    /* top: 64px; */
+  }
 `;

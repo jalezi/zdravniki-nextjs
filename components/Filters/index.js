@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import PropTypes from "prop-types";
+import { forwardRef, useState } from "react";
 
 import AllIcon from "../../assets/svg/icon-all.svg";
 import GPIcon from "../../assets/svg/icon-family-dr.svg";
@@ -6,8 +7,7 @@ import FilterIcon from "../../assets/svg/icon-filter.svg";
 
 import * as Styled from "./styles";
 
-const Filters = function Filters() {
-  const ref = useRef();
+const Filters = forwardRef(({ forwardedRef }, ref) => {
   const [open, setOpen] = useState();
 
   const handleClick = () => {
@@ -16,7 +16,7 @@ const Filters = function Filters() {
 
   return (
     <Styled.OuterContainer ref={ref} onClick={handleClick} open={open}>
-      <Styled.Filters open={open}>
+      <Styled.Filters ref={forwardedRef} open={open}>
         <Styled.Filter as="ul">
           <Styled.FilterItem>družinski zdravnik</Styled.FilterItem>
         </Styled.Filter>
@@ -41,6 +41,12 @@ const Filters = function Filters() {
       </Styled.Summary>
     </Styled.OuterContainer>
   );
-};
+});
 
 export default Filters;
+
+Filters.defaultProps = { forwardedRef: undefined };
+
+Filters.propTypes = {
+  forwardedRef: PropTypes.exact({ current: PropTypes.any }),
+};
