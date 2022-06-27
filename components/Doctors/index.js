@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 
+import { useToggleOpenContext } from "../../context/toggleOpenContext";
 import { ListContainer } from "../../layouts/HomeLayout/styles";
 import { DoctorPropType } from "../../types";
 import List from "../List";
 
 const Doctors = function Doctors({ doctorGroups }) {
+  const { open } = useToggleOpenContext();
+
   return (
-    <ListContainer open>
+    <ListContainer open={open || undefined}>
       <List doctorGroups={doctorGroups} />
     </ListContainer>
   );

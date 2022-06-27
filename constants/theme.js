@@ -60,6 +60,10 @@ const theme = {
     acceptsN: "#D32F2F",
   },
 
+  SVG: {
+    default: "#212529",
+  },
+
   MD: {
     textColor: "rgba(0, 0, 0, 0.7)",
     linkColor: "rgba(0, 0, 0, 0.8)",

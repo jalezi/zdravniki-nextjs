@@ -84,21 +84,43 @@ export const Filter = styled.div`
   display: flex;
   align-items: center;
   height: 48px;
+  min-width: 48px;
   padding: 2px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
+
+  @media screen and (min-width: 768px) {
+    display: ${({ upMediumHide }) => (upMediumHide ? "none" : "flex")};
+  }
 `;
 
 export const FilterItem = styled.span`
   display: flex;
+  justify-content: center;
   align-items: center;
   margin: 2px;
   padding: 2px;
   height: 100%;
+  min-width: 48px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor4};
   color: ${({ theme }) => theme.white};
   font-size: 0.75rem;
   font-weight: 600;
   padding-inline: 6px;
+  cursor: pointer;
+
+  svg > path {
+    fill: ${({ theme }) => theme.white};
+    opacity: 0.56;
+  }
+
+  :hover {
+    background-color: ${({ theme }) => theme.FILTER.backgroundColor5};
+
+    svg > path {
+      fill: ${({ theme }) => theme.white};
+      opacity: 1;
+    }
+  }
 `;
