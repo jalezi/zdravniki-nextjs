@@ -4,9 +4,8 @@ import dynamic from "next/dynamic";
 import { PropTypes } from "prop-types";
 import useSWR from "swr";
 
+import Doctors from "../../components/Doctors";
 import Filters from "../../components/Filters";
-import List from "../../components/List";
-import Search from "../../components/Search";
 // import { PER_PAGE } from "../../constants/common";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
@@ -88,13 +87,8 @@ export default function Gp({ url, doctors, updatedAt }) {
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
       </Styled.MapContainer>
-      <Styled.FiltersContainer>
-        <Filters />
-        <Search />
-      </Styled.FiltersContainer>
-      <Styled.ListContainer>
-        <List doctorGroups={groupedByLetter} />
-      </Styled.ListContainer>
+      <Filters />
+      <Doctors doctorGroups={groupedByLetter} />
     </HomeLayout>
   );
 }
