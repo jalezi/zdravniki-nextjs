@@ -94,7 +94,9 @@ export const Filter = styled.div`
   }
 `;
 
-export const FilterItem = styled.span`
+export const FilterItem = styled.span.attrs(({ as }) => ({
+  type: as === "button" ? "button" : undefined,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
