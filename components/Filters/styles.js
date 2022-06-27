@@ -6,4 +6,8 @@ export const FlexContainer = styled.div`
   align-items: center;
   gap: 8px;
   margin-inline: 16px;
+
+  @media screen and (min-width: 768px) {
+    flex-grow: 1;
+  }
 `;
