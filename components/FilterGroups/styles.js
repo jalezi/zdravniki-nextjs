@@ -56,7 +56,7 @@ export const OuterContainer = styled.div.attrs({ tabIndex: 0 })`
   line-height: 21px;
 
   @media screen and (min-width: 768px) {
-    /* display: none; */
+    background-color: ${({ theme }) => theme.white};
   }
 `;
 
