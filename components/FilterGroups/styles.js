@@ -103,7 +103,7 @@ export const FilterItem = styled.span`
   height: 100%;
   min-width: 48px;
   border-radius: 25px;
-  background-color: ${({ theme }) => theme.FILTER.backgroundColor4};
+  background-color: ${({ theme }) => theme.FILTER.backgroundColor5};
   color: ${({ theme }) => theme.white};
   font-size: 0.75rem;
   font-weight: 600;
@@ -116,11 +116,10 @@ export const FilterItem = styled.span`
   }
 
   :hover {
-    background-color: ${({ theme }) => theme.FILTER.backgroundColor5};
+    background-color: ${({ theme }) => theme.FILTER.backgroundColor4};
 
     svg > path {
       fill: ${({ theme }) => theme.white};
-      opacity: 1;
     }
   }
 `;
