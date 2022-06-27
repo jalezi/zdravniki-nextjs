@@ -1,15 +1,15 @@
 import ListViewIcon from "../../assets/svg/icon-list-view.svg";
 import MapViewIcon from "../../assets/svg/icon-map-view.svg";
-import { useToggleOpenContext } from "../../context/toggleOpenContext";
+import { useToggleContext } from "../../context/toggleContext";
 import { FiltersContainer } from "../../layouts/HomeLayout/styles";
 import FilterGroups from "../FilterGroups";
-import { Filter, FilterItem } from "../FilterGroups/styles";
+import { Filter as ToggleView, FilterItem } from "../FilterGroups/styles";
 import Search from "../Search";
 
 import { FlexContainer } from "./styles";
 
 const Filters = function Filters() {
-  const { open, setOpen } = useToggleOpenContext();
+  const { open, setOpen } = useToggleContext();
 
   const handleToggle = () => {
     setOpen(!open);
@@ -20,7 +20,7 @@ const Filters = function Filters() {
       <FilterGroups />
       <FlexContainer>
         <Search />
-        <Filter
+        <ToggleView
           upMediumHide
           as="button"
           aria-label={open ? "map" : "list"}
@@ -29,7 +29,7 @@ const Filters = function Filters() {
           title={open ? "map" : "list"}
         >
           <FilterItem>{open ? <MapViewIcon /> : <ListViewIcon />}</FilterItem>
-        </Filter>
+        </ToggleView>
       </FlexContainer>
     </FiltersContainer>
   );

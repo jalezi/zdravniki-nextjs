@@ -7,7 +7,7 @@ import useSWR from "swr";
 import Doctors from "../../components/Doctors";
 import Filters from "../../components/Filters";
 // import { PER_PAGE } from "../../constants/common";
-import { ToggleOpenProvider } from "../../context/toggleOpenContext";
+import { ToggleProvider } from "../../context/toggleContext";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
 import { DoctorPropType } from "../../types";
@@ -88,10 +88,10 @@ export default function Gp({ url, doctors, updatedAt }) {
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
       </Styled.MapContainer>
-      <ToggleOpenProvider>
+      <ToggleProvider>
         <Filters />
         <Doctors doctorGroups={groupedByLetter} />
-      </ToggleOpenProvider>
+      </ToggleProvider>
     </HomeLayout>
   );
 }
