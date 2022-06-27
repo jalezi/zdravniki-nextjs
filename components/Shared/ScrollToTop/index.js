@@ -5,7 +5,7 @@ import useEventListener from "../../../hooks/useEventListener";
 
 import { IconContainer } from "./styles";
 
-const ScrollToTop = function ScrollToTop({ Component }) {
+const ScrollToTop = function ScrollToTop({ Component, element }) {
   const [show, setShow] = useState(false);
   const componentRef = useRef();
   const scrollYRef = useRef(0);
@@ -22,7 +22,7 @@ const ScrollToTop = function ScrollToTop({ Component }) {
     }
   };
 
-  useEventListener("scroll", handler);
+  useEventListener("scroll", handler, element);
 
   useEffect(() => {
     if (scrollYRef > scrollMargin) {
@@ -47,6 +47,13 @@ const ScrollToTop = function ScrollToTop({ Component }) {
   );
 };
 
-ScrollToTop.propTypes = { Component: PropTypes.elementType.isRequired };
+ScrollToTop.defaultProps = {
+  element: undefined,
+};
+
+ScrollToTop.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  element: PropTypes.element,
+};
 
 export default ScrollToTop;

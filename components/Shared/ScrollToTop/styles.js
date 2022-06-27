@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   position: fixed;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   bottom: 30px;
   right: -60px;
@@ -12,6 +14,8 @@ export const Button = styled.button`
   border-radius: 50%;
   opacity: 0.8;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
   z-index: 99;
 
   animation: ${({ show }) =>
