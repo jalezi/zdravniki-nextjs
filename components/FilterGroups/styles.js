@@ -77,6 +77,17 @@ export const VerticalSeparator = styled.hr`
 
 export const Info = styled(FlexBase)`
   opacity: 0.5;
+
+  > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 160px;
+
+    @media screen and (min-width: 370px) {
+      max-width: initial;
+    }
+  }
 `;
 
 export const Filter = styled.div`
@@ -112,6 +123,12 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
   font-weight: 600;
   cursor: pointer;
 
+  > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   svg > path {
     fill: ${({ theme }) => theme.white};
     opacity: 0.56;
@@ -144,4 +161,10 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
       fill: ${({ theme }) => theme.white};
     }
   }
+`;
+
+export const NoTextOverflow = styled.span`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
