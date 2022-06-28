@@ -1,3 +1,14 @@
+import {
+  AllIcon,
+  BanIcon,
+  DentistIcon,
+  GPIcon,
+  KidsIcon,
+  GynIcon,
+  AdultsIcon,
+  StudentsIcon,
+} from "../components/Shared/Icons";
+
 // DOCTORS
 export const PER_PAGE = 20;
 export const INSTITUTION_KEY = "id_inst";
@@ -56,4 +67,30 @@ export const DUMMY_INSTITUTION = {
   post: "0000 Neznan",
   municipalityPart: "",
   municipality: "",
+};
+
+export const DR_TYPES_I18_MAP = {
+  gp: "generalPractitioner",
+  den: "dentist",
+  ped: "pediatrician",
+  gyn: "gynecologist",
+};
+
+export const DR_TYPES_ICON_MAP = {
+  gp: GPIcon,
+  den: DentistIcon,
+  ped: KidsIcon,
+  gyn: GynIcon,
+};
+
+export const AGE_GROUP_ICON_MAP = {
+  "": AdultsIcon,
+  y: KidsIcon,
+  s: StudentsIcon,
+};
+
+export const ACCEPTS_ICON_MAP = {
+  "": AllIcon,
+  y: KidsIcon,
+  n: BanIcon
 };

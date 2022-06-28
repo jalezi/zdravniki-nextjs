@@ -1,41 +1,18 @@
 import { useTranslation } from "next-i18next";
 import { useCallback, useState } from "react";
 
+import {
+  ACCEPTS_ICON_MAP,
+  AGE_GROUP_ICON_MAP,
+  DR_TYPES_I18_MAP,
+  DR_TYPES_ICON_MAP,
+} from "../../constants/common";
 import { useToggleFiltersContext } from "../../context/toggleFiltersContext";
 import FilterGroup from "../FilterGroup/index";
-import {
-  FilterIcon,
-  GPIcon,
-  AllIcon,
-  DentistIcon,
-  KidsIcon,
-  GynIcon,
-  AdultsIcon,
-  StudentsIcon,
-} from "../Shared/Icons";
+import { FilterIcon } from "../Shared/Icons";
 
 import { ACCEPTS_GROUP, AGE_GROUP, DR_GROUP } from "./groups";
 import * as Styled from "./styles";
-
-const DR_TYPES_I18_MAP = {
-  gp: "generalPractitioner",
-  den: "dentist",
-  ped: "pediatrician",
-  gyn: "gynecologist",
-};
-
-const DR_TYPES_ICON_MAP = {
-  gp: GPIcon,
-  den: DentistIcon,
-  ped: KidsIcon,
-  gyn: GynIcon,
-};
-
-const AGE_GROUP_ICON_MAP = {
-  "": AdultsIcon,
-  y: KidsIcon,
-  s: StudentsIcon,
-};
 
 const Filters = function Filters() {
   const [expandFilters, setExpandFilters] = useState();
@@ -63,6 +40,7 @@ const Filters = function Filters() {
 
   const DrTypeIcon = DR_TYPES_ICON_MAP[filterState.drType];
   const AgeGroupIcon = AGE_GROUP_ICON_MAP[filterState.ageGroup];
+  const AcceptsIcon = ACCEPTS_ICON_MAP[filterState.accepts];
   const doctorTranslation = tCommon(
     `doctor.${DR_TYPES_I18_MAP[filterState.drType]}`
   );
@@ -103,7 +81,7 @@ const Filters = function Filters() {
             </>
           )}
           <Styled.VerticalSeparator />
-          <AllIcon />
+          <AcceptsIcon />
         </Styled.Info>
       </Styled.Summary>
     </Styled.OuterContainer>
