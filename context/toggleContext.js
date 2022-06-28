@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { createContext, useState, useContext, useMemo } from "react";
 
 import { ChildrenPropType } from "../types";
@@ -6,8 +7,11 @@ const toggleContext = createContext();
 
 export const ToggleConsumer = toggleContext.Consumer;
 
-export const ToggleProvider = function LeafletProvider({ children }) {
-  const [open, setOpen] = useState(null);
+export const ToggleProvider = function ToggleProvider({
+  children,
+  initialValue,
+}) {
+  const [open, setOpen] = useState(initialValue);
 
   const value = useMemo(() => [open, setOpen], [open]);
   return (
@@ -15,8 +19,13 @@ export const ToggleProvider = function LeafletProvider({ children }) {
   );
 };
 
+ToggleProvider.defaultProps = {
+  initialValue: undefined,
+};
+
 ToggleProvider.propTypes = {
   children: ChildrenPropType.isRequired,
+  initialValue: PropTypes.string,
 };
 
 export function useToggleContext() {
