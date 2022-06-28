@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Filters = styled.nav`
   display: ${({ open }) => (open ? "flex" : "none")};
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 0 16px;
   height: 100%;
@@ -14,8 +15,6 @@ export const Filters = styled.nav`
 
   @media only screen and (min-width: 768px) {
     display: flex;
-    position: initial;
-    flex-direction: row;
     flex-wrap: nowrap;
     padding: 0;
   }
@@ -85,6 +84,7 @@ export const Filter = styled.div`
   align-items: center;
   height: 48px;
   min-width: 48px;
+  max-width: max-content;
   padding: 2px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
@@ -102,6 +102,7 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
   align-items: center;
   margin: 2px;
   padding: 2px;
+  gap: 4px;
   height: 100%;
   min-width: 48px;
   border-radius: 25px;
