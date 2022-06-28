@@ -82,10 +82,11 @@ export const Info = styled(FlexBase)`
 export const Filter = styled.div`
   display: flex;
   align-items: center;
+  gap: 4px;
   height: 48px;
   min-width: 48px;
   max-width: max-content;
-  padding: 2px;
+  padding: 4px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
 
@@ -100,17 +101,15 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2px;
-  padding: 2px;
-  gap: 4px;
+  padding: 10px;
+  gap: 8px;
   height: 100%;
-  min-width: 48px;
+  min-width: 44px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor5};
   color: ${({ theme }) => theme.white};
   font-size: 0.75rem;
   font-weight: 600;
-  padding-inline: 6px;
   cursor: pointer;
 
   svg > path {
