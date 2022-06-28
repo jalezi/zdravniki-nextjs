@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { useToggleContext } from "../../context/toggleContext";
 import { FiltersContainer } from "../../layouts/HomeLayout/styles";
 import FilterGroups from "../FilterGroups";
@@ -10,9 +12,9 @@ import { FlexContainer } from "./styles";
 const Filters = function Filters() {
   const [open, setOpen] = useToggleContext();
 
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+  const handleToggle = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, [setOpen]);
 
   return (
     <FiltersContainer>
