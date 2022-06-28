@@ -118,6 +118,26 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
     opacity: 0.56;
   }
 
+  &[aria-pressed="false"] {
+    background: transparent;
+
+    > svg > path {
+      fill: ${({ theme }) => theme.SVG.default};
+    }
+
+    > span {
+      display: none;
+    }
+
+    :hover {
+      background-color: ${({ theme }) => theme.white};
+
+      svg > path {
+        fill: ${({ theme }) => theme.SVG.default};
+      }
+    }
+  }
+
   :hover {
     background-color: ${({ theme }) => theme.FILTER.backgroundColor4};
 
