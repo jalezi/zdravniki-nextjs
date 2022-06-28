@@ -6,7 +6,7 @@ import { DoctorPropType } from "../../types";
 import List from "../List";
 
 const Doctors = function Doctors({ doctorGroups }) {
-  const { open } = useToggleContext();
+  const [open] = useToggleContext();
 
   return (
     <ListContainer open={open || undefined}>

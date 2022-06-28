@@ -9,7 +9,7 @@ import Search from "../Search";
 import { FlexContainer } from "./styles";
 
 const Filters = function Filters() {
-  const { open, setOpen } = useToggleContext();
+  const [open, setOpen] = useToggleContext();
 
   const handleToggle = () => {
     setOpen(!open);

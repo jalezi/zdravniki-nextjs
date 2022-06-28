@@ -9,7 +9,7 @@ export const ToggleConsumer = toggleContext.Consumer;
 export const ToggleProvider = function LeafletProvider({ children }) {
   const [open, setOpen] = useState(null);
 
-  const value = useMemo(() => ({ open, setOpen }), [open]);
+  const value = useMemo(() => [open, setOpen], [open]);
   return (
     <toggleContext.Provider value={value}>{children}</toggleContext.Provider>
   );
