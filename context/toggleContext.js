@@ -13,9 +13,7 @@ export const ToggleProvider = function ToggleProvider({
 }) {
   const [state, setState] = useState(initialValue);
 
-  const memoState = useMemo(() => state, [state]);
-
-  const value = useMemo(() => [memoState, setState], [memoState]);
+  const value = useMemo(() => [state, setState], [state]);
   return (
     <toggleContext.Provider value={value}>{children}</toggleContext.Provider>
   );
@@ -27,15 +25,7 @@ ToggleProvider.defaultProps = {
 
 ToggleProvider.propTypes = {
   children: ChildrenPropType.isRequired,
-  initialValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.exact({
-      drType: PropTypes.string,
-      ageGroup: PropTypes.string,
-      accepts: PropTypes.string,
-      searchValue: PropTypes.string,
-    }),
-  ]),
+  initialValue: PropTypes.bool,
 };
 
 export function useToggleContext() {

@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { useCallback, useState } from "react";
 
-import { useToggleContext } from "../../context/toggleContext";
+import { useToggleFiltersContext } from "../../context/toggleFiltersContext";
 import FilterGroup from "../FilterGroup/index";
 import {
   FilterIcon,
@@ -38,13 +38,13 @@ const AGE_GROUP_ICON_MAP = {
 };
 
 const Filters = function Filters() {
-  const [open, setOpen] = useState();
-  const [filterState, setFilterState] = useToggleContext();
+  const [expandFilters, setExpandFilters] = useState();
+  const [filterState, setFilterState] = useToggleFiltersContext();
   const { t: tCommon } = useTranslation("common");
 
   const handleOpenClick = useCallback(() => {
-    setOpen((prev) => !prev);
-  }, [setOpen]);
+    setExpandFilters((prev) => !prev);
+  }, [setExpandFilters]);
 
   const { drType, ageGroup, accepts } = filterState;
 
@@ -68,8 +68,8 @@ const Filters = function Filters() {
   );
 
   return (
-    <Styled.OuterContainer onClick={handleOpenClick}>
-      <Styled.Filters open={open}>
+    <Styled.OuterContainer onClick={handleOpenClick} open={expandFilters}>
+      <Styled.Filters open={expandFilters}>
         <FilterGroup
           buttons={DR_GROUP}
           onChange={onDrTypeChange}
@@ -88,7 +88,7 @@ const Filters = function Filters() {
           initialValue={accepts ?? ""}
         />
       </Styled.Filters>
-      <Styled.Summary open={open}>
+      <Styled.Summary open={expandFilters}>
         <Styled.FlexBase>
           <FilterIcon />
           <span>{tCommon("filter")}</span>

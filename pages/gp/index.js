@@ -6,8 +6,8 @@ import useSWR from "swr";
 
 import Doctors from "../../components/Doctors";
 import Filters from "../../components/Filters";
-// import { PER_PAGE } from "../../constants/common";
 import { ToggleProvider } from "../../context/toggleContext";
+import { ToggleFiltersProvider } from "../../context/toggleFiltersContext";
 import * as Styled from "../../layouts/HomeLayout/styles";
 import { getDoctorData, sortByField } from "../../lib";
 import { DoctorPropType } from "../../types";
@@ -88,16 +88,18 @@ export default function Gp({ url, doctors, updatedAt }) {
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
       </Styled.MapContainer>
-      <ToggleProvider
-        initialValue={{
-          drType: "gp",
-          ageGroup: "",
-          accepts: "",
-          searchValue: "",
-        }}
-      >
-        <Filters />
-        <Doctors doctorGroups={groupedByLetter} />
+      <ToggleProvider initialValue={false}>
+        <ToggleFiltersProvider
+          initialValue={{
+            drType: "gp",
+            ageGroup: "",
+            accepts: "",
+            searchValue: "",
+          }}
+        >
+          <Filters />
+          <Doctors doctorGroups={groupedByLetter} />
+        </ToggleFiltersProvider>
       </ToggleProvider>
     </HomeLayout>
   );
