@@ -1,15 +1,25 @@
 import { useTranslation } from "next-i18next";
 import PropTypes from "prop-types";
+import { memo, useCallback, useEffect, useState } from "react";
 
-import { useToggleContext } from "../../context/toggleContext";
 import * as FilterGroupsStyled from "../FilterGroups/styles";
 
-const FilterGroup = function FilterGroup({ buttons }) {
-  const [value, setValue] = useToggleContext();
+const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
+  const [value, setValue] = useState(initialValue);
   const { t: tCommon } = useTranslation("common");
-  const handleBtnClick = (val) => {
-    setValue(val);
-  };
+
+  useEffect(() => {
+    if (value !== initialValue) {
+      onChange(value);
+    }
+  }, [value, initialValue, onChange]);
+
+  const handleBtnClick = useCallback(
+    (val) => {
+      setValue(val);
+    },
+    [setValue]
+  );
 
   const translations = tCommon("doctor", { returnObjects: true });
 
@@ -32,7 +42,12 @@ const FilterGroup = function FilterGroup({ buttons }) {
   );
 };
 
-export default FilterGroup;
+export default memo(FilterGroup);
+
+FilterGroup.defaultProps = {
+  initialValue: "",
+  onChange: () => {},
+};
 
 FilterGroup.propTypes = {
   buttons: PropTypes.arrayOf(
@@ -42,4 +57,6 @@ FilterGroup.propTypes = {
       Icon: PropTypes.elementType,
     })
   ).isRequired,
+  initialValue: PropTypes.string,
+  onChange: PropTypes.func,
 };

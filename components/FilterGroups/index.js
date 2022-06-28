@@ -1,53 +1,113 @@
-import PropTypes from "prop-types";
-import { forwardRef, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { useCallback, useState } from "react";
 
-import { ToggleProvider } from "../../context/toggleContext";
+import { useToggleContext } from "../../context/toggleContext";
 import FilterGroup from "../FilterGroup/index";
-import { FilterIcon, GPIcon, AllIcon } from "../Shared/Icons";
+import {
+  FilterIcon,
+  GPIcon,
+  AllIcon,
+  DentistIcon,
+  KidsIcon,
+  GynIcon,
+  AdultsIcon,
+  StudentsIcon,
+} from "../Shared/Icons";
 
 import { ACCEPTS_GROUP, AGE_GROUP, DR_GROUP } from "./groups";
 import * as Styled from "./styles";
 
-const Filters = forwardRef(({ forwardedRef }, ref) => {
-  const [open, setOpen] = useState();
+const DR_TYPES_I18_MAP = {
+  gp: "generalPractitioner",
+  den: "dentist",
+  ped: "pediatrician",
+  gyn: "gynecologist",
+};
 
-  const handleOpenClick = () => {
-    setOpen(!open);
-  };
+const DR_TYPES_ICON_MAP = {
+  gp: GPIcon,
+  den: DentistIcon,
+  ped: KidsIcon,
+  gyn: GynIcon,
+};
+
+const AGE_GROUP_ICON_MAP = {
+  "": AdultsIcon,
+  y: KidsIcon,
+  s: StudentsIcon,
+};
+
+const Filters = function Filters() {
+  const [open, setOpen] = useState();
+  const [filterState, setFilterState] = useToggleContext();
+  const { t: tCommon } = useTranslation("common");
+
+  const handleOpenClick = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, [setOpen]);
+
+  const { drType, ageGroup, accepts } = filterState;
+
+  const onDrTypeChange = useCallback(
+    (val) => setFilterState((prev) => ({ ...prev, drType: val })),
+    [setFilterState]
+  );
+  const onAgeGroupChange = useCallback(
+    (val) => setFilterState((prev) => ({ ...prev, ageGroup: val })),
+    [setFilterState]
+  );
+  const onAcceptsChange = useCallback(
+    (val) => setFilterState((prev) => ({ ...prev, accepts: val })),
+    [setFilterState]
+  );
+
+  const DrTypeIcon = DR_TYPES_ICON_MAP[filterState.drType];
+  const AgeGroupIcon = AGE_GROUP_ICON_MAP[filterState.ageGroup];
+  const doctorTranslation = tCommon(
+    `doctor.${DR_TYPES_I18_MAP[filterState.drType]}`
+  );
 
   return (
-    <Styled.OuterContainer ref={ref} onClick={handleOpenClick}>
-      <Styled.Filters ref={forwardedRef} open={open}>
-        <ToggleProvider initialValue="gp">
-          <FilterGroup buttons={DR_GROUP} />
-        </ToggleProvider>
-        <ToggleProvider initialValue="">
-          <FilterGroup buttons={AGE_GROUP} />
-        </ToggleProvider>
-        <ToggleProvider initialValue="">
-          <FilterGroup buttons={ACCEPTS_GROUP} />
-        </ToggleProvider>
+    <Styled.OuterContainer onClick={handleOpenClick}>
+      <Styled.Filters open={open}>
+        <FilterGroup
+          buttons={DR_GROUP}
+          onChange={onDrTypeChange}
+          initialValue={drType ?? ""}
+        />
+        {filterState.drType?.includes("den") && (
+          <FilterGroup
+            buttons={AGE_GROUP}
+            onChange={onAgeGroupChange}
+            initialValue={ageGroup ?? ""}
+          />
+        )}
+        <FilterGroup
+          buttons={ACCEPTS_GROUP}
+          onChange={onAcceptsChange}
+          initialValue={accepts ?? ""}
+        />
       </Styled.Filters>
       <Styled.Summary open={open}>
         <Styled.FlexBase>
           <FilterIcon />
-          <span>Filter</span>
+          <span>{tCommon("filter")}</span>
         </Styled.FlexBase>
         <Styled.Info>
-          <GPIcon />
-          <span>družinski zdravnik</span>
+          <DrTypeIcon />
+          <span>{doctorTranslation}</span>
+          {filterState.drType?.includes("den") && (
+            <>
+              <Styled.VerticalSeparator />
+              <AgeGroupIcon />
+            </>
+          )}
           <Styled.VerticalSeparator />
           <AllIcon />
         </Styled.Info>
       </Styled.Summary>
     </Styled.OuterContainer>
   );
-});
+};
 
 export default Filters;
-
-Filters.defaultProps = { forwardedRef: undefined };
-
-Filters.propTypes = {
-  forwardedRef: PropTypes.exact({ current: PropTypes.any }),
-};

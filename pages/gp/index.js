@@ -88,7 +88,14 @@ export default function Gp({ url, doctors, updatedAt }) {
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
       </Styled.MapContainer>
-      <ToggleProvider>
+      <ToggleProvider
+        initialValue={{
+          drType: "gp",
+          ageGroup: "",
+          accepts: "",
+          searchValue: "",
+        }}
+      >
         <Filters />
         <Doctors doctorGroups={groupedByLetter} />
       </ToggleProvider>
