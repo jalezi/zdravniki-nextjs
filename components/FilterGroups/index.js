@@ -21,10 +21,10 @@ const Filters = forwardRef(({ forwardedRef }, ref) => {
         <ToggleProvider initialValue="gp">
           <FilterGroup buttons={DR_GROUP} />
         </ToggleProvider>
-        <ToggleProvider initialValue="adults">
+        <ToggleProvider initialValue="">
           <FilterGroup buttons={AGE_GROUP} />
         </ToggleProvider>
-        <ToggleProvider initialValue="all">
+        <ToggleProvider initialValue="">
           <FilterGroup buttons={ACCEPTS_GROUP} />
         </ToggleProvider>
       </Styled.Filters>

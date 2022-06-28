@@ -14,7 +14,7 @@ export const DR_GROUP = [
   {
     value: "gp",
     Icon: GPIcon,
-    label: "general practitioner",
+    label: "generalPractitioner",
   },
   {
     value: "ped",
@@ -29,23 +29,23 @@ export const DR_GROUP = [
   {
     value: "den",
     Icon: DentistIcon,
-    label: "general practitioner",
+    label: "dentist",
   },
 ];
 
 export const AGE_GROUP = [
   {
-    value: "adults",
+    value: "",
     Icon: AdultsIcon,
     label: "adults",
   },
   {
-    value: "youth",
+    value: "y",
     Icon: KidsIcon,
     label: "youth",
   },
   {
-    value: "students",
+    value: "s",
     Icon: StudentsIcon,
     label: "students",
   },
@@ -54,15 +54,15 @@ export const ACCEPTS_GROUP = [
   {
     value: "y",
     Icon: CheckIcon,
-    label: "accepting",
+    label: "accepts",
   },
   {
     value: "n",
     Icon: BanIcon,
-    label: "not accepting",
+    label: "rejects",
   },
   {
-    value: "all",
+    value: "",
     Icon: AllIcon,
     label: "all",
   },
