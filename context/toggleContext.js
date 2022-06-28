@@ -11,9 +11,11 @@ export const ToggleProvider = function ToggleProvider({
   children,
   initialValue,
 }) {
-  const [open, setOpen] = useState(initialValue);
+  const [state, setState] = useState(initialValue);
 
-  const value = useMemo(() => [open, setOpen], [open]);
+  const memoState = useMemo(() => state, [state]);
+
+  const value = useMemo(() => [memoState, setState], [memoState]);
   return (
     <toggleContext.Provider value={value}>{children}</toggleContext.Provider>
   );
