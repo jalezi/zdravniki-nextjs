@@ -4,6 +4,19 @@
     "subtitle": "Tracciatore di medici",
     "description": "Monitoraggio dei medici: dati raccolti, verificati, aggiornati, analizzati e rivisti sui medici disponibili in Slovenia."
   },
+  "doctor": {
+    "accepts": "accetta",
+    "rejects": "non accetta",
+    "all": "tutti",
+    "generalPractitioner": "medico di medicina generale",
+    "dentist": "odontoiatra",
+    "pediatrician": "pediatra",
+    "gynecologist": "ginecologo",
+    "adults": "adulti",
+    "students": "studenti",
+    "youth": "giovani"
+  },
+  "filter": "Filtro",
   "_error": {
     "link": "Elenco",
     "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",

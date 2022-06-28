@@ -4,6 +4,19 @@
     "subtitle": "Doctors Tracker",
     "description": "Doctors tracking - collected, verified, updated, analyzed and reviewed data about available doctors in Slovenia."
   },
+  "doctor": {
+    "accepts": "accepting",
+    "rejects": "not accepting",
+    "all": "all",
+    "generalPractitioner": "general practitioner",
+    "dentist": "dentist",
+    "pediatrician": "pediatrician",
+    "gynecologist": "gynecologist",
+    "adults": "adults",
+    "students": "students",
+    "youth": "youth"
+  },
+  "filter": "Filter",
   "_error": {
     "link": "Home",
     "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",
