@@ -25,7 +25,15 @@ ToggleProvider.defaultProps = {
 
 ToggleProvider.propTypes = {
   children: ChildrenPropType.isRequired,
-  initialValue: PropTypes.string,
+  initialValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.exact({
+      drType: PropTypes.string,
+      ageGroup: PropTypes.string,
+      accepts: PropTypes.string,
+      searchValue: PropTypes.string,
+    }),
+  ]),
 };
 
 export function useToggleContext() {
