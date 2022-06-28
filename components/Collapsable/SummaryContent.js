@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import Tooltip from "rc-tooltip";
 
-import Check2 from "../../assets/svg/check2.svg";
-import Close from "../../assets/svg/close-dd.svg";
-import Expand from "../../assets/svg/expand-dd.svg";
-import Copy from "../../assets/svg/icon-copy.svg";
 import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
+import {
+  Check2Icon,
+  CloseCircleIcon,
+  CopyIcon,
+  ExpandIcon,
+} from "../Shared/Icons";
 
 const SummaryContent = function SummaryContent({
   title,
@@ -27,7 +29,7 @@ const SummaryContent = function SummaryContent({
               aria-label="copied"
               className="make-smaller"
             >
-              <Check2 alt="Check" />
+              <Check2Icon alt="Check" />
             </MDXLayoutStyles.IconButton>
           </Tooltip>
         ) : (
@@ -37,7 +39,7 @@ const SummaryContent = function SummaryContent({
               aria-label="copy"
               className="make-smaller"
             >
-              <Copy alt="Copy" />
+              <CopyIcon alt="Copy" />
             </MDXLayoutStyles.IconButton>
           </Tooltip>
         )}
@@ -47,7 +49,7 @@ const SummaryContent = function SummaryContent({
             disabled={isCopied}
             aria-label="close"
           >
-            <Close alt="Close" />
+            <CloseCircleIcon alt="Close" />
           </MDXLayoutStyles.IconButton>
         ) : (
           <MDXLayoutStyles.IconButton
@@ -55,7 +57,7 @@ const SummaryContent = function SummaryContent({
             disabled={isCopied}
             aria-label="expand"
           >
-            <Expand alt="Expand" />
+            <ExpandIcon alt="Expand" />
           </MDXLayoutStyles.IconButton>
         )}
       </MDXLayoutStyles.ButtonsContainer>

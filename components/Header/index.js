@@ -5,11 +5,9 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
-import FbIcon from "../../assets/svg/icon-fb.svg";
-import TwIcon from "../../assets/svg/icon-tw.svg";
-import Logo from "../../assets/svg/zdravniki-sledilnik-logo.svg";
 import useEventListener from "../../hooks/useEventListener";
 import LanguageSelector from "../LanguageSelector";
+import { FbIcon, LogoIcon, TwIcon } from "../Shared/Icons";
 
 import Backdrop from "./Backdrop";
 import Hamburger from "./Hamburger";
@@ -83,7 +81,7 @@ const Header = function Header({ noAnimation }) {
     <Styled.Header ref={headerRef}>
       <Link href="/">
         <Styled.Logo role="link" aria-label="link to home">
-          <Logo role="link" aria-label="link to home" />
+          <LogoIcon role="link" aria-label="link to home" />
         </Styled.Logo>
       </Link>
       <Hamburger onClick={onHamburgerClick} isOpen={open} />

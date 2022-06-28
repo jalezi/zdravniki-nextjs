@@ -1,10 +1,9 @@
-import ListViewIcon from "../../assets/svg/icon-list-view.svg";
-import MapViewIcon from "../../assets/svg/icon-map-view.svg";
 import { useToggleContext } from "../../context/toggleContext";
 import { FiltersContainer } from "../../layouts/HomeLayout/styles";
 import FilterGroups from "../FilterGroups";
 import { Filter as ToggleView, FilterItem } from "../FilterGroups/styles";
 import Search from "../Search";
+import { ListViewIcon, MapViewIcon } from "../Shared/Icons";
 
 import { FlexContainer } from "./styles";
 

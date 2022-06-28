@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import CloseIconSVG from "../../assets/svg/icon-close.svg";
+import { CloseIcon as CloseIconSVG } from "../Shared/Icons";
 
 const scaleUpRatio = 16 / 14;
 const scaleDownRatio = 14 / 16;

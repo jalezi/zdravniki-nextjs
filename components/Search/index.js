@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-import SearchIcon from "../../assets/svg/icon-search.svg";
+import { SearchIcon } from "../Shared/Icons";
 
 import * as Styled from "./styles";
 
