@@ -1,7 +1,9 @@
 export { default as AdultsIcon } from '../../../assets/svg/icon-adults.svg';
 export { default as AllIcon } from '../../../assets/svg/icon-all.svg';
 export { default as BanIcon } from '../../../assets/svg/icon-ban.svg';
+export { default as BanRedIcon } from '../../../assets/svg/icon-ban-red.svg';
 export { default as CheckIcon } from '../../../assets/svg/icon-check.svg';
+export { default as CheckCircleGreenIcon } from '../../../assets/svg/icon-check-green.svg';
 export { default as Check2Icon } from '../../../assets/svg/check2.svg';
 export { default as CloseIcon } from '../../../assets/svg/icon-close.svg';
 export { default as CloseCircleIcon } from '../../../assets/svg/close-dd.svg';
@@ -16,6 +18,8 @@ export { default as KidsIcon } from '../../../assets/svg/icon-kids.svg';
 export { default as ListViewIcon } from '../../../assets/svg/icon-list-view.svg';
 export { default as LogoIcon } from '../../../assets/svg/zdravniki-sledilnik-logo.svg';
 export { default as MapViewIcon } from '../../../assets/svg/icon-map-view.svg';
+export { default as PhoneBigIcon } from '../../../assets/svg/icon-phone--big.svg';
+export { default as PhoneNoneBigIcon } from '../../../assets/svg/icon-phone-none--big.svg';
 export { default as SearchIcon } from '../../../assets/svg/icon-search.svg';
 export { default as StudentsIcon } from '../../../assets/svg/icon-students.svg';
 export { default as TwIcon } from '../../../assets/svg/icon-tw.svg';
