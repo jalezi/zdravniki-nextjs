@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
+  position: sticky;
+  top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +10,9 @@ export const Header = styled.header`
   color: ${({ theme }) => theme.LIST_HEADER.color};
   font-size: 0.75rem;
   line-height: 0.75rem;
+  background: ${({ theme }) => theme.bgColor1};
+
+  z-index: 1;
 
   height: 36px;
   width: 100%;
@@ -16,18 +21,20 @@ export const Header = styled.header`
 export const DoctorsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100% - 36px); /* header with number of hits  height*/
-  overflow-y: auto;
   background: ${({ theme }) => theme.bgColor1};
 
   @media screen and (min-width: 768px) {
-    height: calc(100% - 100px);
+    height: 100%;
+
+    > section {
+      background: white;
+    }
   }
 `;
 
 export const HeadingBase = styled.div`
   position: sticky;
-  top: 0;
+  top: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,8 +44,4 @@ export const HeadingBase = styled.div`
   font-size: 0.875rem;
   line-height: 0.875rem;
   font-weight: 500;
-
-  @media only screen and (min-width: 768px) {
-    /* top: 64px; */
-  }
 `;

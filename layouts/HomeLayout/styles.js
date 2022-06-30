@@ -116,27 +116,26 @@ export const MapContainer = styled.div`
 export const FiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: end;
+  flex-grow: 1;
   gap: 8px;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: ${({ theme }) => theme.bgColor1};
-  background: ${({ open }) => (open ? "#104856cc" : "initial")};
-  height: fit-content;
+
+  height: ${({ open }) => (open ? "100%" : "initial")};
   margin-inline: 16px;
   margin-bottom: 8px;
   padding-block: 8px;
-  z-index: 20;
 
-  flex-grow: 1;
-  height: ${({ open }) => (open ? "100%" : "initial")};
-  justify-content: end;
+  background: transparent;
+
+  z-index: 20;
 
   @media only screen and (min-width: 768px) {
     position: initial;
     grid-area: filters;
-    z-index: 1;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -147,15 +146,21 @@ export const FiltersContainer = styled.div`
 `;
 export const ListContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: ${({ open }) => (open ? "0" : "100%")};
-  right: ${({ open }) => (open ? "0" : "-100%")};
+  left: ${({ open }) => (open ? "0" : "200%")};
+  right: ${({ open }) => (open ? "0" : "-200%")};
   bottom: 0;
   height: 100%;
 
+  overflow-y: auto;
+
   background: ${({ theme }) => theme.bgColor1};
-  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  transition: all 300ms ease-in 0s;
   z-index: 10;
+
+  > div {
+    padding-bottom: 120px;
+  }
 
   @media only screen and (min-width: 768px) {
     left: 0;
@@ -163,5 +168,10 @@ export const ListContainer = styled.div`
     height: 100%;
     grid-area: list;
     z-index: 1;
+
+    position: relative;
+    height: calc(100% - 64px);
+    overflow-y: auto;
+    padding-bottom: 128px;
   }
 `;
