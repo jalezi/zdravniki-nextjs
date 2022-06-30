@@ -1,6 +1,7 @@
 import {
   AllIcon,
   BanIcon,
+  CheckIcon,
   DentistIcon,
   GPIcon,
   KidsIcon,
@@ -91,6 +92,6 @@ export const AGE_GROUP_ICON_MAP = {
 
 export const ACCEPTS_ICON_MAP = {
   '': AllIcon,
-  y: KidsIcon,
+  y: CheckIcon,
   n: BanIcon,
 };
