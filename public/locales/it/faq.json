@@ -1,13 +1,13 @@
 {
-  "seo": {
-    "title": "Domande frequenti",
-    "description": "",
-    "keywords": ""
+  "headings": {
+    "general": "In generale",
+    "glossary": "Glossario",
+    "title": "Domande frequenti"
   },
   "notice": "In caso di emergenza medica è necessario contattare i servizi di emergenza o chiamare il 112.",
-  "headings": {
-    "title": "Domande frequenti",
-    "general": "In generale",
-    "glossary": "Glossario"
+  "seo": {
+    "description": "",
+    "keywords": "",
+    "title": "Domande frequenti"
   }
 }

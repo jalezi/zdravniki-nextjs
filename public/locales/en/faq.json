@@ -1,13 +1,13 @@
 {
-  "seo": {
-    "title": "FAQ",
-    "description": "",
-    "keywords": ""
+  "headings": {
+    "general": "Splošno",
+    "glossary": "Slovar izrazov",
+    "title": "Frequently Asked Questions"
   },
   "notice": "In case of medical emergency you should contact emergency services or call 112.",
-  "headings": {
-    "title": "Frequently Asked Questions",
-    "general": "Splošno",
-    "glossary": "Slovar izrazov"
+  "seo": {
+    "description": "",
+    "keywords": "",
+    "title": "FAQ"
   }
 }

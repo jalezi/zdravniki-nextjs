@@ -1,10 +1,10 @@
 {
-  "seo": {
-    "title": "404: page not found",
-    "description": "",
-    "keywords": ""
-  },
   "h1": "404: page not found",
-  "text": "oops… something went wrong 😞",
-  "link": "Home"
+  "link": "Home",
+  "seo": {
+    "description": "",
+    "keywords": "",
+    "title": "404: page not found"
+  },
+  "text": "oops… something went wrong 😞"
 }

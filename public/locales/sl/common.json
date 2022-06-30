@@ -1,29 +1,5 @@
 {
-  "head": {
-    "title": "Zdravniki",
-    "subtitle": "Zdravniki Sledilnik",
-    "description": "Zdravniki Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o prostih zdravnikih v Sloveniji."
-  },
-  "doctor": {
-    "accepts": "sprejema",
-    "rejects": "ne sprejema",
-    "all": "vsi",
-    "generalPractitioner": "družinski zdravnik",
-    "dentist": "zobozdravnik",
-    "pediatrician": "pediater",
-    "gynecologist": "ginekolog",
-    "adults": "odrasli",
-    "students": "študenti",
-    "youth": "mladina"
-  },
-  "filter": "Filter",
   "_error": {
-    "link": "Imenik",
-    "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",
-    "client": "Napaka se je zgodila v brskalniku. $t(_error.tryAgain).",
-    "server": "Napaka {{statusCode}} se je zgodila na strežniku. $t(_error.tryAgain).",
-    "seoTitle": "{{statusCode}} - $t(_error.{{statusCode}})",
-    "tryAgain": "Poskusite znova",
     "400": "Bad Request",
     "401": "Unauthorized",
     "402": "Payment Required",
@@ -64,6 +40,30 @@
     "508": "Loop Detected",
     "509": "Bandwidth Limit Exceeded",
     "510": "Not Extended",
-    "511": "Network Authentication Required"
+    "511": "Network Authentication Required",
+    "client": "Napaka se je zgodila v brskalniku. $t(_error.tryAgain).",
+    "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",
+    "link": "Imenik",
+    "seoTitle": "{{statusCode}} - $t(_error.{{statusCode}})",
+    "server": "Napaka {{statusCode}} se je zgodila na strežniku. $t(_error.tryAgain).",
+    "tryAgain": "Poskusite znova"
+  },
+  "doctor": {
+    "accepts": "sprejema",
+    "adults": "odrasli",
+    "all": "vsi",
+    "dentist": "zobozdravnik",
+    "generalPractitioner": "družinski zdravnik",
+    "gynecologist": "ginekolog",
+    "pediatrician": "pediater",
+    "rejects": "ne sprejema",
+    "students": "študenti",
+    "youth": "mladina"
+  },
+  "filter": "Filter",
+  "head": {
+    "description": "Zdravniki Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o prostih zdravnikih v Sloveniji.",
+    "subtitle": "Zdravniki Sledilnik",
+    "title": "Zdravniki"
   }
 }

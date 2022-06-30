@@ -1,29 +1,5 @@
 {
-  "head": {
-    "title": "Doctors",
-    "subtitle": "Doctors Tracker",
-    "description": "Doctors tracking - collected, verified, updated, analyzed and reviewed data about available doctors in Slovenia."
-  },
-  "doctor": {
-    "accepts": "accepting",
-    "rejects": "not accepting",
-    "all": "all",
-    "generalPractitioner": "general practitioner",
-    "dentist": "dentist",
-    "pediatrician": "pediatrician",
-    "gynecologist": "gynecologist",
-    "adults": "adults",
-    "students": "students",
-    "youth": "youth"
-  },
-  "filter": "Filter",
   "_error": {
-    "link": "Home",
-    "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",
-    "client": "An error occurred on client. $t(_error.tryAgain)",
-    "server": "An error {{statusCode}} occurred on server. $t(_error.tryAgain).",
-    "seoTitle": "{{statusCode}} - $t(_error.{{statusCode}})",
-    "tryAgain": "Please try again later",
     "400": "Bad Request",
     "401": "Unauthorized",
     "402": "Payment Required",
@@ -64,6 +40,30 @@
     "508": "Loop Detected",
     "509": "Bandwidth Limit Exceeded",
     "510": "Not Extended",
-    "511": "Network Authentication Required"
+    "511": "Network Authentication Required",
+    "client": "An error occurred on client. $t(_error.tryAgain)",
+    "h1": "{{statusCode}}: $t(_error.{{statusCode}}) ",
+    "link": "Home",
+    "seoTitle": "{{statusCode}} - $t(_error.{{statusCode}})",
+    "server": "An error {{statusCode}} occurred on server. $t(_error.tryAgain).",
+    "tryAgain": "Please try again later"
+  },
+  "doctor": {
+    "accepts": "accepting",
+    "adults": "adults",
+    "all": "all",
+    "dentist": "dentist",
+    "generalPractitioner": "general practitioner",
+    "gynecologist": "gynecologist",
+    "pediatrician": "pediatrician",
+    "rejects": "not accepting",
+    "students": "students",
+    "youth": "youth"
+  },
+  "filter": "Filter",
+  "head": {
+    "description": "Doctors tracking - collected, verified, updated, analyzed and reviewed data about available doctors in Slovenia.",
+    "subtitle": "Doctors Tracker",
+    "title": "Doctors"
   }
 }

@@ -14,6 +14,61 @@
     "import",
     "unused-imports"
   ],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "complexity": "warn",
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          "internal",
+          "parent",
+          [
+            "sibling",
+            "index"
+          ],
+          "object"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-console": [
+      "error"
+    ],
+    "no-eq-null": "warn",
+    "no-unused-vars": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".mdx",
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": "error",
+    "react/react-in-jsx-scope": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ]
+  },
   "settings": {
     "import/resolver": {
       "node": {
@@ -28,60 +83,5 @@
       }
     },
     "mdx/code-blocks": true
-  },
-  "rules": {
-    "no-unused-vars": "off",
-    "@next/next/no-img-element": "off",
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
-      "error",
-      {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "no-eq-null": "warn",
-    "import/order": [
-      "warn",
-      {
-        "groups": [
-          [
-            "builtin",
-            "external"
-          ],
-          "internal",
-          "parent",
-          [
-            "sibling",
-            "index"
-          ],
-          "object"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-    "complexity": "warn",
-    "no-console": [
-      "error"
-    ],
-    "react/prop-types": "error",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".mdx",
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
-    "import/prefer-default-export": "off"
   }
 }

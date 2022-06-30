@@ -1,6 +1,6 @@
 {
-  "totalResults_one": "{{count}} zadetek",
-  "totalResults_two": "{{count}} zadetka",
   "totalResults_few": "{{count}} zadetki",
-  "totalResults_other": "{{count}} zadetkov"
+  "totalResults_one": "{{count}} zadetek",
+  "totalResults_other": "{{count}} zadetkov",
+  "totalResults_two": "{{count}} zadetka"
 }
