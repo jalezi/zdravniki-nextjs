@@ -1,7 +1,7 @@
-const ORIGIN = "https://raw.githubusercontent.com";
+const ORIGIN = 'https://raw.githubusercontent.com';
 const BASE_URL = new URL(ORIGIN);
 
-const BASE_PATH = "/sledilnik/zdravniki-data/main/csv";
+const BASE_PATH = '/sledilnik/zdravniki-data/main/csv';
 
 const INSTITUTIONS_CSV_PATH = `${BASE_PATH}/institutions.csv`;
 const DOCTORS_CSV_PATH = `${BASE_PATH}/doctors.csv`;

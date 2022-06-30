@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import StyleProp from "react-style-proptype";
+import PropTypes from 'prop-types';
+import StyleProp from 'react-style-proptype';
 /*
  ? remove proptypes from production
  see: https://www.npmjs.com/package/babel-plugin-transform-react-remove-prop-types
@@ -94,7 +94,7 @@ export const DoctorPropType = PropTypes.shape({
   slug: PropTypes.string.isRequired,
 });
 
-export const AcceptsPropType = PropTypes.oneOf(["y", "n"]);
+export const AcceptsPropType = PropTypes.oneOf(['y', 'n']);
 
 export const GeoLocationType = PropTypes.oneOfType([
   PropTypes.arrayOf(PropTypes.number),

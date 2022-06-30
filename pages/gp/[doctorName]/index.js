@@ -1,19 +1,19 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { PropTypes } from "prop-types";
-import slugify from "slugify";
-import styled from "styled-components";
-import { SWRConfig } from "swr";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { PropTypes } from 'prop-types';
+import slugify from 'slugify';
+import styled from 'styled-components';
+import { SWRConfig } from 'swr';
 
-import { DOCTORS_CSV_URL } from "../../../constants/csvURL";
-import { fetchRawCsvAndParse, getDoctorData } from "../../../lib";
-import { DoctorPropType } from "../../../types";
+import { DOCTORS_CSV_URL } from '../../../constants/csvURL';
+import { fetchRawCsvAndParse, getDoctorData } from '../../../lib';
+import { DoctorPropType } from '../../../types';
 
-const DoctorCard = dynamic(() => import("../../../components/DoctorCard"));
-const Header = dynamic(() => import("../../../components/Header"));
-const SEO = dynamic(() => import("../../../components/SEO"));
+const DoctorCard = dynamic(() => import('../../../components/DoctorCard'));
+const Header = dynamic(() => import('../../../components/Header'));
+const SEO = dynamic(() => import('../../../components/SEO'));
 
 const StyledMain = styled.main`
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
@@ -24,18 +24,18 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL, { type: "gp" });
+  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL, { type: 'gp' });
   const paths = doctors
-    .map((doctor) => ({
+    .map(doctor => ({
       params: { doctorName: slugify(doctor.doctor, { lower: true }) },
     }))
     .slice(0, 20); // limit to 20 for performance reasons
 
-  return { paths, fallback: "blocking" };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ locale, params }) {
-  if (locale === "default") {
+  if (locale === 'default') {
     return { notFound: true };
   }
 
@@ -43,8 +43,8 @@ export async function getStaticProps({ locale, params }) {
 
   const slug = params.doctorName;
   const { doctors, updatedAt } = await getDoctorData({
-    type: "gp",
-    field: "doctor",
+    type: 'gp',
+    field: 'doctor',
     value: slug,
     isSlug: true,
   });
@@ -55,7 +55,7 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header"])),
+      ...(await serverSideTranslations(locale, ['common', 'header'])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       fallback: {
@@ -77,8 +77,8 @@ const fetcher = async (resource, init) => {
 };
 
 export default function DoctorName({ url, fallback }) {
-  const { t } = useTranslation("common");
-  const { title, description } = t("head", { returnObjects: true });
+  const { t } = useTranslation('common');
+  const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
 
   const goBack = () => {
@@ -93,7 +93,7 @@ export default function DoctorName({ url, fallback }) {
         <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
           <DoctorCard />
         </SWRConfig>
-        <button type="button" onClick={goBack} style={{ cursor: "pointer" }}>
+        <button type="button" onClick={goBack} style={{ cursor: 'pointer' }}>
           Nazaj
         </button>
       </StyledMain>

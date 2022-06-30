@@ -1,11 +1,11 @@
-import { useTranslation } from "next-i18next";
-import Head from "next/head";
-import PropTypes from "prop-types";
+import { useTranslation } from 'next-i18next';
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 
 const SEO = function SEO({ title, description, url }) {
   const socialImgUrl = `${url}/share-card-photo.png`;
-  const { t } = useTranslation("common");
-  const head = t("head", { returnObjects: true });
+  const { t } = useTranslation('common');
+  const head = t('head', { returnObjects: true });
 
   return (
     <Head>

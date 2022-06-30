@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Header from "../../components/Header";
-import SEO from "../../components/SEO";
-import ScrollToTop from "../../components/Shared/ScrollToTop";
-import { Button } from "../../components/Shared/ScrollToTop/styles";
-import { ChildrenPropType } from "../../types";
+import Header from '../../components/Header';
+import SEO from '../../components/SEO';
+import ScrollToTop from '../../components/Shared/ScrollToTop';
+import { Button } from '../../components/Shared/ScrollToTop/styles';
+import { ChildrenPropType } from '../../types';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 export default function MDXLayout({ children, url, title, description }) {
   return (

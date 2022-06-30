@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import { appWithTranslation } from "next-i18next";
-import Head from "next/head";
-import { ThemeProvider } from "styled-components";
+import { appWithTranslation } from 'next-i18next';
+import Head from 'next/head';
+import { ThemeProvider } from 'styled-components';
 
-import { theme } from "../constants/theme";
+import { theme } from '../constants/theme';
 
-import "../styles/globals.css";
+import '../styles/globals.css';
 
 // ? maybe can be moved to faq
-import "rc-tooltip/assets/bootstrap.css";
+import 'rc-tooltip/assets/bootstrap.css';
 
 function MyApp({ Component, pageProps }) {
   return (

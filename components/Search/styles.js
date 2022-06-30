@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { CloseIcon as CloseIconSVG } from "../Shared/Icons";
+import { CloseIcon as CloseIconSVG } from '../Shared/Icons';
 
 const scaleUpRatio = 16 / 14;
 const scaleDownRatio = 14 / 16;
-const scaleUp = (size) => size * scaleUpRatio;
+const scaleUp = size => size * scaleUpRatio;
 
 export const SearchContainer = styled.div`
   position: relative;
@@ -25,7 +25,7 @@ const InputBase = styled.input`
 `;
 
 export const InputSearch = styled(InputBase).attrs(() => ({
-  type: "search",
+  type: 'search',
 }))`
   padding-block: 0;
   padding-right: ${scaleUp(40)}px;
@@ -53,7 +53,7 @@ export const InputSearch = styled(InputBase).attrs(() => ({
   }
 `;
 
-const IconButtonBase = styled.button.attrs({ type: "button" })`
+const IconButtonBase = styled.button.attrs({ type: 'button' })`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

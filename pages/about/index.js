@@ -1,24 +1,24 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 const LanguagePageMDX = dynamic(() =>
-  import("../../components/LanguagePageMDX")
+  import('../../components/LanguagePageMDX')
 );
-const MDXLayout = dynamic(() => import("../../layouts/MDXLayout"));
+const MDXLayout = dynamic(() => import('../../layouts/MDXLayout'));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
-  if (locale === "default") {
+  if (locale === 'default') {
     return { notFound: true };
   }
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header", "about"])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'about'])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
     },
@@ -27,15 +27,15 @@ export async function getStaticProps({ locale }) {
 
 export default function About({ url }) {
   const router = useRouter();
-  const { t: tCommon } = useTranslation("common");
-  const { t: tAbout } = useTranslation("about");
-  const title = tAbout("seo.title");
-  const description = tCommon("head.description");
+  const { t: tCommon } = useTranslation('common');
+  const { t: tAbout } = useTranslation('about');
+  const title = tAbout('seo.title');
+  const description = tCommon('head.description');
 
   useEffect(() => {
-    document.querySelectorAll("main a").forEach((el) => {
-      if (/^(https?:)?\/\//.test(el.getAttribute("href"))) {
-        el.setAttribute("target", "_blank");
+    document.querySelectorAll('main a').forEach(el => {
+      if (/^(https?:)?\/\//.test(el.getAttribute('href'))) {
+        el.setAttribute('target', '_blank');
       }
     });
   }, []);

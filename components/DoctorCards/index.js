@@ -1,15 +1,15 @@
-import Link from "next/link";
-import PropTypes from "prop-types";
+import Link from 'next/link';
+import PropTypes from 'prop-types';
 
-import { toSlug } from "../../lib";
-import { DoctorPropType } from "../../types";
+import { toSlug } from '../../lib';
+import { DoctorPropType } from '../../types';
 
 const DoctorCards = function DoctorCards({ doctors }) {
-  const drJsx = (dr) => (
+  const drJsx = dr => (
     <div key={dr.doctor + dr.id_inst}>
       <br />
       {Object.entries(dr).map(([key, value]) => {
-        if (key === "doctor") {
+        if (key === 'doctor') {
           return (
             <p key={`${value}${key}S`}>
               <span>{key}: </span>
@@ -28,7 +28,7 @@ const DoctorCards = function DoctorCards({ doctors }) {
       <br />
     </div>
   );
-  return <div style={{ overflow: "auto" }}>{doctors.map(drJsx)}</div>;
+  return <div style={{ overflow: 'auto' }}>{doctors.map(drJsx)}</div>;
 };
 
 DoctorCards.propTypes = {

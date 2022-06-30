@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Button = styled.button`
   position: fixed;
@@ -19,11 +19,11 @@ export const Button = styled.button`
   z-index: 99;
 
   animation: ${({ show }) =>
-      show ? "show-scroll-to-top" : "hide-scroll-to-top"}
+      show ? 'show-scroll-to-top' : 'hide-scroll-to-top'}
     0.5s ease-in forwards;
 
   &.first {
-    animation: ${({ show }) => (show ? "show-scroll-to-top" : "none")} 0.5s
+    animation: ${({ show }) => (show ? 'show-scroll-to-top' : 'none')} 0.5s
       ease-in forwards;
   }
 

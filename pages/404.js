@@ -1,14 +1,14 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
-import PropTypes from "prop-types";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
 
-import * as Styled from "../layouts/ErrorLayout/styles";
-import image from "../public/doctor-404.png";
+import * as Styled from '../layouts/ErrorLayout/styles';
+import image from '../public/doctor-404.png';
 
-const ErrorLayout = dynamic(() => import("../layouts/ErrorLayout"));
+const ErrorLayout = dynamic(() => import('../layouts/ErrorLayout'));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
@@ -16,9 +16,9 @@ export async function getStaticProps({ locale }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, [
-        "common",
-        "header",
-        "pageNotFound",
+        'common',
+        'header',
+        'pageNotFound',
       ])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
@@ -27,15 +27,15 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Custom404({ url }) {
-  const { t: tCommon } = useTranslation("common");
-  const { t: tPageNotFound } = useTranslation("pageNotFound");
-  const { description } = tCommon("head", { returnObjects: true });
-  const { title } = tPageNotFound("seo", { returnObjects: true });
+  const { t: tCommon } = useTranslation('common');
+  const { t: tPageNotFound } = useTranslation('pageNotFound');
+  const { description } = tCommon('head', { returnObjects: true });
+  const { title } = tPageNotFound('seo', { returnObjects: true });
 
   return (
     <ErrorLayout title={title} description={description} url={url}>
-      <h1>{tPageNotFound("h1")}</h1>
-      <p>{tPageNotFound("text")}</p>
+      <h1>{tPageNotFound('h1')}</h1>
+      <p>{tPageNotFound('text')}</p>
       <Styled.ImgWrapper>
         <Image
           alt="not found"
@@ -43,7 +43,7 @@ export default function Custom404({ url }) {
           srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
         />
       </Styled.ImgWrapper>
-      <Link href="/">{tPageNotFound("link")}</Link>
+      <Link href="/">{tPageNotFound('link')}</Link>
     </ErrorLayout>
   );
 }

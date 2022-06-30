@@ -1,5 +1,5 @@
-import { darken } from "polished";
-import styled from "styled-components";
+import { darken } from 'polished';
+import styled from 'styled-components';
 
 /*
 .container {  display: grid;
@@ -36,8 +36,8 @@ export const Main = styled.main`
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "filters filters"
-      "map list";
+      'filters filters'
+      'map list';
   }
 `;
 
@@ -80,35 +80,35 @@ export const MapContainer = styled.div`
   .marker-cluster-accepts-0 {
     background-color: #d32f2f54;
     span {
-      color: ${() => darken(0.6, "#d32f2f")};
+      color: ${() => darken(0.6, '#d32f2f')};
     }
   }
 
   .marker-cluster-accepts-25 {
     background-color: #ef741f54;
     span {
-      color: ${() => darken(0.6, "#ef741f")};
+      color: ${() => darken(0.6, '#ef741f')};
     }
   }
 
   .marker-cluster-accepts-50 {
     background-color: #ffa80054;
     span: {
-      color: ${() => darken(0.6, "#ffa800")};
+      color: ${() => darken(0.6, '#ffa800')};
     }
   }
 
   .marker-cluster-accepts-75 {
     background-color: #aeb11854;
     span {
-      color: ${() => darken(0.6, "#aeb118")};
+      color: ${() => darken(0.6, '#aeb118')};
     }
   }
 
   .marker-cluster-accepts-100 {
     background-color: #2e7d3257;
     span {
-      color: ${() => darken(0.6, "#2e7d32")};
+      color: ${() => darken(0.6, '#2e7d32')};
     }
   }
 `;
@@ -124,7 +124,7 @@ export const FiltersContainer = styled.div`
   left: 0;
   right: 0;
 
-  height: ${({ open }) => (open ? "100%" : "initial")};
+  height: ${({ open }) => (open ? '100%' : 'initial')};
   margin-inline: 16px;
   margin-bottom: 8px;
   padding-block: 8px;
@@ -146,8 +146,8 @@ export const FiltersContainer = styled.div`
 `;
 export const ListContainer = styled.div`
   position: absolute;
-  left: ${({ open }) => (open ? "0" : "200%")};
-  right: ${({ open }) => (open ? "0" : "-200%")};
+  left: ${({ open }) => (open ? '0' : '200%')};
+  right: ${({ open }) => (open ? '0' : '-200%')};
   bottom: 0;
   height: 100%;
 

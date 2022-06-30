@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Filters = styled.nav`
-  display: ${({ open }) => (open ? "flex" : "none")};
+  display: ${({ open }) => (open ? 'flex' : 'none')};
   flex-direction: row;
   flex-wrap: wrap;
   gap: 8px;
@@ -32,7 +32,7 @@ export const Summary = styled.div`
   border-bottom-left-radius: 25px;
   border-top: 1px solid
     ${({ theme, open }) =>
-      open ? theme.FILTER.backgroundColor3 : "transparent"};
+      open ? theme.FILTER.backgroundColor3 : 'transparent'};
 
   @media screen and (min-width: 768px) {
     display: none;
@@ -104,12 +104,12 @@ export const Filter = styled.div`
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
 
   @media screen and (min-width: 768px) {
-    display: ${({ upMediumHide }) => (upMediumHide ? "none" : "flex")};
+    display: ${({ upMediumHide }) => (upMediumHide ? 'none' : 'flex')};
   }
 `;
 
 export const FilterItem = styled.span.attrs(({ as }) => ({
-  type: as === "button" ? "button" : undefined,
+  type: as === 'button' ? 'button' : undefined,
 }))`
   display: flex;
   justify-content: center;
@@ -136,7 +136,7 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
     opacity: 0.56;
   }
 
-  &[aria-pressed="false"] {
+  &[aria-pressed='false'] {
     background: transparent;
 
     > svg > path {

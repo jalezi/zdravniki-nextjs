@@ -1,13 +1,13 @@
-import { useTranslation } from "next-i18next";
-import Link from "next/link";
-import PropTypes from "prop-types";
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
 
-import ErrorLayout from "../layouts/ErrorLayout";
+import ErrorLayout from '../layouts/ErrorLayout';
 
 function Error({ statusCode, url }) {
-  const { t } = useTranslation("common");
-  const { description } = t("head", { returnObjects: true });
-  const { link, client, server, seoTitle, h1 } = t("_error", {
+  const { t } = useTranslation('common');
+  const { description } = t('head', { returnObjects: true });
+  const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
     statusCode,
   });

@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 const Hamburger = function Hamburger({ onClick, isOpen }) {
   return (

@@ -1,19 +1,19 @@
-const { i18n } = require("./next-i18next.config");
+const { i18n } = require('./next-i18next.config');
 
 // eslint-disable-next-line import/order
-const withMDX = require("@next/mdx")({
+const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
-    providerImportSource: "@mdx-js/react",
+    providerImportSource: '@mdx-js/react',
   },
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ["js", "jsx", "md", "mdx"],
+  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   compiler: {
     styledComponents: true,
   },
@@ -21,14 +21,14 @@ const nextConfig = {
   trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
-      loader: "@svgr/webpack",
+      loader: '@svgr/webpack',
       options: {
         prettier: false,
         svgo: true,
         svgoConfig: {
           plugins: [
             {
-              name: "preset-default",
+              name: 'preset-default',
               params: {
                 overrides: { removeViewBox: false },
               },
@@ -46,8 +46,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        destination: "/gp",
+        source: '/',
+        destination: '/gp',
         permanent: true,
       },
     ];

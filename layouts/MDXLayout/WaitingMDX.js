@@ -1,9 +1,9 @@
-import Skeleton from "react-loading-skeleton";
-import styled from "styled-components";
+import Skeleton from 'react-loading-skeleton';
+import styled from 'styled-components';
 
-import "react-loading-skeleton/dist/skeleton.css";
+import 'react-loading-skeleton/dist/skeleton.css';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 const DetailsSkeleton = styled(Styled.Details)`
   &&&[open] > summary:first-of-type {

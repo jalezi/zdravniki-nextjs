@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import * as animations from "./animations";
-import * as styledCss from "./css";
+import * as animations from './animations';
+import * as styledCss from './css';
 
 export const H1 = styled.h1`
   margin-bottom: 32px;
@@ -41,14 +41,14 @@ export const A = styled.a`
 `;
 
 // Names of CustomContainer and StaticPageWrapper matches classes from 'style.scss' from https://covid-19.sledilnik.org/ website project
-export const CustomContainer = styled("main")(({ theme }) => ({
-  margin: "48px auto 0 auto",
-  maxWidth: "730px",
+export const CustomContainer = styled('main')(({ theme }) => ({
+  margin: '48px auto 0 auto',
+  maxWidth: '730px',
   background: theme.white,
   lineHeight: 1.7,
   color: theme.MD.textColor,
-  "@media only screen and (min-width: 768px)": {
-    margin: "48px auto 65px auto",
+  '@media only screen and (min-width: 768px)': {
+    margin: '48px auto 65px auto',
     boxShadow: theme.MD.elementBoxShadow,
   },
 }));

@@ -1,6 +1,6 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
-import * as animations from "./animations";
+import * as animations from './animations';
 
 export const openLine1 = css`
   div:nth-child(1) {

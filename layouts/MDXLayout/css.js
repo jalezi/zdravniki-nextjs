@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 export const link = css`
   color: ${({ theme }) => theme.MD.linkColor};
@@ -52,7 +52,7 @@ export const spanDataTerm = css`
 
   ::before {
     position: absolute;
-    content: "";
+    content: '';
     width: 100%;
     height: 100%;
     top: -2px;

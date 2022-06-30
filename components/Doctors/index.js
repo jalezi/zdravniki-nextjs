@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { useToggleContext } from "../../context/toggleContext";
-import { ListContainer } from "../../layouts/HomeLayout/styles";
-import { DoctorPropType } from "../../types";
-import List from "../List";
+import { useToggleContext } from '../../context/toggleContext';
+import { ListContainer } from '../../layouts/HomeLayout/styles';
+import { DoctorPropType } from '../../types';
+import List from '../List';
 
 const Doctors = function Doctors({ doctorGroups }) {
   const [open] = useToggleContext();

@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import * as backdropAnimations from "./Backdrop/animations";
-import * as backdrop from "./Backdrop/styles";
-import * as hamburgerCss from "./Hamburger/css";
+import * as backdropAnimations from './Backdrop/animations';
+import * as backdrop from './Backdrop/styles';
+import * as hamburgerCss from './Hamburger/css';
 
 export const Nav = styled.nav`
   display: flex;

@@ -8,7 +8,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  font-family: "IBM Plex Sans", "Roboto", sans-serif;
+  font-family: 'IBM Plex Sans', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -97,7 +97,7 @@ meter {
 
 /* revert for bug in Chromium browsers
  - fix for the content editable attribute will work properly. */
-:where([contenteditable]:not([contenteditable="false"])) {
+:where([contenteditable]:not([contenteditable='false'])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
   overflow-wrap: break-word;
@@ -106,6 +106,6 @@ meter {
 }
 
 /* apply back the draggable feature - exist only in Chromium and Safari */
-:where([draggable="true"]) {
+:where([draggable='true']) {
   -webkit-user-drag: element;
 }

@@ -7,12 +7,12 @@ import {
   GynIcon,
   AdultsIcon,
   StudentsIcon,
-} from "../components/Shared/Icons";
+} from '../components/Shared/Icons';
 
 // DOCTORS
 export const PER_PAGE = 20;
-export const INSTITUTION_KEY = "id_inst";
-export const DOCTOR_TYPES = ["gp", "ped", "gyn", "den", "den-y", "den-s"];
+export const INSTITUTION_KEY = 'id_inst';
+export const DOCTOR_TYPES = ['gp', 'ped', 'gyn', 'den', 'den-y', 'den-s'];
 
 // LOCATION
 const ZOOM = 8;
@@ -56,24 +56,24 @@ export const MAP = {
 
 // INSTITUTIONS
 export const DUMMY_INSTITUTION = {
-  unit: "",
-  name: "",
-  website: "",
-  phone: "",
+  unit: '',
+  name: '',
+  website: '',
+  phone: '',
   lat: SL_CENTER[0],
   lon: SL_CENTER[1],
-  address: "",
-  city: "",
-  post: "0000 Neznan",
-  municipalityPart: "",
-  municipality: "",
+  address: '',
+  city: '',
+  post: '0000 Neznan',
+  municipalityPart: '',
+  municipality: '',
 };
 
 export const DR_TYPES_I18_MAP = {
-  gp: "generalPractitioner",
-  den: "dentist",
-  ped: "pediatrician",
-  gyn: "gynecologist",
+  gp: 'generalPractitioner',
+  den: 'dentist',
+  ped: 'pediatrician',
+  gyn: 'gynecologist',
 };
 
 export const DR_TYPES_ICON_MAP = {
@@ -84,13 +84,13 @@ export const DR_TYPES_ICON_MAP = {
 };
 
 export const AGE_GROUP_ICON_MAP = {
-  "": AdultsIcon,
+  '': AdultsIcon,
   y: KidsIcon,
   s: StudentsIcon,
 };
 
 export const ACCEPTS_ICON_MAP = {
-  "": AllIcon,
+  '': AllIcon,
   y: KidsIcon,
-  n: BanIcon
+  n: BanIcon,
 };

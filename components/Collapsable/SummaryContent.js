@@ -1,13 +1,13 @@
-import PropTypes from "prop-types";
-import Tooltip from "rc-tooltip";
+import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
 
-import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
+import * as MDXLayoutStyles from '../../layouts/MDXLayout/styles';
 import {
   Check2Icon,
   CloseCircleIcon,
   CopyIcon,
   ExpandIcon,
-} from "../Shared/Icons";
+} from '../Shared/Icons';
 
 const SummaryContent = function SummaryContent({
   title,

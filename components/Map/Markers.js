@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import { forwardRef } from "react";
-import { CircleMarker as ReactLeafletCM } from "react-leaflet";
+import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
+import { CircleMarker as ReactLeafletCM } from 'react-leaflet';
 
-import { theme } from "../../constants/theme";
-import { AcceptsPropType, GeoLocationType } from "../../types";
+import { theme } from '../../constants/theme';
+import { AcceptsPropType, GeoLocationType } from '../../types';
 
 export const CircleMarker = ReactLeafletCM;
 
@@ -12,7 +12,7 @@ export const CircleMarker = ReactLeafletCM;
   to be able to get "accepts" prop in MarkerClusterGroup 
 */
 export const DoctorMarker = forwardRef(({ accepts, center, Popup }, ref) => {
-  const isDrAccepting = accepts === "y";
+  const isDrAccepting = accepts === 'y';
   const fillColor = isDrAccepting
     ? theme.MARKERS.acceptsY
     : theme.MARKERS.acceptsN;

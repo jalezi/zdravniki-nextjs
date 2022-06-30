@@ -8,62 +8,62 @@ import {
   GynIcon,
   KidsIcon,
   StudentsIcon,
-} from "../Shared/Icons";
+} from '../Shared/Icons';
 
 export const DR_GROUP = [
   {
-    value: "gp",
+    value: 'gp',
     Icon: GPIcon,
-    label: "generalPractitioner",
+    label: 'generalPractitioner',
   },
   {
-    value: "ped",
+    value: 'ped',
     Icon: KidsIcon,
-    label: "pediatrician",
+    label: 'pediatrician',
   },
   {
-    value: "gyn",
+    value: 'gyn',
     Icon: GynIcon,
-    label: "gynecologist",
+    label: 'gynecologist',
   },
   {
-    value: "den",
+    value: 'den',
     Icon: DentistIcon,
-    label: "dentist",
+    label: 'dentist',
   },
 ];
 
 export const AGE_GROUP = [
   {
-    value: "",
+    value: '',
     Icon: AdultsIcon,
-    label: "adults",
+    label: 'adults',
   },
   {
-    value: "y",
+    value: 'y',
     Icon: KidsIcon,
-    label: "youth",
+    label: 'youth',
   },
   {
-    value: "s",
+    value: 's',
     Icon: StudentsIcon,
-    label: "students",
+    label: 'students',
   },
 ];
 export const ACCEPTS_GROUP = [
   {
-    value: "y",
+    value: 'y',
     Icon: CheckIcon,
-    label: "accepts",
+    label: 'accepts',
   },
   {
-    value: "n",
+    value: 'n',
     Icon: BanIcon,
-    label: "rejects",
+    label: 'rejects',
   },
   {
-    value: "",
+    value: '',
     Icon: AllIcon,
-    label: "all",
+    label: 'all',
   },
 ];

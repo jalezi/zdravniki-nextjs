@@ -1,19 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
-import { SearchIcon } from "../Shared/Icons";
+import { SearchIcon } from '../Shared/Icons';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 const Search = function Search() {
   const inputRef = useRef();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setValue(e.target.value);
   };
 
   const handleClear = () => {
-    setValue("");
+    setValue('');
     inputRef.current.focus();
   };
 

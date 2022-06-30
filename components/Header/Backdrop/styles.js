@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Backdrop = styled.div`
   background-color: ${({ theme }) => theme.textColor2};

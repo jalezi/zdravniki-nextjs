@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import { AttributionControl, TileLayer, MapContainer } from "react-leaflet";
+import PropTypes from 'prop-types';
+import { AttributionControl, TileLayer, MapContainer } from 'react-leaflet';
 
-import "leaflet/dist/leaflet.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import "leaflet-defaulticon-compatibility";
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import 'leaflet-defaulticon-compatibility';
 
-import { MAP } from "../../constants/common";
+import { MAP } from '../../constants/common';
 import {
   ChildrenPropType,
   GeoLocationType,
   StylePropType,
-} from "../../types/index";
+} from '../../types/index';
 
 export function Map({
   center,

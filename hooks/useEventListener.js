@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 const useEventListener = (eventType, callback, element) => {
   const callbackRef = useRef(callback);
@@ -10,7 +10,7 @@ const useEventListener = (eventType, callback, element) => {
   useEffect(() => {
     const el = element === undefined ? window : element;
 
-    const handler = (e) => callbackRef.current(e);
+    const handler = e => callbackRef.current(e);
     el.addEventListener(eventType, handler);
 
     return () => {

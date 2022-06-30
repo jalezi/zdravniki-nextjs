@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import { createContext, useState, useContext, useMemo } from "react";
+import PropTypes from 'prop-types';
+import { createContext, useState, useContext, useMemo } from 'react';
 
-import { ChildrenPropType } from "../types";
+import { ChildrenPropType } from '../types';
 
 const toggleFiltersContext = createContext();
 
@@ -46,7 +46,7 @@ export function useToggleFiltersContext() {
 
   if (!context) {
     throw new Error(
-      "useToggleFiltersContext must be used within a ToggleFiltersProvider"
+      'useToggleFiltersContext must be used within a ToggleFiltersProvider'
     );
   }
   return context;

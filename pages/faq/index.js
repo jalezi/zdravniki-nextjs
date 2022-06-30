@@ -1,27 +1,27 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
-import PropTypes from "prop-types";
-import { Suspense } from "react";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
+import PropTypes from 'prop-types';
+import { Suspense } from 'react';
 
-import { GlossaryPropType, QuestionPropType } from "../../types";
+import { GlossaryPropType, QuestionPropType } from '../../types';
 
-const Sections = dynamic(() => import("../../components/Sections"), {
+const Sections = dynamic(() => import('../../components/Sections'), {
   suspense: true,
 });
-const MDXLayout = dynamic(() => import("../../layouts/MDXLayout"));
-const WaitingMDX = dynamic(() => import("../../layouts/MDXLayout/WaitingMDX"));
+const MDXLayout = dynamic(() => import('../../layouts/MDXLayout'));
+const WaitingMDX = dynamic(() => import('../../layouts/MDXLayout/WaitingMDX'));
 const Heading = dynamic(() =>
-  import("../../layouts/MDXLayout/styles").then((mod) => mod.H1)
+  import('../../layouts/MDXLayout/styles').then(mod => mod.H1)
 );
 const Notice = dynamic(() =>
-  import("../../layouts/MDXLayout/styles").then((mod) => mod.Notice)
+  import('../../layouts/MDXLayout/styles').then(mod => mod.Notice)
 );
-const Error = dynamic(() => import("../_error"));
+const Error = dynamic(() => import('../_error'));
 
 export async function getStaticProps({ locale }) {
   const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
-  if (locale === "default") {
+  if (locale === 'default') {
     return { notFound: true };
   }
 
@@ -33,7 +33,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header", "faq"])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'faq'])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       data,
@@ -44,17 +44,17 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Faq({ url, data, errorCode }) {
-  const { t: tCommon } = useTranslation("common");
-  const { t: tFaq } = useTranslation("faq");
+  const { t: tCommon } = useTranslation('common');
+  const { t: tFaq } = useTranslation('faq');
 
   if (errorCode) {
     return <Error statusCode={errorCode} url={url} />;
   }
 
-  const title = tFaq("seo.title");
-  const description = tCommon("head.description");
-  const noticeText = tFaq("notice");
-  const headings = tFaq("headings", { returnObjects: true });
+  const title = tFaq('seo.title');
+  const description = tCommon('head.description');
+  const noticeText = tFaq('notice');
+  const headings = tFaq('headings', { returnObjects: true });
 
   return (
     <MDXLayout title={title} description={description} url={url}>

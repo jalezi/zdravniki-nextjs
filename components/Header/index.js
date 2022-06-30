@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useTranslation } from "next-i18next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useTranslation } from 'next-i18next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
 
-import useEventListener from "../../hooks/useEventListener";
-import LanguageSelector from "../LanguageSelector";
-import { FbIcon, LogoIcon, TwIcon } from "../Shared/Icons";
+import useEventListener from '../../hooks/useEventListener';
+import LanguageSelector from '../LanguageSelector';
+import { FbIcon, LogoIcon, TwIcon } from '../Shared/Icons';
 
-import Backdrop from "./Backdrop";
-import Hamburger from "./Hamburger";
-import * as Styled from "./styles";
+import Backdrop from './Backdrop';
+import Hamburger from './Hamburger';
+import * as Styled from './styles';
 
 const Header = function Header({ noAnimation }) {
   const headerRef = useRef();
@@ -20,9 +20,9 @@ const Header = function Header({ noAnimation }) {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(null);
   const router = useRouter();
-  const { t: tHeader } = useTranslation("header");
+  const { t: tHeader } = useTranslation('header');
 
-  const handler = (e) => {
+  const handler = e => {
     if (noAnimation) {
       return;
     }
@@ -43,38 +43,38 @@ const Header = function Header({ noAnimation }) {
     }
   };
 
-  useEventListener("scroll", handler, bodyRef.current);
+  useEventListener('scroll', handler, bodyRef.current);
 
   useEffect(() => {
     bodyRef.current = window;
   }, []);
 
   const onHamburgerClick = () => {
-    setOpen((prev) => !prev);
+    setOpen(prev => !prev);
 
     if (open) {
-      headerRef.current.classList.add("closingMenu");
-      headerRef.current.classList.remove("menuOpen");
+      headerRef.current.classList.add('closingMenu');
+      headerRef.current.classList.remove('menuOpen');
     }
 
     if (!open) {
-      headerRef.current.classList.remove("closingMenu");
-      headerRef.current.classList.add("menuOpen");
+      headerRef.current.classList.remove('closingMenu');
+      headerRef.current.classList.add('menuOpen');
     }
   };
 
   if (isScrolled) {
-    headerRef.current?.classList.add("scrolled");
+    headerRef.current?.classList.add('scrolled');
   }
   if (!isScrolled) {
-    headerRef.current?.classList.remove("scrolled");
+    headerRef.current?.classList.remove('scrolled');
   }
 
-  const onLinkClick = (e) => {
+  const onLinkClick = e => {
     e.stopPropagation();
     e.target.blur();
     setOpen(false);
-    headerRef.current.classList.remove("menuOpen");
+    headerRef.current.classList.remove('menuOpen');
   };
 
   return (
@@ -90,24 +90,24 @@ const Header = function Header({ noAnimation }) {
         <Styled.List>
           <li>
             <Link href="/gp" passHref>
-              <Styled.A className={router.pathname === "/gp" ? "active" : ""}>
-                {tHeader("home")}
+              <Styled.A className={router.pathname === '/gp' ? 'active' : ''}>
+                {tHeader('home')}
               </Styled.A>
             </Link>
           </li>
           <li>
             <Link href="/faq" passHref>
-              <Styled.A className={router.pathname === "/faq" ? "active" : ""}>
-                {tHeader("faq")}
+              <Styled.A className={router.pathname === '/faq' ? 'active' : ''}>
+                {tHeader('faq')}
               </Styled.A>
             </Link>
           </li>
           <li>
             <Link href="/about" passHref>
               <Styled.A
-                className={router.pathname === "/about" ? "active" : ""}
+                className={router.pathname === '/about' ? 'active' : ''}
               >
-                {tHeader("about")}
+                {tHeader('about')}
               </Styled.A>
             </Link>
           </li>
@@ -118,7 +118,7 @@ const Header = function Header({ noAnimation }) {
               rel="noopener noreferrer"
               onClick={onLinkClick}
             >
-              {tHeader("support")}
+              {tHeader('support')}
             </Styled.A>
           </li>
           <li>

@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
-import { GlossaryPropType, QuestionPropType } from "../../types";
-import Collapsable from "../Collapsable";
+import * as MDXLayoutStyles from '../../layouts/MDXLayout/styles';
+import { GlossaryPropType, QuestionPropType } from '../../types';
+import Collapsable from '../Collapsable';
 
 const Section = function Section({ sectionData, title }) {
-  const articles = sectionData.map((section) => {
+  const articles = sectionData.map(section => {
     const key = `${section.position}-${section.slug}`;
     return (
       <article key={key}>

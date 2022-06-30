@@ -1,12 +1,12 @@
-import { useTranslation } from "next-i18next";
-import PropTypes from "prop-types";
-import { memo, useCallback, useEffect, useState } from "react";
+import { useTranslation } from 'next-i18next';
+import PropTypes from 'prop-types';
+import { memo, useCallback, useEffect, useState } from 'react';
 
-import * as FilterGroupsStyled from "../FilterGroups/styles";
+import * as FilterGroupsStyled from '../FilterGroups/styles';
 
 const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
   const [value, setValue] = useState(initialValue);
-  const { t: tCommon } = useTranslation("common");
+  const { t: tCommon } = useTranslation('common');
 
   useEffect(() => {
     if (value !== initialValue) {
@@ -15,17 +15,17 @@ const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
   }, [value, initialValue, onChange]);
 
   const handleBtnClick = useCallback(
-    (val) => {
+    val => {
       setValue(val);
     },
     [setValue]
   );
 
-  const translations = tCommon("doctor", { returnObjects: true });
+  const translations = tCommon('doctor', { returnObjects: true });
 
   return (
     <FilterGroupsStyled.Filter>
-      {buttons.map((btn) => (
+      {buttons.map(btn => (
         <FilterGroupsStyled.FilterItem
           as="button"
           key={btn.value}
@@ -45,7 +45,7 @@ const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
 export default memo(FilterGroup);
 
 FilterGroup.defaultProps = {
-  initialValue: "",
+  initialValue: '',
   onChange: () => {},
 };
 

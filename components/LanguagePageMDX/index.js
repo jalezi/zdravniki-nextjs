@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import AboutEN from "../../content/en/about.mdx";
-import AboutIT from "../../content/it/about.mdx";
-import AboutSL from "../../content/sl/about.mdx";
-import { mdComponents } from "../../layouts/MDXLayout/mdComponents";
+import AboutEN from '../../content/en/about.mdx';
+import AboutIT from '../../content/it/about.mdx';
+import AboutSL from '../../content/sl/about.mdx';
+import { mdComponents } from '../../layouts/MDXLayout/mdComponents';
 
 const AboutIntlMap = {
   it: AboutIT,

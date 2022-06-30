@@ -1,8 +1,8 @@
-import { createControlComponent } from "@react-leaflet/core";
-import L from "leaflet";
-import "leaflet.locatecontrol";
+import { createControlComponent } from '@react-leaflet/core';
+import L from 'leaflet';
+import 'leaflet.locatecontrol';
 
-import "leaflet.locatecontrol/dist/L.Control.Locate.css";
+import 'leaflet.locatecontrol/dist/L.Control.Locate.css';
 
 function createLocateControl(props) {
   return L.control.locate(props);

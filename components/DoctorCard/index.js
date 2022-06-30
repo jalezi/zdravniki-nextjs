@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import useSWR from "swr";
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-import Error from "../../pages/_error";
+import Error from '../../pages/_error';
 
 const DoctorCard = function DoctorCard() {
   const router = useRouter();

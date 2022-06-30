@@ -1,15 +1,15 @@
 export const customStyles = {
   control: (provided, { theme, isFocused }) => ({
     ...provided,
-    background: "transparent",
-    cursor: "pointer",
-    borderColor: isFocused ? "transparent" : theme.appTheme.textColor2,
-    minHeight: "unset",
+    background: 'transparent',
+    cursor: 'pointer',
+    borderColor: isFocused ? 'transparent' : theme.appTheme.textColor2,
+    minHeight: 'unset',
     minWidth: 72,
-    boxShadow: isFocused ? `0 0 0 1px ${theme.appTheme.bgColor1}` : "none",
+    boxShadow: isFocused ? `0 0 0 1px ${theme.appTheme.bgColor1}` : 'none',
     opacity: isFocused ? 1 : 0.7,
-    "&:hover": {
-      borderColor: isFocused ? "transparent" : theme.appTheme.textColor1,
+    '&:hover': {
+      borderColor: isFocused ? 'transparent' : theme.appTheme.textColor1,
       opacity: 1,
     },
   }),
@@ -20,22 +20,22 @@ export const customStyles = {
   dropdownIndicator: (provided, { theme }) => ({
     ...provided,
     color: theme.appTheme.black,
-    paddingBlock: "0.25rem",
-    paddingInline: "0.25rem",
-    "&:hover": {
+    paddingBlock: '0.25rem',
+    paddingInline: '0.25rem',
+    '&:hover': {
       color: theme.appTheme.textColor1,
     },
   }),
-  menu: (provided) => ({
+  menu: provided => ({
     ...provided,
-    width: "max-content",
-    marginLeft: "-80%",
+    width: 'max-content',
+    marginLeft: '-80%',
     padding: 8,
-    "@media (min-width: 380px)": {
-      marginLeft: "--50%",
+    '@media (min-width: 380px)': {
+      marginLeft: '--50%',
     },
-    "@media (min-width: 768px)": {
-      marginLeft: "-60%",
+    '@media (min-width: 768px)': {
+      marginLeft: '-60%',
     },
   }),
   option: (provided, { isFocused, isSelected, theme }) => {
@@ -47,15 +47,15 @@ export const customStyles = {
 
     return {
       ...provided,
-      cursor: "pointer",
+      cursor: 'pointer',
       backgroundColor: bgColor,
     };
   },
   singleValue: (provided, { theme }) => ({
     ...provided,
     color: theme.appTheme.black,
-    textAlign: "center",
-    "&:hover": { color: theme.appTheme.textColor1 },
-    width: "max-content",
+    textAlign: 'center',
+    '&:hover': { color: theme.appTheme.textColor1 },
+    width: 'max-content',
   }),
 };

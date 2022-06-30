@@ -1,19 +1,19 @@
-import Markdown from "markdown-to-jsx";
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import { useEffect, useState, useRef } from "react";
+import Markdown from 'markdown-to-jsx';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import { useEffect, useState, useRef } from 'react';
 
-import * as MDXLayoutStyles from "../../layouts/MDXLayout/styles";
-import { GlossaryPropType, QuestionPropType } from "../../types";
+import * as MDXLayoutStyles from '../../layouts/MDXLayout/styles';
+import { GlossaryPropType, QuestionPropType } from '../../types';
 
-import SummaryContent from "./SummaryContent";
+import SummaryContent from './SummaryContent';
 
-const repairMarkdown = (text = "") =>
+const repairMarkdown = (text = '') =>
   text
-    .replaceAll("<li>", "-  ")
-    .replaceAll("</li>", "")
-    .replaceAll("<ul>", "")
-    .replaceAll("</ul>", "");
+    .replaceAll('<li>', '-  ')
+    .replaceAll('</li>', '')
+    .replaceAll('<ul>', '')
+    .replaceAll('</ul>', '');
 
 const Collapsable = function Collapsable({ section }) {
   const router = useRouter();
@@ -24,7 +24,7 @@ const Collapsable = function Collapsable({ section }) {
   // in order not to cause error: Hydration failed because the initial UI does not match what was rendered on the server.
   const markdown = repairMarkdown(section.answer ?? section.definition);
 
-  const hash = router.asPath.split("#")[1];
+  const hash = router.asPath.split('#')[1];
   const detailsId = section.slug;
   const btnContainerId = `btn-container-${detailsId}`;
 
@@ -34,7 +34,7 @@ const Collapsable = function Collapsable({ section }) {
     if (shouldOpenAndScrollTo) {
       detailsRef.current.scrollIntoView({
         top: detailsRef.current.getBoundingClientRect().top,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
       detailsRef.current.open = true;
       setIsExpanded(true);
@@ -49,17 +49,17 @@ const Collapsable = function Collapsable({ section }) {
     navigator.clipboard.writeText(id);
   };
 
-  const handleExpand = (e) => {
+  const handleExpand = e => {
     e.stopPropagation();
     setIsExpanded(true);
   };
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     e.stopPropagation();
     setIsExpanded(false);
   };
 
-  const handleSummaryClick = (e) => {
+  const handleSummaryClick = e => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -67,7 +67,7 @@ const Collapsable = function Collapsable({ section }) {
       return;
     }
 
-    setIsExpanded((prev) => {
+    setIsExpanded(prev => {
       detailsRef.current.open = !prev;
       return !prev;
     });

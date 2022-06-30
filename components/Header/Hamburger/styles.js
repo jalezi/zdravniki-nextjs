@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-export const Container = styled.div.attrs({ role: "button" })`
+export const Container = styled.div.attrs({ role: 'button' })`
   width: 36px;
   height: 30px;
   padding: 5px 6px;

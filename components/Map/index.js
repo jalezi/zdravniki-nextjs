@@ -1,22 +1,22 @@
-import L from "leaflet";
-import PropTypes from "prop-types";
-import { createRef } from "react";
-import { Popup } from "react-leaflet";
+import L from 'leaflet';
+import PropTypes from 'prop-types';
+import { createRef } from 'react';
+import { Popup } from 'react-leaflet';
 
-import { MAP } from "../../constants/common";
-import { DoctorPropType } from "../../types/index";
+import { MAP } from '../../constants/common';
+import { DoctorPropType } from '../../types/index';
 
-import LocateControl from "./LocateControl";
-import { Map } from "./Map";
-import MapTotalResults from "./MapTotalResults";
+import LocateControl from './LocateControl';
+import { Map } from './Map';
+import MapTotalResults from './MapTotalResults';
 import MarkerClusterGroup, {
   createClusterCustomIcon,
-} from "./MarkerClusterGroup";
-import { DoctorMarker } from "./Markers";
+} from './MarkerClusterGroup';
+import { DoctorMarker } from './Markers';
 
 const withMap = function withMap(Component) {
   const DoctorsMap = function DoctorsMap({ doctors }) {
-    const markers = doctors?.map((doctor) => {
+    const markers = doctors?.map(doctor => {
       const key = doctor.doctor + doctor.inst_id + Math.random() * Date.now();
       const ref = createRef();
       const accepts = doctor.accepts_override || doctor.accepts;
@@ -42,9 +42,9 @@ const withMap = function withMap(Component) {
     const isSafari = () => {
       const ua = navigator.userAgent.toLowerCase();
       return (
-        ua.indexOf("safari") !== -1 &&
-        ua.indexOf("chrome") === -1 &&
-        ua.indexOf("android") === -1
+        ua.indexOf('safari') !== -1 &&
+        ua.indexOf('chrome') === -1 &&
+        ua.indexOf('android') === -1
       );
     };
 

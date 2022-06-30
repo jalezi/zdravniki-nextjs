@@ -1,16 +1,16 @@
-import { useRouter } from "next/router";
-import { useRef } from "react";
-import { Controller, useForm } from "react-hook-form";
-import Select from "react-select";
+import { useRouter } from 'next/router';
+import { useRef } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import Select from 'react-select';
 
-import { theme as appTheme } from "../../constants/theme";
+import { theme as appTheme } from '../../constants/theme';
 
-import { customStyles } from "./styles";
+import { customStyles } from './styles';
 
 const LANGUAGES_MAP = {
-  sl: "Slovenščina",
-  en: "English",
-  it: "Italiano",
+  sl: 'Slovenščina',
+  en: 'English',
+  it: 'Italiano',
 };
 
 export default function LanguageSelector() {
@@ -22,15 +22,15 @@ export default function LanguageSelector() {
   });
 
   const options = router.locales
-    .filter((lng) => lng !== "default")
-    .map((lng) => ({ value: lng, label: LANGUAGES_MAP[lng] }));
+    .filter(lng => lng !== 'default')
+    .map(lng => ({ value: lng, label: LANGUAGES_MAP[lng] }));
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     router.push(router.pathname, router.pathname, { locale: data.lngSelector });
   };
 
-  const onLngChange = (option) => {
-    setValue("lngSelector", option.value);
+  const onLngChange = option => {
+    setValue('lngSelector', option.value);
     hiddenInputRef.current.click();
   };
 
@@ -51,12 +51,12 @@ export default function LanguageSelector() {
             onChange={onLngChange}
             onBlur={onBlur}
             formatOptionLabel={(option, { context }) =>
-              context === "value" ? option.value.toUpperCase() : option.label
+              context === 'value' ? option.value.toUpperCase() : option.label
             }
             aria-label={`Selected language: ${LANGUAGES_MAP[value]}`}
             isSearchable={false}
             styles={customStyles}
-            theme={(reactSelectTheme) => ({
+            theme={reactSelectTheme => ({
               ...reactSelectTheme,
               appTheme,
               colors: {

@@ -1,31 +1,31 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import dynamic from "next/dynamic";
-import { PropTypes } from "prop-types";
-import useSWR from "swr";
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
+import { PropTypes } from 'prop-types';
+import useSWR from 'swr';
 
-import Doctors from "../../components/Doctors";
-import Filters from "../../components/Filters";
-import { ToggleProvider } from "../../context/toggleContext";
-import { ToggleFiltersProvider } from "../../context/toggleFiltersContext";
-import * as Styled from "../../layouts/HomeLayout/styles";
-import { getDoctorData, sortByField } from "../../lib";
-import { DoctorPropType } from "../../types";
+import Doctors from '../../components/Doctors';
+import Filters from '../../components/Filters';
+import { ToggleProvider } from '../../context/toggleContext';
+import { ToggleFiltersProvider } from '../../context/toggleFiltersContext';
+import * as Styled from '../../layouts/HomeLayout/styles';
+import { getDoctorData, sortByField } from '../../lib';
+import { DoctorPropType } from '../../types';
 
-const Error = dynamic(() => import("../_error"));
-const HomeLayout = dynamic(() => import("../../layouts/HomeLayout"));
+const Error = dynamic(() => import('../_error'));
+const HomeLayout = dynamic(() => import('../../layouts/HomeLayout'));
 
 export async function getStaticProps({ locale }) {
-  if (locale === "default") {
+  if (locale === 'default') {
     return { notFound: true };
   }
 
   const { PUBLIC_URL } = process.env;
-  const { updatedAt } = await getDoctorData({ type: "gp" });
+  const { updatedAt } = await getDoctorData({ type: 'gp' });
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "header", "map"])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
       // Will be passed to the page component as props
       url: PUBLIC_URL,
       doctors: [],
@@ -35,7 +35,7 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-const fetcher = async (fetchUrl) => {
+const fetcher = async fetchUrl => {
   const res = await fetch(fetchUrl);
   const data = await res.json();
 
@@ -46,26 +46,26 @@ const fetcher = async (fetchUrl) => {
 };
 
 export default function Gp({ url, doctors, updatedAt }) {
-  const MapWithNoSSR = dynamic(() => import("../../components/Map"), {
+  const MapWithNoSSR = dynamic(() => import('../../components/Map'), {
     ssr: false,
   });
 
-  const { t: tCommon } = useTranslation("common");
+  const { t: tCommon } = useTranslation('common');
 
-  const { data, error } = useSWR("/api/gp", fetcher, {
+  const { data, error } = useSWR('/api/gp', fetcher, {
     fallbackData: { doctors, updatedAt },
     refreshInterval: 30_000,
     // ? use onErrorRetry
   });
 
-  const sortedDoctors = data.doctors.sort(sortByField("doctor"));
+  const sortedDoctors = data.doctors.sort(sortByField('doctor'));
 
   if (error) {
     // TODO use some kind of logger for error.status
     return <Error statusCode={500} url={url} />;
   }
 
-  const { title, description } = tCommon("head", { returnObjects: true });
+  const { title, description } = tCommon('head', { returnObjects: true });
 
   const groupedByLetter = sortedDoctors.reduce((acc, doctor) => {
     const firstLetter = doctor.doctor.charAt(0).toUpperCase();
@@ -91,10 +91,10 @@ export default function Gp({ url, doctors, updatedAt }) {
       <ToggleProvider initialValue={false}>
         <ToggleFiltersProvider
           initialValue={{
-            drType: "gp",
-            ageGroup: "",
-            accepts: "",
-            searchValue: "",
+            drType: 'gp',
+            ageGroup: '',
+            accepts: '',
+            searchValue: '',
           }}
         >
           <Filters />

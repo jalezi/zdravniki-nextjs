@@ -1,10 +1,10 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Header from "../../components/Header";
-import SEO from "../../components/SEO";
-import { ChildrenPropType } from "../../types";
+import Header from '../../components/Header';
+import SEO from '../../components/SEO';
+import { ChildrenPropType } from '../../types';
 
-import * as Styled from "./styles";
+import * as Styled from './styles';
 
 export default function HomeLayout({ children, url, title, description }) {
   return (

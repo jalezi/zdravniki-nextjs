@@ -1,4 +1,4 @@
-import { keyframes } from "styled-components";
+import { keyframes } from 'styled-components';
 
 /* MENU OPEN ANIMATIONS */
 export const line1 = keyframes`

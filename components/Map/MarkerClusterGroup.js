@@ -1,16 +1,16 @@
 // see: https://github.com/yuzhva/react-leaflet-markercluster/blob/master/src/react-leaflet-markercluster.js
-import "leaflet.markercluster";
-import { createPathComponent } from "@react-leaflet/core";
-import L from "leaflet";
+import 'leaflet.markercluster';
+import { createPathComponent } from '@react-leaflet/core';
+import L from 'leaflet';
 
-import "leaflet.markercluster/dist/MarkerCluster.css";
-import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
-export const createClusterCustomIcon = (cluster) => {
+export const createClusterCustomIcon = cluster => {
   let acceptsCnt = 0;
 
-  Object.values(cluster.getAllChildMarkers()).forEach((marker) => {
-    acceptsCnt += marker.options.accepts === "y" ? 1 : 0;
+  Object.values(cluster.getAllChildMarkers()).forEach(marker => {
+    acceptsCnt += marker.options.accepts === 'y' ? 1 : 0;
   });
 
   let acceptsPercentage =
@@ -42,7 +42,7 @@ const MarkerClusterGroup = createPathComponent(
 
     // Splitting props and events to different objects
     Object.entries(props).forEach(([propName, prop]) => {
-      if (propName.startsWith("on")) {
+      if (propName.startsWith('on')) {
         clusterEvents[propName] = prop;
       } else {
         clusterProps[propName] = prop;
