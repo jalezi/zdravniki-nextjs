@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import { appWithTranslation } from 'next-i18next';
 import Head from 'next/head';
+
+import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider } from 'styled-components';
 
 import { theme } from '../constants/theme';

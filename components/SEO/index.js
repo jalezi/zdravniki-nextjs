@@ -1,5 +1,6 @@
-import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
+
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 const SEO = function SEO({ title, description, url }) {

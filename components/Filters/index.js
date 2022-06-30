@@ -6,7 +6,6 @@ import FilterGroups from '../FilterGroups';
 import { Filter as ToggleView, FilterItem } from '../FilterGroups/styles';
 import Search from '../Search';
 import { ListViewIcon, MapViewIcon } from '../Shared/Icons';
-
 import { FlexContainer } from './styles';
 
 const Filters = function Filters() {

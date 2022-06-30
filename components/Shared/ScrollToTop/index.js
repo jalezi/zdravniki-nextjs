@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import useEventListener from '../../../hooks/useEventListener';
+import PropTypes from 'prop-types';
 
+import useEventListener from '../../../hooks/useEventListener';
 import { IconContainer } from './styles';
 
 const ScrollToTop = function ScrollToTop({ Component, element }) {

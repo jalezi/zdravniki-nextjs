@@ -2,7 +2,6 @@ import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 import { DoctorPropType } from '../../types';
-
 import * as Styled from './styles';
 
 const List = function List({ doctorGroups }) {

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
+
 import { useRef } from 'react';
+
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 
 import { theme as appTheme } from '../../constants/theme';
-
 import { customStyles } from './styles';
 
 const LANGUAGES_MAP = {

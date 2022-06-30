@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
 import { SearchIcon } from '../Shared/Icons';
-
 import * as Styled from './styles';
 
 const Search = function Search() {

@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
+
 import { compiler } from 'markdown-to-jsx';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 import { GlossaryPropType, QuestionPropType } from '../../types';
 import Section from '../Section';

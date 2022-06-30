@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
+
 import { useEffect, useRef, useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
+import PropTypes from 'prop-types';
 
 import useEventListener from '../../hooks/useEventListener';
 import LanguageSelector from '../LanguageSelector';
 import { FbIcon, LogoIcon, TwIcon } from '../Shared/Icons';
-
 import Backdrop from './Backdrop';
 import Hamburger from './Hamburger';
 import * as Styled from './styles';

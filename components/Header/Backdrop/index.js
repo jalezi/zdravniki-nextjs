@@ -1,5 +1,4 @@
 import { ChildrenPropType } from '../../../types/index';
-
 import * as Styled from './styles';
 
 const Backdrop = function Backdrop({ children }) {

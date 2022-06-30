@@ -1,5 +1,6 @@
-import { useTranslation } from 'next-i18next';
 import { useCallback, useState } from 'react';
+
+import { useTranslation } from 'next-i18next';
 
 import {
   ACCEPTS_ICON_MAP,
@@ -10,7 +11,6 @@ import {
 import { useToggleFiltersContext } from '../../context/toggleFiltersContext';
 import FilterGroup from '../FilterGroup/index';
 import { FilterIcon } from '../Shared/Icons';
-
 import { ACCEPTS_GROUP, AGE_GROUP, DR_GROUP } from './groups';
 import * as Styled from './styles';
 

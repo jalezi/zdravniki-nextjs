@@ -1,11 +1,11 @@
+import { createRef } from 'react';
+
 import L from 'leaflet';
 import PropTypes from 'prop-types';
-import { createRef } from 'react';
 import { Popup } from 'react-leaflet';
 
 import { MAP } from '../../constants/common';
 import { DoctorPropType } from '../../types/index';
-
 import LocateControl from './LocateControl';
 import { Map } from './Map';
 import MapTotalResults from './MapTotalResults';

@@ -1,11 +1,12 @@
-import Markdown from 'markdown-to-jsx';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
+
 import { useEffect, useState, useRef } from 'react';
+
+import Markdown from 'markdown-to-jsx';
+import PropTypes from 'prop-types';
 
 import * as MDXLayoutStyles from '../../layouts/MDXLayout/styles';
 import { GlossaryPropType, QuestionPropType } from '../../types';
-
 import SummaryContent from './SummaryContent';
 
 const repairMarkdown = (text = '') =>

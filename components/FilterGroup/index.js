@@ -1,6 +1,7 @@
+import { memo, useCallback, useEffect, useState } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
-import { memo, useCallback, useEffect, useState } from 'react';
 
 import * as FilterGroupsStyled from '../FilterGroups/styles';
 

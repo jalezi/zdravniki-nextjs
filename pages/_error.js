@@ -1,5 +1,6 @@
-import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 import ErrorLayout from '../layouts/ErrorLayout';

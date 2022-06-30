@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import PropTypes from 'prop-types';
 
 import { toSlug } from '../../lib';
