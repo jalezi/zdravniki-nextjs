@@ -25,12 +25,14 @@ export const Summary = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
+  min-height: 48px;
   height: 100%;
   width: 100%;
-  padding-bottom: ${({ open }) => (open ? "14px" : "0")};
-  padding-top: ${({ open }) => (open ? "8px" : "0")};
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
+  border-top: 1px solid
+    ${({ theme, open }) =>
+      open ? theme.FILTER.backgroundColor3 : "transparent"};
 
   @media screen and (min-width: 768px) {
     display: none;

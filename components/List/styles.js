@@ -16,11 +16,12 @@ export const Header = styled.header`
 export const DoctorsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100% - 93px);
+  height: calc(100% - 36px); /* header with number of hits  height*/
   overflow-y: auto;
+  background: ${({ theme }) => theme.bgColor1};
 
   @media screen and (min-width: 768px) {
-    height: calc(100% - 106px);
+    height: calc(100% - 100px);
   }
 `;
 

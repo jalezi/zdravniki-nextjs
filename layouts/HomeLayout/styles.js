@@ -47,7 +47,8 @@ export const MapContainer = styled.div`
   left: 0;
   right: 0;
   background: red;
-  height: calc(100% - 64px);
+  height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
+  height: 100%;
   z-index: 9;
 
   @media only screen and (min-width: 768px) {
@@ -121,9 +122,16 @@ export const FiltersContainer = styled.div`
   left: 0;
   right: 0;
   background: ${({ theme }) => theme.bgColor1};
+  background: ${({ open }) => (open ? "#104856cc" : "initial")};
   height: fit-content;
+  margin-inline: 16px;
+  margin-bottom: 8px;
   padding-block: 8px;
   z-index: 20;
+
+  flex-grow: 1;
+  height: ${({ open }) => (open ? "100%" : "initial")};
+  justify-content: end;
 
   @media only screen and (min-width: 768px) {
     position: initial;
@@ -133,22 +141,25 @@ export const FiltersContainer = styled.div`
     flex-wrap: nowrap;
     justify-content: space-between;
     background: ${({ theme }) => theme.white};
+    margin-inline: 0;
+    margin-bottom: 0;
   }
 `;
 export const ListContainer = styled.div`
   position: absolute;
-  top: 0px;
-  left: 0;
-  right: 0;
-  bottom: 64px;
-  height: ${({ open }) => (open ? "auto" : "0px")};
-  /* padding-block: ${({ open }) => (open ? "8px" : "0px")}; */
+  top: 0;
+  left: ${({ open }) => (open ? "0" : "100%")};
+  right: ${({ open }) => (open ? "0" : "-100%")};
+  bottom: 0;
+  height: 100%;
 
   background: ${({ theme }) => theme.bgColor1};
   transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   z-index: 10;
 
   @media only screen and (min-width: 768px) {
+    left: 0;
+    right: 0;
     height: 100%;
     grid-area: list;
     z-index: 1;

@@ -13,6 +13,7 @@ export const SearchContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.INPUTS.border};
   border-radius: 25px;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: ${({ theme }) => theme.white};
 
   :focus-within {
     box-shadow: rgb(9 175 218 / 76%) 0px 0px 7px 0px;
