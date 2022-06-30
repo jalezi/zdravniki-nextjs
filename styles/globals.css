@@ -1,5 +1,6 @@
 :root {
   font-size: 100%;
+  text-size-adjust: 100%;
   --mobilePaddingTop: 56px;
   --paddingTop: 64px;
 }
