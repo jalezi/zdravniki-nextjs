@@ -12,7 +12,7 @@ export const Header = styled.header`
   line-height: 0.75rem;
   background: ${({ theme }) => theme.bgColor1};
 
-  z-index: 1;
+  z-index: 2;
 
   height: 36px;
   width: 100%;
@@ -25,10 +25,6 @@ export const DoctorsContainer = styled.div`
 
   @media screen and (min-width: 768px) {
     height: 100%;
-
-    > section {
-      background: white;
-    }
   }
 `;
 
@@ -38,6 +34,7 @@ export const HeadingBase = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 4px;
   padding: 10px 24px;
   border-block: 1px solid ${({ theme }) => theme.LIST_HEADER.borderBottomColor};
   background: ${({ theme }) => theme.bgColor1};
@@ -46,4 +43,12 @@ export const HeadingBase = styled.div`
   font-weight: 500;
 
   z-index: 1;
+
+  a {
+    opacity: 0.56;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
 `;
