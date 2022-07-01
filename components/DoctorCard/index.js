@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import Error from '../../pages/_error';
+import Info from './Info';
 
 const DoctorCard = function DoctorCard() {
   const router = useRouter();
@@ -22,9 +23,11 @@ const DoctorCard = function DoctorCard() {
   return (
     <>
       {data.doctors.map(doctor => (
-        <div style={{ padding: '16px' }}>
-          <h2>{doctor.name}</h2>
-          <p>{doctor.provider}</p>
+        <div
+          key={`${doctor.instId}-${doctor.name}`}
+          style={{ padding: '16px' }}
+        >
+          <Info doctor={doctor} />
         </div>
       ))}
     </>
