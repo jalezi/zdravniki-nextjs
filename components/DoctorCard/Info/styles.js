@@ -136,5 +136,5 @@ export const AvailabilityText = styled.span`
   letter-spacing: 0px;
   color: inherit;
   white-space: nowrap;
-  opacity: 0.56;
+  color: #000000aa;
 `;
