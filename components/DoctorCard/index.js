@@ -18,12 +18,16 @@ const DoctorCard = function DoctorCard() {
     return <Error statusCode={500} url={process.env.PUBLIC_URL} />;
   }
 
-  const doctor = data.doctors[0];
-
+  // Zrnić Milko has two entries in case i would need doctor with multiple entries
   return (
-    <div>
-      <h2>{doctor?.doctor}</h2>
-    </div>
+    <>
+      {data.doctors.map(doctor => (
+        <div style={{ padding: '16px' }}>
+          <h2>{doctor.name}</h2>
+          <p>{doctor.provider}</p>
+        </div>
+      ))}
+    </>
   );
 };
 export default DoctorCard;

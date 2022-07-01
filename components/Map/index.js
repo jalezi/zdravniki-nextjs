@@ -17,16 +17,17 @@ import { DoctorMarker } from './Markers';
 const withMap = function withMap(Component) {
   const DoctorsMap = function DoctorsMap({ doctors }) {
     const markers = doctors?.map(doctor => {
-      const key = doctor.doctor + doctor.inst_id + Math.random() * Date.now();
+      const key = doctor.name + doctor.instId + Math.random() * Date.now();
       const ref = createRef();
       const accepts = doctor.accepts_override || doctor.accepts;
+      const { geoLocation, name } = doctor;
       return (
         <DoctorMarker
           key={key}
           ref={ref}
           accepts={accepts}
-          center={[parseFloat(doctor.lat), parseFloat(doctor.lon)]}
-          Popup={<Popup>{doctor.doctor}</Popup>}
+          center={geoLocation}
+          Popup={<Popup>{name}</Popup>}
         />
       );
     });

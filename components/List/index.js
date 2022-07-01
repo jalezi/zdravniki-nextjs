@@ -23,8 +23,8 @@ const List = function List({ doctorGroups }) {
             <Styled.HeadingBase as="h2">{letter}</Styled.HeadingBase>
             <ul>
               {drGroup.map(dr => (
-                <li key={dr.id_inst + dr.slug}>
-                  <a href={`/gp/${dr.slug}`}>{dr.doctor}</a>
+                <li key={dr.instId + dr.nameSlug}>
+                  <a href={`/gp/${dr.nameSlug}`}>{dr.name}</a>
                 </li>
               ))}
             </ul>

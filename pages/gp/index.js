@@ -59,7 +59,7 @@ export default function Gp({ url, doctors, updatedAt }) {
     // ? use onErrorRetry
   });
 
-  const sortedDoctors = data.doctors.sort(sortByField('doctor'));
+  const sortedDoctors = data.doctors.sort(sortByField('name'));
 
   if (error) {
     // TODO use some kind of logger for error.status
@@ -69,7 +69,7 @@ export default function Gp({ url, doctors, updatedAt }) {
   const { title, description } = tCommon('head', { returnObjects: true });
 
   const groupedByLetter = sortedDoctors.reduce((acc, doctor) => {
-    const firstLetter = doctor.doctor.charAt(0).toUpperCase();
+    const firstLetter = doctor.name.charAt(0).toUpperCase();
 
     if (!acc[firstLetter]) {
       acc[firstLetter] = [];

@@ -70,30 +70,6 @@ export const InstitutionFromCsvPropType = PropTypes.exact({
   website: PropTypes.string,
 });
 
-export const DoctorPropType = PropTypes.shape({
-  doctor: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  id_inst: PropTypes.string.isRequired,
-  accepts: PropTypes.string.isRequired,
-  availability: PropTypes.string.isRequired,
-  load: PropTypes.string.isRequired,
-  date_overide: PropTypes.string,
-  note_overide: PropTypes.string,
-  accepts_overide: PropTypes.string,
-  availability_overide: PropTypes.string,
-  phone: PropTypes.string.isRequired,
-  website: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  orderform: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
-  post: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  municipalityPart: PropTypes.string.isRequired,
-  lat: PropTypes.string.isRequired,
-  lon: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
-});
-
 export const AcceptsPropType = PropTypes.oneOf(['y', 'n']);
 
 export const GeoLocationType = PropTypes.oneOfType([
@@ -104,3 +80,27 @@ export const GeoLocationType = PropTypes.oneOfType([
     alt: PropTypes.number,
   }),
 ]);
+
+export const DoctorPropType = PropTypes.exact({
+  accepts: AcceptsPropType.isRequired,
+  acceptsOverride: PropTypes.string.isRequired,
+  acceptsZZZS: PropTypes.string.isRequired,
+  availability: PropTypes.string.isRequired,
+  availabilityOverride: PropTypes.string,
+  availabilityZZZS: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  fullAddress: PropTypes.string.isRequired,
+  geoLocation: GeoLocationType.isRequired,
+  instId: PropTypes.string.isRequired,
+  load: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  nameSlug: PropTypes.string.isRequired,
+  note: PropTypes.string,
+  orderForm: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  provider: PropTypes.string.isRequired,
+  searchAddress: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  updatedAt: PropTypes.string,
+  website: PropTypes.string.isRequired,
+});
