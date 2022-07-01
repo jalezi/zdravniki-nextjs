@@ -5,16 +5,24 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
 import useSWR from 'swr';
 
-import Doctors from '../../components/Doctors';
-import Filters from '../../components/Filters';
-import { ToggleProvider } from '../../context/toggleContext';
-import { ToggleFiltersProvider } from '../../context/toggleFiltersContext';
-import * as Styled from '../../layouts/HomeLayout/styles';
 import { getDoctorData, sortByField } from '../../lib';
 import { DoctorPropType } from '../../types';
 
+const Doctors = dynamic(() => import('../../components/Doctors'));
 const Error = dynamic(() => import('../_error'));
+const Filters = dynamic(() => import('../../components/Filters'));
 const HomeLayout = dynamic(() => import('../../layouts/HomeLayout'));
+const MapContainer = dynamic(() =>
+  import('../../layouts/HomeLayout/styles').then(mod => mod.MapContainer)
+);
+const ToggleProvider = dynamic(() =>
+  import('../../context/toggleContext').then(mod => mod.ToggleProvider)
+);
+const ToggleFiltersProvider = dynamic(() =>
+  import('../../context/toggleFiltersContext').then(
+    mod => mod.ToggleFiltersProvider
+  )
+);
 
 export async function getStaticProps({ locale }) {
   if (locale === 'default') {
@@ -82,13 +90,13 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   return (
     <HomeLayout title={title} description={description} url={url}>
-      <Styled.MapContainer>
+      <MapContainer>
         {data.doctors.length === 0 ? (
           <div>Loading...</div>
         ) : (
           <MapWithNoSSR doctors={sortedDoctors} />
         )}
-      </Styled.MapContainer>
+      </MapContainer>
       <ToggleProvider initialValue={false}>
         <ToggleFiltersProvider
           initialValue={{
