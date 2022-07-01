@@ -44,6 +44,7 @@ const theme = {
     acceptsY: '#95C83F',
     acceptsDarkY: '#81B130',
     acceptsN: '#DC3435',
+    address: '#6C7074', // nickel
   },
 
   BUTTONS: {

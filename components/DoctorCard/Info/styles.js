@@ -73,6 +73,7 @@ export const Provider = styled.p`
 `;
 
 export const Address = styled.address`
+  color: ${({ theme }) => theme.CARDS.address};
   letter-spacing: 0px;
   font-weight: 400;
   font-size: 0.75rem;
