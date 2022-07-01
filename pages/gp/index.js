@@ -76,18 +76,6 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   const { title, description } = tCommon('head', { returnObjects: true });
 
-  const groupedByLetter = sortedDoctors.reduce((acc, doctor) => {
-    const firstLetter = doctor.name.charAt(0).toUpperCase();
-
-    if (!acc[firstLetter]) {
-      acc[firstLetter] = [];
-    }
-
-    acc[firstLetter].push(doctor);
-
-    return acc;
-  }, {});
-
   return (
     <HomeLayout title={title} description={description} url={url}>
       <MapContainer>
@@ -107,7 +95,7 @@ export default function Gp({ url, doctors, updatedAt }) {
           }}
         >
           <Filters />
-          <Doctors doctorGroups={groupedByLetter} />
+          <Doctors doctors={sortedDoctors} />
         </ToggleFiltersProvider>
       </ToggleProvider>
     </HomeLayout>

@@ -1,47 +1,44 @@
-import Link from 'next/link';
-
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
-import { toPercent } from '../../lib/helpers';
 import { DoctorPropType } from '../../types';
-import { PhoneBigIcon, PhoneNoneBigIcon } from '../Shared/Icons';
-import Accepts from './Accepts';
-import CircleChart from './CircleChart';
+import Info from '../DoctorCard/Info';
 import * as Styled from './styles';
 
 const DoctorCards = function DoctorCards({ doctors }) {
-  const drJsx = dr => (
-    <Styled.InfoContainer as="article" key={dr.name + dr.instId}>
-      <Styled.InfoContent>
-        <Styled.Name as="h3">
-          <Link href={`/gp/${dr.nameSlug}`}>{dr.name}</Link>
-        </Styled.Name>
-        <Styled.Provider>{dr.provider}</Styled.Provider>
-        <Styled.Address>{dr.fullAddress}</Styled.Address>
-        <Styled.InfoSubContent>
-          <Styled.AcceptsContainer>
-            <Accepts accepts={dr.accepts} />
-          </Styled.AcceptsContainer>
-          <CircleChart size="26px" percent={dr.availability} />
-          <Styled.AvailabilityText>
-            {toPercent(dr.availability)}
-          </Styled.AvailabilityText>
-        </Styled.InfoSubContent>
-      </Styled.InfoContent>
-      <Styled.InfoActions>
-        <Styled.IconButtonBase>E</Styled.IconButtonBase>
-        <Styled.IconButtonBase
-          as={dr.phone ? 'a' : 'button'}
-          href={dr.phone ? `tel:${dr.phone}` : undefined}
-          phone={dr.phone}
-          disabled={dr.phone ? undefined : true}
-        >
-          {dr.phone ? <PhoneBigIcon /> : <PhoneNoneBigIcon />}
-        </Styled.IconButtonBase>
-      </Styled.InfoActions>
-    </Styled.InfoContainer>
+  const { t: tMap } = useTranslation('map');
+
+  const drJsx = dr => <Info doctor={dr} />;
+
+  const groupedByLetter = doctors.reduce((acc, doctor) => {
+    const firstLetter = doctor.name.charAt(0).toUpperCase();
+
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = [];
+    }
+
+    acc[firstLetter].push(doctor);
+
+    return acc;
+  }, {});
+
+  const count = doctors.length;
+
+  return (
+    <>
+      <Styled.Header>
+        <span>{tMap('totalResults', { count })}</span>
+      </Styled.Header>
+      <Styled.DoctorsContainer>
+        {Object.entries(groupedByLetter).map(([letter, drGroup]) => (
+          <section key={letter}>
+            <Styled.HeadingBase as="h2">{letter}</Styled.HeadingBase>
+            {drGroup.map(drJsx)}
+          </section>
+        ))}
+      </Styled.DoctorsContainer>
+    </>
   );
-  return <>{doctors.map(drJsx)}</>;
 };
 
 DoctorCards.propTypes = {
