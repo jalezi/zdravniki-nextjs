@@ -44,4 +44,6 @@ export const HeadingBase = styled.div`
   font-size: 0.875rem;
   line-height: 0.875rem;
   font-weight: 500;
+
+  z-index: 1;
 `;

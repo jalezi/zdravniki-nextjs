@@ -2,6 +2,7 @@ import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 import { DoctorPropType } from '../../types';
+import DoctorCards from '../DoctorCards';
 import * as Styled from './styles';
 
 const List = function List({ doctorGroups }) {
@@ -21,13 +22,7 @@ const List = function List({ doctorGroups }) {
         {Object.entries(doctorGroups).map(([letter, drGroup]) => (
           <section key={letter}>
             <Styled.HeadingBase as="h2">{letter}</Styled.HeadingBase>
-            <ul>
-              {drGroup.map(dr => (
-                <li key={dr.instId + dr.nameSlug}>
-                  <a href={`/gp/${dr.nameSlug}`}>{dr.name}</a>
-                </li>
-              ))}
-            </ul>
+            <DoctorCards doctors={drGroup} />
           </section>
         ))}
       </Styled.DoctorsContainer>

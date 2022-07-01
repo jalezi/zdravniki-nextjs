@@ -31,6 +31,8 @@ const DoctorCards = function DoctorCards({ doctors }) {
       <Styled.InfoActions>
         <Styled.IconButtonBase>E</Styled.IconButtonBase>
         <Styled.IconButtonBase
+          as={dr.phone ? 'a' : 'button'}
+          href={dr.phone ? `tel:${dr.phone}` : undefined}
           phone={dr.phone}
           disabled={dr.phone ? undefined : true}
         >
