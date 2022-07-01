@@ -80,9 +80,10 @@ export const Address = styled.address`
   line-height: 0.75rem;
 `;
 
-export const IconButtonBase = styled.button.attrs(({ type, disabled }) => ({
+export const IconButtonBase = styled.button.attrs(({ type, phone }) => ({
   type: type || 'button',
-  'aria-label': disabled ? 'Disabled' : 'Click to call',
+  'aria-label': phone ? 'Click to call' : 'Disabled',
+  'aria-disabled': !phone,
 }))`
   display: flex;
   justify-content: center;
@@ -92,8 +93,8 @@ export const IconButtonBase = styled.button.attrs(({ type, disabled }) => ({
   width: 40px;
   cursor: pointer;
 
-  &:disabled {
-    cursor: initial;
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
     opacity: 0.3;
   }
 

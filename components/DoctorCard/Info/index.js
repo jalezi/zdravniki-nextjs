@@ -37,7 +37,6 @@ const Info = forwardRef(({ doctor }, ref) => (
         as={doctor.phone ? 'a' : 'button'}
         href={doctor.phone ? `tel:${doctor.phone}` : undefined}
         phone={doctor.phone}
-        disabled={doctor.phone ? undefined : true}
       >
         {doctor.phone ? <PhoneBigIcon /> : <PhoneNoneBigIcon />}
       </Styled.IconButtonBase>
