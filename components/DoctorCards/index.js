@@ -38,7 +38,6 @@ const DoctorCards = function DoctorCards({ doctors }) {
   });
 
   const lastBookElementRef = useCallback(
-    // (*)
     node => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver(entries => {
