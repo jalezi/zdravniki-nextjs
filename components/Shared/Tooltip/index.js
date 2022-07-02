@@ -1,6 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
+import * as Styled from './styles';
+
 export const HeadQuotient = function HeadQuotient({
   load,
   note,
@@ -10,51 +12,49 @@ export const HeadQuotient = function HeadQuotient({
   const { t: tCommon } = useTranslation('common');
 
   return (
-    <div>
-      <p>{tCommon('doctor.headQuotient')}</p>
-      <p>{parseFloat(load)}</p>
+    <Styled.HeadQuotientContainer>
+      <Styled.P>{tCommon('doctor.headQuotient')}</Styled.P>
+      <Styled.Load>{parseFloat(load)}</Styled.Load>
       {hasOverride && (
         <>
-          <br />
-          <div>
-            {note && <p>{note}</p>}
-            {date && (
-              <p>
-                {tCommon('doctor.changedOn')} {date}
-              </p>
-            )}
-          </div>
+          <Styled.TooltipDivider />
+          {note && <Styled.P>{note}</Styled.P>}
+          {date && (
+            <Styled.P>
+              {tCommon('doctor.changedOn')} {date}
+            </Styled.P>
+          )}
         </>
       )}
-    </div>
+    </Styled.HeadQuotientContainer>
   );
 };
 
 HeadQuotient.defaultProps = {
+  date: undefined,
   hasOverride: undefined,
+  note: undefined,
 };
 
 HeadQuotient.propTypes = {
-  load: PropTypes.string.isRequired,
-  note: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(undefined)])
-    .isRequired,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(undefined)])
-    .isRequired,
+  date: PropTypes.string,
   hasOverride: PropTypes.bool,
+  load: PropTypes.string.isRequired,
+  note: PropTypes.string,
 };
 
 export const Availability = function Availability({ date, hasOverride }) {
   const { t: tCommon } = useTranslation('common');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <p>{tCommon('doctor.doctorAvailability')}</p>
+    <div>
+      <Styled.P>{tCommon('doctor.doctorAvailability')}</Styled.P>
       {hasOverride && (
         <>
-          <br />
-          <p>
+          <Styled.TooltipDivider />
+          <Styled.P>
             {tCommon('doctor.changedOn')} {date}
-          </p>
+          </Styled.P>
         </>
       )}
     </div>
@@ -69,4 +69,18 @@ Availability.propTypes = {
 Availability.defaultProps = {
   date: undefined,
   hasOverride: undefined,
+};
+
+export const Phone = function Phone({ phone }) {
+  const { t: tCommon } = useTranslation('common');
+
+  return <Styled.P>{phone || tCommon('doctorCard.noPhone')}</Styled.P>;
+};
+
+Phone.propTypes = {
+  phone: PropTypes.string,
+};
+
+Phone.defaultProps = {
+  phone: undefined,
 };

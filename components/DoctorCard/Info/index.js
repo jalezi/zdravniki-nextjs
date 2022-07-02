@@ -4,18 +4,16 @@ import { useRouter } from 'next/router';
 import { forwardRef } from 'react';
 
 import Tooltip from '@material-ui/core/Tooltip';
-import { useTranslation } from 'next-i18next';
 
 import { toPercent, formatDateToLocale } from '../../../lib/helpers';
 import { DoctorPropType } from '../../../types';
 import { PhoneBigIcon, PhoneNoneBigIcon } from '../../Shared/Icons';
-import { Availability, HeadQuotient } from '../../Shared/Tooltip';
+import { Availability, HeadQuotient, Phone } from '../../Shared/Tooltip';
 import Accepts from '../Accepts';
 import CircleChart from '../CircleChart';
 import * as Styled from './styles';
 
 const Info = forwardRef(({ doctor }, ref) => {
-  const { t: tCommon } = useTranslation('common');
   const { locale } = useRouter();
 
   const hasAcceptsOverride =
@@ -78,7 +76,7 @@ const Info = forwardRef(({ doctor }, ref) => {
       <Styled.InfoActions>
         <Styled.IconButtonBase ariaLabel="More">E</Styled.IconButtonBase>
         <Tooltip
-          title={doctor.phone ? doctor.phone : tCommon('doctorCard.noPhone')}
+          title={<Phone phone={doctor.phone} />}
           leaveTouchDelay={3000}
           enterTouchDelay={50}
         >
