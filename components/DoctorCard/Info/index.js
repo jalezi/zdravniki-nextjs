@@ -1,48 +1,101 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { forwardRef } from 'react';
 
-import { toPercent } from '../../../lib/helpers';
+import Tooltip from '@material-ui/core/Tooltip';
+import { useTranslation } from 'next-i18next';
+
+import { toPercent, formatDateToLocale } from '../../../lib/helpers';
 import { DoctorPropType } from '../../../types';
 import { PhoneBigIcon, PhoneNoneBigIcon } from '../../Shared/Icons';
+import { Availability, HeadQuotient } from '../../Shared/Tooltip';
 import Accepts from '../Accepts';
 import CircleChart from '../CircleChart';
 import * as Styled from './styles';
 
-const Info = forwardRef(({ doctor }, ref) => (
-  <Styled.InfoContainer
-    ref={ref}
-    as="article"
-    key={doctor.name + doctor.instId}
-  >
-    <Styled.InfoContent>
-      <Styled.Name as="h3">
-        <Link href={`/gp/${doctor.nameSlug}`}>{doctor.name}</Link>
-      </Styled.Name>
-      <Styled.Provider>{doctor.provider}</Styled.Provider>
-      <Styled.Address>{doctor.fullAddress}</Styled.Address>
-      <Styled.InfoSubContent>
-        <Styled.AcceptsContainer>
-          <Accepts accepts={doctor.accepts} />
-        </Styled.AcceptsContainer>
-        <CircleChart size="26px" percent={doctor.availability} />
-        <Styled.AvailabilityText>
-          {toPercent(doctor.availability)}
-        </Styled.AvailabilityText>
-      </Styled.InfoSubContent>
-    </Styled.InfoContent>
-    <Styled.InfoActions>
-      <Styled.IconButtonBase>E</Styled.IconButtonBase>
-      <Styled.IconButtonBase
-        as={doctor.phone ? 'a' : 'button'}
-        href={doctor.phone ? `tel:${doctor.phone}` : undefined}
-        phone={doctor.phone}
-      >
-        {doctor.phone ? <PhoneBigIcon /> : <PhoneNoneBigIcon />}
-      </Styled.IconButtonBase>
-    </Styled.InfoActions>
-  </Styled.InfoContainer>
-));
+const Info = forwardRef(({ doctor }, ref) => {
+  const { t: tCommon } = useTranslation('common');
+  const { locale } = useRouter();
+
+  const hasAcceptsOverride =
+    doctor.acceptsOverride || doctor.note ? true : undefined;
+  const hasAvailabilityOverride = doctor.availabilityOverride
+    ? true
+    : undefined;
+  const updatedAt =
+    doctor.updatedAt && formatDateToLocale(doctor.updatedAt, locale);
+
+  return (
+    <Styled.InfoContainer
+      ref={ref}
+      as="article"
+      key={doctor.name + doctor.instId}
+    >
+      <Styled.InfoContent>
+        <Styled.Name as="h3">
+          <Link href={`/gp/${doctor.nameSlug}`}>{doctor.name}</Link>
+        </Styled.Name>
+        <Styled.Provider>{doctor.provider}</Styled.Provider>
+        <Styled.Address>{doctor.fullAddress}</Styled.Address>
+        <Styled.InfoSubContent>
+          <Tooltip
+            title={
+              <HeadQuotient
+                accepts={doctor.accepts}
+                date={updatedAt}
+                hasOverride={hasAcceptsOverride}
+                load={doctor.load}
+                note={doctor.note}
+              />
+            }
+            leaveTouchDelay={3000}
+            enterTouchDelay={50}
+          >
+            <Styled.AcceptsContainer tabIndex={0}>
+              <Accepts accepts={doctor.accepts} />
+            </Styled.AcceptsContainer>
+          </Tooltip>
+          <Tooltip
+            title={
+              <Availability
+                date={updatedAt}
+                hasOverride={hasAvailabilityOverride}
+              />
+            }
+            leaveTouchDelay={3000}
+            enterTouchDelay={50}
+          >
+            <Styled.CirclePercentContainer tabIndex={0}>
+              <CircleChart size="26px" percent={doctor.availability} />
+              <Styled.AvailabilityText>
+                {toPercent(doctor.availability)}
+              </Styled.AvailabilityText>
+            </Styled.CirclePercentContainer>
+          </Tooltip>
+        </Styled.InfoSubContent>
+      </Styled.InfoContent>
+      <Styled.InfoActions>
+        <Styled.IconButtonBase ariaLabel="More">E</Styled.IconButtonBase>
+        <Tooltip
+          title={doctor.phone ? doctor.phone : tCommon('doctorCard.noPhone')}
+          leaveTouchDelay={3000}
+          enterTouchDelay={50}
+        >
+          <Styled.IconButtonBase
+            as={doctor.phone ? 'a' : 'button'}
+            href={doctor.phone ? `tel:${doctor.phone}` : undefined}
+            phone={doctor.phone}
+            ariaLabel={doctor.phone ? 'Click to call' : 'No phone number'}
+            ariaDisabled={!doctor.phone}
+          >
+            {doctor.phone ? <PhoneBigIcon /> : <PhoneNoneBigIcon />}
+          </Styled.IconButtonBase>
+        </Tooltip>
+      </Styled.InfoActions>
+    </Styled.InfoContainer>
+  );
+});
 
 export default Info;
 

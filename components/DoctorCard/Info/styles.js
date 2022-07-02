@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const CirclePercentContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: help;
+`;
+
 export const InfoContainer = styled.div`
   font-size: 1rem;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -80,11 +87,13 @@ export const Address = styled.address`
   line-height: 0.75rem;
 `;
 
-export const IconButtonBase = styled.button.attrs(({ type, phone }) => ({
-  type: type || 'button',
-  'aria-label': phone ? 'Click to call' : 'Disabled',
-  'aria-disabled': !phone,
-}))`
+export const IconButtonBase = styled.button.attrs(
+  ({ type, ariaLabel, ariaDisabled }) => ({
+    type: type || 'button',
+    'aria-label': ariaLabel ?? undefined,
+    'aria-disabled': ariaDisabled ?? undefined,
+  })
+)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +140,6 @@ export const AcceptsContainer = styled.div`
 `;
 
 export const AvailabilityText = styled.span`
-  cursor: help;
   font-size: 0.75rem;
   line-height: 1.66;
   font-weight: 700;
