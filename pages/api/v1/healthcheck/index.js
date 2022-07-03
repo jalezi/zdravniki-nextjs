@@ -6,6 +6,7 @@ import {
 } from '../../../../constants/csvURL';
 import getPerformance from '../../../../lib/getPerformance';
 
+// TODO Error handling
 export default async function handler(_req, res) {
   const responses = await Promise.all([
     fetch(DOCTORS_TS_URL),

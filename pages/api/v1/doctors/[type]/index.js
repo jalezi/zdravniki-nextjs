@@ -4,6 +4,7 @@ import { getNowToLocaleString } from '../../../../../lib';
 
 const cache = new Map(DOCTOR_TYPES.map(type => [type, new Map()]));
 
+// TODO Error handling
 export default async function handler(req, res) {
   const { type } = req.query;
   const metadata = { url: req.url, time: getNowToLocaleString() };
