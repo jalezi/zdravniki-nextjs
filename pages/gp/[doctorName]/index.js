@@ -8,6 +8,7 @@ import slugify from 'slugify';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
+import { NEXT_URL } from '../../../config';
 import { DOCTORS_CSV_URL } from '../../../constants/csvURL';
 import { fetchRawCsvAndParse, getDoctorData } from '../../../lib';
 import { DoctorPropType } from '../../../types';
@@ -40,8 +41,6 @@ export async function getStaticProps({ locale, params }) {
     return { notFound: true };
   }
 
-  const { PUBLIC_URL } = process.env;
-
   const slug = params.doctorName;
   const { doctors, updatedAt } = await getDoctorData({
     type: 'gp',
@@ -58,7 +57,7 @@ export async function getStaticProps({ locale, params }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header'])),
       // Will be passed to the page component as props
-      url: PUBLIC_URL,
+      url: NEXT_URL,
       fallback: {
         [`/api/gp/${slug}`]: { doctors, updatedAt },
       },
