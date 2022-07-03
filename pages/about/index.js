@@ -7,13 +7,14 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 
+import { NEXT_URL } from '../../config';
+
 const LanguagePageMDX = dynamic(() =>
   import('../../components/LanguagePageMDX')
 );
 const MDXLayout = dynamic(() => import('../../layouts/MDXLayout'));
 
 export async function getStaticProps({ locale }) {
-  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
   if (locale === 'default') {
     return { notFound: true };
   }
@@ -22,7 +23,7 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'about'])),
       // Will be passed to the page component as props
-      url: PUBLIC_URL,
+      url: NEXT_URL,
     },
   };
 }

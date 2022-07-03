@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
 import useSWR from 'swr';
 
+import { NEXT_URL } from '../../config';
 import { getDoctorData, sortByField } from '../../lib';
 import { DoctorPropType } from '../../types';
 
@@ -29,14 +30,13 @@ export async function getStaticProps({ locale }) {
     return { notFound: true };
   }
 
-  const { PUBLIC_URL } = process.env;
   const { updatedAt } = await getDoctorData({ type: 'gp' });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
       // Will be passed to the page component as props
-      url: PUBLIC_URL,
+      url: NEXT_URL,
       doctors: [],
       updatedAt,
     },

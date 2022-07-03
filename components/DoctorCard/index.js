@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import useSWR from 'swr';
 
+import { NEXT_URL } from '../../config';
 import Error from '../../pages/_error';
 import Info from './Info';
 
@@ -16,7 +17,7 @@ const DoctorCard = function DoctorCard() {
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={process.env.PUBLIC_URL} />;
+    return <Error statusCode={500} url={NEXT_URL} />;
   }
 
   // Zrnić Milko has two entries in case i would need doctor with multiple entries

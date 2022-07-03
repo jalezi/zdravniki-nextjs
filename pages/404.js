@@ -6,14 +6,13 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 
+import { NEXT_URL } from '../config';
 import * as Styled from '../layouts/ErrorLayout/styles';
 import image from '../public/doctor-404.png';
 
 const ErrorLayout = dynamic(() => import('../layouts/ErrorLayout'));
 
 export async function getStaticProps({ locale }) {
-  const PUBLIC_URL = process.env.PUBLIC_URL ?? null;
-
   return {
     props: {
       ...(await serverSideTranslations(locale, [
@@ -22,7 +21,7 @@ export async function getStaticProps({ locale }) {
         'pageNotFound',
       ])),
       // Will be passed to the page component as props
-      url: PUBLIC_URL,
+      url: NEXT_URL,
     },
   };
 }

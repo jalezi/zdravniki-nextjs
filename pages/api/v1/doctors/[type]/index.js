@@ -1,3 +1,4 @@
+import { NEXT_URL } from '../../../../../config';
 import { DOCTOR_TYPES } from '../../../../../constants/common';
 import { DOCTORS_TS_URL } from '../../../../../constants/csvURL';
 import { getNowToLocaleString } from '../../../../../lib';
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = await fetch(`${process.env.PUBLIC_URL}/api/v1/doctors`);
+    const response = await fetch(`${NEXT_URL}/api/v1/doctors`);
     const { data } = await response.json();
     const doctors = data.filter(doctor => doctor.type === type);
 
