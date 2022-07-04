@@ -6,6 +6,7 @@ import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider } from 'styled-components';
 
 import { theme } from '../constants/theme';
+import nextI18NextConfig from '../next-i18next.config';
 
 import '../styles/globals.css';
 
@@ -26,4 +27,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp, nextI18NextConfig);

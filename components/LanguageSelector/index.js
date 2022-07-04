@@ -27,7 +27,7 @@ export default function LanguageSelector() {
     .map(lng => ({ value: lng, label: LANGUAGES_MAP[lng] }));
 
   const onSubmit = data => {
-    router.push(router.pathname, router.pathname, { locale: data.lngSelector });
+    router.push(router.pathname, router.asPath, { locale: data.lngSelector });
   };
 
   const onLngChange = option => {

@@ -24,6 +24,8 @@ const Info = forwardRef(({ doctor }, ref) => {
   const updatedAt =
     doctor.updatedAt && formatDateToLocale(doctor.updatedAt, locale);
 
+  // see Link dynamic locale: https://github.com/isaachinman/next-i18next/issues/413#issuecomment-579284859
+
   return (
     <Styled.InfoContainer
       ref={ref}
@@ -32,7 +34,15 @@ const Info = forwardRef(({ doctor }, ref) => {
     >
       <Styled.InfoContent>
         <Styled.Name as="h3">
-          <Link href={`/gp/${doctor.nameSlug}`}>{doctor.name}</Link>
+          <Link
+            href={{
+              pathname: '/gp/[doctorName]',
+              query: { doctorName: doctor.nameSlug },
+            }}
+            as={`/gp/${doctor.nameSlug}`}
+          >
+            {doctor.name}
+          </Link>
         </Styled.Name>
         <Styled.Provider>{doctor.provider}</Styled.Provider>
         <Styled.Address>{doctor.fullAddress}</Styled.Address>

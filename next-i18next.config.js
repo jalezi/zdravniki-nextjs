@@ -13,6 +13,6 @@ module.exports = {
       escapeValue: false, // not needed for react as it escapes by default
     },
     supportedLngs: ['sl', 'en', 'it'],
-    preload: true,
+    serializeConfig: false,
   },
 };

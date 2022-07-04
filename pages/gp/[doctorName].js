@@ -4,18 +4,17 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
-import slugify from 'slugify';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
-import { NEXT_URL } from '../../../config';
-import { DOCTORS_CSV_URL } from '../../../constants/csvURL';
-import { fetchRawCsvAndParse, getDoctorData } from '../../../lib';
-import { DoctorPropType } from '../../../types';
+import { NEXT_URL } from '../../config';
+import { getDoctorData } from '../../lib';
+import nextI18NextConfig from '../../next-i18next.config';
+import { DoctorPropType } from '../../types';
 
-const DoctorCard = dynamic(() => import('../../../components/DoctorCard'));
-const Header = dynamic(() => import('../../../components/Header'));
-const SEO = dynamic(() => import('../../../components/SEO'));
+const DoctorCard = dynamic(() => import('../../components/DoctorCard'));
+const Header = dynamic(() => import('../../components/Header'));
+const SEO = dynamic(() => import('../../components/SEO'));
 
 const StyledMain = styled.main`
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
@@ -26,14 +25,7 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL, { type: 'gp' });
-  const paths = doctors
-    .map(doctor => ({
-      params: { doctorName: slugify(doctor.doctor, { lower: true }) },
-    }))
-    .slice(0, 20); // limit to 20 for performance reasons
-
-  return { paths, fallback: 'blocking' };
+  return { paths: [], fallback: 'blocking' };
 }
 
 export async function getStaticProps({ locale, params }) {
@@ -58,8 +50,12 @@ export async function getStaticProps({ locale, params }) {
       ...(await serverSideTranslations(locale, ['common', 'header'])),
       // Will be passed to the page component as props
       fallback: {
-        [`/api/gp/${slug}`]: { doctors, updatedAt },
+        [`/api/gp/${slug}`]: {
+          doctors,
+          updatedAt,
+        },
       },
+      nextI18NextConfig,
     },
     revalidate: 1,
   };
