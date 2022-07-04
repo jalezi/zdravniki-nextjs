@@ -57,7 +57,6 @@ export async function getStaticProps({ locale, params }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header'])),
       // Will be passed to the page component as props
-      url: NEXT_URL,
       fallback: {
         [`/api/gp/${slug}`]: { doctors, updatedAt },
       },
@@ -76,7 +75,7 @@ const fetcher = async (resource, init) => {
   return data;
 };
 
-export default function DoctorName({ url, fallback }) {
+export default function DoctorName({ fallback }) {
   const { t } = useTranslation('common');
   const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
@@ -87,7 +86,7 @@ export default function DoctorName({ url, fallback }) {
 
   return (
     <>
-      <SEO title={title} description={description} url={url} />
+      <SEO title={title} description={description} url={NEXT_URL} />
       <Header />
       <StyledMain>
         <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
@@ -104,7 +103,6 @@ export default function DoctorName({ url, fallback }) {
 DoctorName.defaultProps = { fallback: undefined };
 
 DoctorName.propTypes = {
-  url: PropTypes.string.isRequired,
   fallback: PropTypes.shape({
     doctors: PropTypes.arrayOf(DoctorPropType),
     updatedAt: PropTypes.number,

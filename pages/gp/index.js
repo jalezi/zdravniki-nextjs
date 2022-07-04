@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -36,7 +37,6 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
       // Will be passed to the page component as props
-      url: NEXT_URL,
       doctors: [],
       updatedAt,
     },
@@ -54,10 +54,12 @@ const fetcher = async fetchUrl => {
   return data;
 };
 
-export default function Gp({ url, doctors, updatedAt }) {
+export default function Gp({ doctors, updatedAt }) {
   const MapWithNoSSR = dynamic(() => import('../../components/Map'), {
     ssr: false,
   });
+
+  const router = useRouter();
 
   const { t: tCommon } = useTranslation('common');
 
@@ -71,13 +73,13 @@ export default function Gp({ url, doctors, updatedAt }) {
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={url} />;
+    return <Error statusCode={500} url={router.url} />;
   }
 
   const { title, description } = tCommon('head', { returnObjects: true });
 
   return (
-    <HomeLayout title={title} description={description} url={url}>
+    <HomeLayout title={title} description={description} url={NEXT_URL}>
       <MapContainer>
         {data.doctors.length === 0 ? (
           <div>Loading...</div>
@@ -103,7 +105,6 @@ export default function Gp({ url, doctors, updatedAt }) {
 }
 
 Gp.propTypes = {
-  url: PropTypes.string.isRequired,
   doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
   updatedAt: PropTypes.number.isRequired,
 };

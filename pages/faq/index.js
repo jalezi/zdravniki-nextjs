@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import { Suspense } from 'react';
 
@@ -37,7 +38,6 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'faq'])),
       // Will be passed to the page component as props
-      url: NEXT_URL,
       data,
       errorCode,
     },
@@ -45,12 +45,13 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-export default function Faq({ url, data, errorCode }) {
+export default function Faq({ data, errorCode }) {
+  const router = useRouter();
   const { t: tCommon } = useTranslation('common');
   const { t: tFaq } = useTranslation('faq');
 
   if (errorCode) {
-    return <Error statusCode={errorCode} url={url} />;
+    return <Error statusCode={errorCode} url={router.url} />;
   }
 
   const title = tFaq('seo.title');
@@ -59,7 +60,7 @@ export default function Faq({ url, data, errorCode }) {
   const headings = tFaq('headings', { returnObjects: true });
 
   return (
-    <MDXLayout title={title} description={description} url={url}>
+    <MDXLayout title={title} description={description} url={NEXT_URL}>
       <Heading>{headings.title}</Heading>
       <Notice>{noticeText}</Notice>
       <Suspense fallback={<WaitingMDX />}>
@@ -70,7 +71,6 @@ export default function Faq({ url, data, errorCode }) {
 }
 
 Faq.propTypes = {
-  url: PropTypes.string.isRequired,
   data: PropTypes.shape({
     faq: PropTypes.arrayOf(PropTypes.shape(QuestionPropType)),
     glossary: PropTypes.arrayOf(PropTypes.shape(GlossaryPropType)),

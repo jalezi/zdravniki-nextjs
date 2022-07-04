@@ -1,12 +1,11 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import PropTypes from 'prop-types';
 
-import { NEXT_URL } from '../config';
 import * as Styled from '../layouts/ErrorLayout/styles';
 import image from '../public/doctor-404.png';
 
@@ -21,19 +20,19 @@ export async function getStaticProps({ locale }) {
         'pageNotFound',
       ])),
       // Will be passed to the page component as props
-      url: NEXT_URL,
     },
   };
 }
 
-export default function Custom404({ url }) {
+export default function Custom404() {
+  const router = useRouter();
   const { t: tCommon } = useTranslation('common');
   const { t: tPageNotFound } = useTranslation('pageNotFound');
   const { description } = tCommon('head', { returnObjects: true });
   const { title } = tPageNotFound('seo', { returnObjects: true });
 
   return (
-    <ErrorLayout title={title} description={description} url={url}>
+    <ErrorLayout title={title} description={description} url={router.url}>
       <h1>{tPageNotFound('h1')}</h1>
       <p>{tPageNotFound('text')}</p>
       <Styled.ImgWrapper>
@@ -47,5 +46,3 @@ export default function Custom404({ url }) {
     </ErrorLayout>
   );
 }
-
-Custom404.propTypes = { url: PropTypes.string.isRequired };

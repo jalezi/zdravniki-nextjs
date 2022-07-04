@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import PropTypes from 'prop-types';
 
 import { NEXT_URL } from '../../config';
 
@@ -23,12 +22,11 @@ export async function getStaticProps({ locale }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'about'])),
       // Will be passed to the page component as props
-      url: NEXT_URL,
     },
   };
 }
 
-export default function About({ url }) {
+export default function About() {
   const router = useRouter();
   const { t: tCommon } = useTranslation('common');
   const { t: tAbout } = useTranslation('about');
@@ -44,10 +42,8 @@ export default function About({ url }) {
   }, []);
 
   return (
-    <MDXLayout title={title} description={description} url={url}>
+    <MDXLayout title={title} description={description} url={NEXT_URL}>
       <LanguagePageMDX slug="about" name={router.locale} />
     </MDXLayout>
   );
 }
-
-About.propTypes = { url: PropTypes.string.isRequired };
