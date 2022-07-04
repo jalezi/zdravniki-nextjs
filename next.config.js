@@ -12,6 +12,9 @@ const withMDX = require('@next/mdx')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    CONTENT_ENDPOINT_BASE: 'https://backend.sledilnik.org/api/v1',
+  },
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   compiler: {
