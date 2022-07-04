@@ -46,7 +46,6 @@ export const MapContainer = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  background: red;
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
   height: 100%;
   z-index: 9;

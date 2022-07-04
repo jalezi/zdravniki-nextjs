@@ -31,13 +31,13 @@ export async function getStaticProps({ locale }) {
     return { notFound: true };
   }
 
-  const { updatedAt } = await getDoctorData({ type: 'gp' });
+  const { doctors, updatedAt } = await getDoctorData({ type: 'gp' });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
       // Will be passed to the page component as props
-      doctors: [],
+      doctors,
       updatedAt,
     },
     revalidate: 1,
@@ -81,11 +81,7 @@ export default function Gp({ doctors, updatedAt }) {
   return (
     <HomeLayout title={title} description={description} url={NEXT_URL}>
       <MapContainer>
-        {data.doctors.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
-          <MapWithNoSSR doctors={sortedDoctors} />
-        )}
+        <MapWithNoSSR doctors={sortedDoctors} />
       </MapContainer>
       <ToggleProvider initialValue={false}>
         <ToggleFiltersProvider
