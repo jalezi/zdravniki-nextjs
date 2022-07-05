@@ -8,7 +8,8 @@ import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
 import { NEXT_URL } from '../../config';
-import { getDoctorData } from '../../lib';
+import { DOCTORS_CSV_URL } from '../../constants/csvURL';
+import { fetchRawCsvAndParse, getDoctorData, toSlug } from '../../lib';
 import nextI18NextConfig from '../../next-i18next.config';
 import { DoctorPropType } from '../../types';
 
@@ -25,7 +26,20 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' };
+  const locales = ['sl', 'en', 'it'];
+  const doctors = await fetchRawCsvAndParse(DOCTORS_CSV_URL, { type: 'gp' });
+  const paths = locales
+    .map(locale =>
+      doctors
+        .slice(0, 1) // limit to 20 for performance reasons
+        .map(doctor => ({
+          params: { doctorName: toSlug(doctor.doctor) },
+          locale,
+        }))
+    )
+    .flat(Infinity);
+
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ locale, params }) {
