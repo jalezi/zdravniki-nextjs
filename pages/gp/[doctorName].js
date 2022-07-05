@@ -39,7 +39,7 @@ export async function getStaticPaths() {
     )
     .flat(Infinity);
 
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps({ locale, params }) {
@@ -89,6 +89,10 @@ export default function DoctorName({ fallback }) {
   const { t } = useTranslation('common');
   const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const goBack = () => {
     router.back();
