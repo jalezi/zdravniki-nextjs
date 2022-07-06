@@ -91,7 +91,9 @@ const Header = function Header({ noAnimation }) {
         <Styled.List>
           <li>
             <Link href="/gp" passHref>
-              <Styled.A className={router.pathname === '/gp' ? 'active' : ''}>
+              <Styled.A
+                className={router.pathname === '/[type]' ? 'active' : ''}
+              >
                 {tHeader('home')}
               </Styled.A>
             </Link>
