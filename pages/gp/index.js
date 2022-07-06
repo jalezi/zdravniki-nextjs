@@ -32,13 +32,13 @@ export async function getStaticProps({ locale }) {
     return { notFound: true };
   }
 
-  const { doctors, updatedAt } = await getDoctorData({ type: 'gp' });
+  const { updatedAt } = await getDoctorData({ type: 'gp' });
 
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
       // Will be passed to the page component as props
-      doctors,
+      doctors: [],
       updatedAt,
     },
     revalidate: 1,
