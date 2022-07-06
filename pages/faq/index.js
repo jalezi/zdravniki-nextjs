@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 
+import SEO from '../../components/SEO';
 import { NEXT_URL } from '../../config';
 import { GlossaryPropType, QuestionPropType } from '../../types';
 
@@ -60,13 +61,16 @@ export default function Faq({ data, errorCode }) {
   const headings = tFaq('headings', { returnObjects: true });
 
   return (
-    <MDXLayout title={title} description={description} url={NEXT_URL}>
-      <Heading>{headings.title}</Heading>
-      <Notice>{noticeText}</Notice>
-      <Suspense fallback={<WaitingMDX />}>
-        <Sections data={data} />
-      </Suspense>
-    </MDXLayout>
+    <>
+      <SEO title={title} description={description} url={NEXT_URL} />
+      <MDXLayout>
+        <Heading>{headings.title}</Heading>
+        <Notice>{noticeText}</Notice>
+        <Suspense fallback={<WaitingMDX />}>
+          <Sections data={data} />
+        </Suspense>
+      </MDXLayout>
+    </>
   );
 }
 

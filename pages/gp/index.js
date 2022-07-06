@@ -10,6 +10,7 @@ import { NEXT_URL } from '../../config';
 import { getDoctorData, sortByField } from '../../lib';
 import { DoctorPropType } from '../../types';
 
+const SEO = dynamic(() => import('../../components/SEO'));
 const Doctors = dynamic(() => import('../../components/Doctors'));
 const Error = dynamic(() => import('../_error'));
 const Filters = dynamic(() => import('../../components/Filters'));
@@ -79,24 +80,27 @@ export default function Gp({ doctors, updatedAt }) {
   const { title, description } = tCommon('head', { returnObjects: true });
 
   return (
-    <HomeLayout title={title} description={description} url={NEXT_URL}>
-      <MapContainer>
-        <MapWithNoSSR doctors={sortedDoctors} />
-      </MapContainer>
-      <ToggleProvider initialValue={false}>
-        <ToggleFiltersProvider
-          initialValue={{
-            drType: 'gp',
-            ageGroup: '',
-            accepts: '',
-            searchValue: '',
-          }}
-        >
-          <Filters />
-          <Doctors doctors={sortedDoctors} />
-        </ToggleFiltersProvider>
-      </ToggleProvider>
-    </HomeLayout>
+    <>
+      <SEO title={title} description={description} url={NEXT_URL} />
+      <HomeLayout>
+        <MapContainer>
+          {router.isReady && <MapWithNoSSR doctors={sortedDoctors} />}
+        </MapContainer>
+        <ToggleProvider initialValue={false}>
+          <ToggleFiltersProvider
+            initialValue={{
+              drType: 'gp',
+              ageGroup: '',
+              accepts: '',
+              searchValue: '',
+            }}
+          >
+            <Filters />
+            <Doctors doctors={sortedDoctors} />
+          </ToggleFiltersProvider>
+        </ToggleProvider>
+      </HomeLayout>
+    </>
   );
 }
 

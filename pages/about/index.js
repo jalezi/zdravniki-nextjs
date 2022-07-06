@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import SEO from '../../components/SEO';
 import { NEXT_URL } from '../../config';
 
 const LanguagePageMDX = dynamic(() =>
@@ -42,8 +43,11 @@ export default function About() {
   }, []);
 
   return (
-    <MDXLayout title={title} description={description} url={NEXT_URL}>
-      <LanguagePageMDX slug="about" name={router.locale} />
-    </MDXLayout>
+    <>
+      <SEO title={title} description={description} url={NEXT_URL} />
+      <MDXLayout>
+        <LanguagePageMDX slug="about" name={router.locale} />
+      </MDXLayout>
+    </>
   );
 }

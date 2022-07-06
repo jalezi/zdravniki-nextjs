@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import Head from 'next/head';
+import dynamic from 'next/dynamic';
 
 import { appWithTranslation } from 'next-i18next';
-import { ThemeProvider } from 'styled-components';
 
-import { theme } from '../constants/theme';
+// import Layout from '../layouts/Layout';
 import nextI18NextConfig from '../next-i18next.config';
 
 import '../styles/globals.css';
@@ -13,17 +12,13 @@ import '../styles/globals.css';
 // ? maybe can be moved to faq
 import 'rc-tooltip/assets/bootstrap.css';
 
+const Layout = dynamic(() => import('../layouts/Layout'));
+
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Head>
-        <style>
-          @import
-          url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap);
-        </style>
-      </Head>
+    <Layout>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </Layout>
   );
 }
 

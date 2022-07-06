@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import SEO from '../components/SEO';
 import * as Styled from '../layouts/ErrorLayout/styles';
 import image from '../public/doctor-404.png';
 
@@ -32,17 +33,20 @@ export default function Custom404() {
   const { title } = tPageNotFound('seo', { returnObjects: true });
 
   return (
-    <ErrorLayout title={title} description={description} url={router.url}>
-      <h1>{tPageNotFound('h1')}</h1>
-      <p>{tPageNotFound('text')}</p>
-      <Styled.ImgWrapper>
-        <Image
-          alt="not found"
-          src={image}
-          srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
-        />
-      </Styled.ImgWrapper>
-      <Link href="/">{tPageNotFound('link')}</Link>
-    </ErrorLayout>
+    <>
+      <SEO title={title} description={description} url={router.url} />
+      <ErrorLayout>
+        <h1>{tPageNotFound('h1')}</h1>
+        <p>{tPageNotFound('text')}</p>
+        <Styled.ImgWrapper>
+          <Image
+            alt="not found"
+            src={image}
+            srcSet="/doctor-404.png 1x,/doctor-404@2x.png 2x"
+          />
+        </Styled.ImgWrapper>
+        <Link href="/">{tPageNotFound('link')}</Link>
+      </ErrorLayout>
+    </>
   );
 }

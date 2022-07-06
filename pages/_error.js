@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
+import SEO from '../components/SEO';
 import ErrorLayout from '../layouts/ErrorLayout';
 
 function Error({ statusCode, url }) {
@@ -14,11 +15,14 @@ function Error({ statusCode, url }) {
   });
 
   return (
-    <ErrorLayout title={seoTitle} description={description} url={url}>
-      <h1>{h1}</h1>
-      <p>{statusCode ? server : client}</p>
-      <Link href="/">{link}</Link>
-    </ErrorLayout>
+    <>
+      <SEO title={seoTitle} description={description} url={url} />
+      <ErrorLayout>
+        <h1>{h1}</h1>
+        <p>{statusCode ? server : client}</p>
+        <Link href="/">{link}</Link>
+      </ErrorLayout>
+    </>
   );
 }
 
