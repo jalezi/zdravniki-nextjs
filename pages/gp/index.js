@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import { useMemo } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
@@ -70,7 +72,10 @@ export default function Gp({ doctors, updatedAt }) {
     // ? use onErrorRetry
   });
 
-  const sortedDoctors = data.doctors.sort(sortByField('name'));
+  const sortedDoctors = useMemo(
+    () => data.doctors.sort(sortByField('name')),
+    [data.doctors]
+  );
 
   if (error) {
     // TODO use some kind of logger for error.status
