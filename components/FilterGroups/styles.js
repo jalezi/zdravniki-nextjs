@@ -24,6 +24,7 @@ export const Summary = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 6px;
   padding: 0 16px;
   min-height: 48px;
   height: 100%;
@@ -33,6 +34,10 @@ export const Summary = styled.div`
   border-top: 1px solid
     ${({ theme, open }) =>
       open ? theme.FILTER.backgroundColor3 : 'transparent'};
+
+  @media only screen and (min-width: 390px) {
+    gap: 8px;
+  }
 
   @media screen and (min-width: 768px) {
     display: none;
@@ -77,6 +82,12 @@ export const VerticalSeparator = styled.hr`
   border-color: rgb(193, 212, 215);
 `;
 
+export const NoTextOverflow = styled.span`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export const Info = styled(FlexBase)`
   opacity: 0.5;
 
@@ -86,7 +97,7 @@ export const Info = styled(FlexBase)`
     white-space: nowrap;
     max-width: 160px;
 
-    @media screen and (min-width: 370px) {
+    @media screen and (min-width: 390px) {
       max-width: initial;
     }
   }
@@ -116,7 +127,7 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
   justify-content: center;
   align-items: center;
   padding: 10px;
-  gap: 8px;
+  gap: 6px;
   height: 100%;
   min-width: 44px;
   border-radius: 25px;
@@ -164,10 +175,8 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
       fill: ${({ theme }) => theme.white};
     }
   }
-`;
 
-export const NoTextOverflow = styled.span`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  @media screen and (min-width: 390px) {
+    gap: 8px;
+  }
 `;
