@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import SEO from '../components/SEO';
 import ErrorLayout from '../layouts/ErrorLayout';
 
-function Error({ statusCode, url }) {
+function Error({ statusCode }) {
   const { t } = useTranslation('common');
   const { description } = t('head', { returnObjects: true });
   const { link, client, server, seoTitle, h1 } = t('_error', {
@@ -16,7 +16,7 @@ function Error({ statusCode, url }) {
 
   return (
     <>
-      <SEO title={seoTitle} description={description} url={url} />
+      <SEO title={seoTitle} description={description} />
       <ErrorLayout>
         <h1>{h1}</h1>
         <p>{statusCode ? server : client}</p>
@@ -35,5 +35,4 @@ export default Error;
 
 Error.propTypes = {
   statusCode: PropTypes.number.isRequired,
-  url: PropTypes.string.isRequired,
 };

@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 
 import { Suspense } from 'react';
 
@@ -8,7 +7,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 
 import SEO from '../../components/SEO';
-import { NEXT_URL } from '../../config';
 import { GlossaryPropType, QuestionPropType } from '../../types';
 
 const Sections = dynamic(() => import('../../components/Sections'), {
@@ -47,12 +45,11 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Faq({ data, errorCode }) {
-  const router = useRouter();
   const { t: tCommon } = useTranslation('common');
   const { t: tFaq } = useTranslation('faq');
 
   if (errorCode) {
-    return <Error statusCode={errorCode} url={router.pathname} />;
+    return <Error statusCode={errorCode} />;
   }
 
   const title = tFaq('seo.title');
@@ -62,7 +59,7 @@ export default function Faq({ data, errorCode }) {
 
   return (
     <>
-      <SEO title={title} description={description} url={NEXT_URL} />
+      <SEO title={title} description={description} />
       <MDXLayout>
         <Heading>{headings.title}</Heading>
         <Notice>{noticeText}</Notice>

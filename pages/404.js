@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -26,7 +25,6 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Custom404() {
-  const router = useRouter();
   const { t: tCommon } = useTranslation('common');
   const { t: tPageNotFound } = useTranslation('pageNotFound');
   const { description } = tCommon('head', { returnObjects: true });
@@ -34,7 +32,7 @@ export default function Custom404() {
 
   return (
     <>
-      <SEO title={title} description={description} url={router.url} />
+      <SEO title={title} description={description} />
       <ErrorLayout>
         <h1>{tPageNotFound('h1')}</h1>
         <p>{tPageNotFound('text')}</p>

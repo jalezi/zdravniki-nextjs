@@ -3,8 +3,11 @@ import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
-const SEO = function SEO({ title, description, url }) {
-  const socialImgUrl = `${url}/share-card-photo.png`;
+import { NEXT_URL } from '../../config';
+
+const SEO = function SEO({ title, description }) {
+  const baseUrl = NEXT_URL.includes('http') ? NEXT_URL : `https://${NEXT_URL}`;
+  const socialImgUrl = `${baseUrl}/share-card-photo.png`;
   const { t } = useTranslation('common');
   const head = t('head', { returnObjects: true });
 
@@ -53,7 +56,6 @@ const SEO = function SEO({ title, description, url }) {
 SEO.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
 };
 
 export default SEO;

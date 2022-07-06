@@ -7,10 +7,10 @@ import { Button } from '../../components/Shared/ScrollToTop/styles';
 import { ChildrenPropType } from '../../types';
 import * as Styled from './styles';
 
-export default function MDXLayout({ children, url, title, description }) {
+export default function MDXLayout({ children, title, description }) {
   return (
     <>
-      <SEO title={title} description={description} url={url} />
+      <SEO title={title} description={description} />
       <Header />
       <Styled.CustomContainer>
         <Styled.StaticPageWrapper>
@@ -23,7 +23,6 @@ export default function MDXLayout({ children, url, title, description }) {
 }
 
 MDXLayout.propTypes = {
-  url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   children: ChildrenPropType.isRequired,

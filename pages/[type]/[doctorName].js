@@ -7,7 +7,6 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
-import { NEXT_URL } from '../../config';
 import { getDoctorData } from '../../lib';
 import nextI18NextConfig from '../../next-i18next.config';
 import { DoctorPropType } from '../../types';
@@ -82,7 +81,7 @@ export default function DoctorName({ fallback }) {
 
   return (
     <>
-      <SEO title={title} description={description} url={NEXT_URL} />
+      <SEO title={title} description={description} />
       <Header />
       <StyledMain>
         <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>

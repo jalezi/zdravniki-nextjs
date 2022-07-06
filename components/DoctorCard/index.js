@@ -18,7 +18,7 @@ const DoctorCard = function DoctorCard() {
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={router.pathname} />;
+    return <Error statusCode={500} />;
   }
 
   // Zrnić Milko has two entries in case i would need doctor with multiple entries

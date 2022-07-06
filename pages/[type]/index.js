@@ -8,7 +8,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
 import useSWR from 'swr';
 
-import { NEXT_URL } from '../../config';
 import { DOCTOR_TYPES } from '../../constants/common';
 import { getDoctorData, sortByField } from '../../lib';
 import { DoctorPropType } from '../../types';
@@ -70,7 +69,7 @@ export default function Gp({ doctors, updatedAt }) {
     ssr: false,
   });
 
-  const { isReady, query, pathname: url } = useRouter();
+  const { isReady, query } = useRouter();
   const { type } = query;
 
   const { t: tCommon } = useTranslation('common');
@@ -88,14 +87,13 @@ export default function Gp({ doctors, updatedAt }) {
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={url} />;
   }
 
   const { title, description } = tCommon('head', { returnObjects: true });
 
   return (
     <>
-      <SEO title={title} description={description} url={NEXT_URL} />
+      <SEO title={title} description={description} />
       <HomeLayout>
         <MapContainer>
           {isReady && <MapWithNoSSR doctors={sortedDoctors} />}

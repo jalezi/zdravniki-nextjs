@@ -7,7 +7,6 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import SEO from '../../components/SEO';
-import { NEXT_URL } from '../../config';
 
 const LanguagePageMDX = dynamic(() =>
   import('../../components/LanguagePageMDX')
@@ -44,7 +43,7 @@ export default function About() {
 
   return (
     <>
-      <SEO title={title} description={description} url={NEXT_URL} />
+      <SEO title={title} description={description} />
       <MDXLayout>
         <LanguagePageMDX slug="about" name={router.locale} />
       </MDXLayout>
