@@ -99,6 +99,7 @@ export const Filter = styled.div`
   height: 48px;
   min-width: 48px;
   max-width: max-content;
+  width: 100%;
   padding: 4px;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.FILTER.backgroundColor3};
