@@ -92,6 +92,7 @@ const Header = function Header({ noAnimation }) {
           <li>
             <Link href="/gp" passHref>
               <Styled.A
+                onClick={onLinkClick}
                 className={router.pathname === '/[type]' ? 'active' : ''}
               >
                 {tHeader('home')}
@@ -100,7 +101,10 @@ const Header = function Header({ noAnimation }) {
           </li>
           <li>
             <Link href="/faq" passHref>
-              <Styled.A className={router.pathname === '/faq' ? 'active' : ''}>
+              <Styled.A
+                onClick={onLinkClick}
+                className={router.pathname === '/faq' ? 'active' : ''}
+              >
                 {tHeader('faq')}
               </Styled.A>
             </Link>
@@ -108,6 +112,7 @@ const Header = function Header({ noAnimation }) {
           <li>
             <Link href="/about" passHref>
               <Styled.A
+                onClick={onLinkClick}
                 className={router.pathname === '/about' ? 'active' : ''}
               >
                 {tHeader('about')}
