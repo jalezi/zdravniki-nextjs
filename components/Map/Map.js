@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import PropTypes from 'prop-types';
 import { AttributionControl, TileLayer, MapContainer } from 'react-leaflet';
 
@@ -12,7 +14,7 @@ import {
   StylePropType,
 } from '../../types/index';
 
-export function Map({
+const Map = function Map({
   center,
   children,
   maxBounds,
@@ -39,7 +41,7 @@ export function Map({
       {children}
     </MapContainer>
   );
-}
+};
 
 Map.defaultProps = {
   center: MAP.GEO_LOCATION.SL_CENTER,
@@ -63,3 +65,5 @@ Map.propTypes = {
   style: StylePropType,
   zoom: PropTypes.number,
 };
+
+export default memo(Map);
