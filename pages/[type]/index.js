@@ -9,6 +9,7 @@ import { PropTypes } from 'prop-types';
 import useSWR from 'swr';
 
 import { NEXT_URL } from '../../config';
+import { DOCTOR_TYPES } from '../../constants/common';
 import { getDoctorData, sortByField } from '../../lib';
 import { DoctorPropType } from '../../types';
 
@@ -29,12 +30,19 @@ const ToggleFiltersProvider = dynamic(() =>
   )
 );
 
-export async function getStaticProps({ locale }) {
+export async function getStaticPaths() {
+  const paths = ['sl', 'en', 'it']
+    .map(locale => DOCTOR_TYPES.map(type => ({ params: { type }, locale })))
+    .flat(Infinity);
+
+  return { paths, fallback: false };
+}
+export async function getStaticProps({ locale, params }) {
   if (locale === 'default') {
     return { notFound: true };
   }
 
-  const { updatedAt } = await getDoctorData({ type: 'gp' });
+  const { updatedAt } = await getDoctorData({ type: params.type });
 
   return {
     props: {
@@ -62,11 +70,12 @@ export default function Gp({ doctors, updatedAt }) {
     ssr: false,
   });
 
-  const router = useRouter();
+  const { isReady, query, pathname: url } = useRouter();
+  const { type } = query;
 
   const { t: tCommon } = useTranslation('common');
 
-  const { data, error } = useSWR('/api/gp', fetcher, {
+  const { data, error } = useSWR(`/api/${type}`, fetcher, {
     fallbackData: { doctors, updatedAt },
     refreshInterval: 30_000,
     // ? use onErrorRetry
@@ -79,7 +88,7 @@ export default function Gp({ doctors, updatedAt }) {
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={router.url} />;
+    return <Error statusCode={500} url={url} />;
   }
 
   const { title, description } = tCommon('head', { returnObjects: true });
@@ -89,7 +98,7 @@ export default function Gp({ doctors, updatedAt }) {
       <SEO title={title} description={description} url={NEXT_URL} />
       <HomeLayout>
         <MapContainer>
-          {router.isReady && <MapWithNoSSR doctors={sortedDoctors} />}
+          {isReady && <MapWithNoSSR doctors={sortedDoctors} />}
         </MapContainer>
         <ToggleProvider initialValue={false}>
           <ToggleFiltersProvider

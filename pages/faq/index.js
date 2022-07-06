@@ -52,7 +52,7 @@ export default function Faq({ data, errorCode }) {
   const { t: tFaq } = useTranslation('faq');
 
   if (errorCode) {
-    return <Error statusCode={errorCode} url={router.url} />;
+    return <Error statusCode={errorCode} url={router.pathname} />;
   }
 
   const title = tFaq('seo.title');

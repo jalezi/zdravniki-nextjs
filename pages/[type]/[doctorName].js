@@ -35,7 +35,7 @@ export async function getStaticProps({ locale, params }) {
 
   const slug = params.doctorName;
   const { doctors, updatedAt } = await getDoctorData({
-    type: 'gp',
+    type: params.type,
     field: 'doctor',
     value: slug,
     isSlug: true,
@@ -50,7 +50,7 @@ export async function getStaticProps({ locale, params }) {
       ...(await serverSideTranslations(locale, ['common', 'header'])),
       // Will be passed to the page component as props
       fallback: {
-        [`/api/gp/${slug}`]: {
+        [`/api/${params.type}/${slug}`]: {
           doctors,
           updatedAt,
         },

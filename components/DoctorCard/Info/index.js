@@ -36,10 +36,10 @@ const Info = forwardRef(({ doctor }, ref) => {
         <Styled.Name as="h3">
           <Link
             href={{
-              pathname: '/gp/[doctorName]',
-              query: { doctorName: doctor.nameSlug },
+              pathname: '/[type]/[doctorName]',
+              query: { doctorName: doctor.nameSlug, type: doctor.type },
             }}
-            as={`/gp/${doctor.nameSlug}`}
+            as={`/${doctor.type}/${doctor.nameSlug}`}
           >
             {doctor.name}
           </Link>

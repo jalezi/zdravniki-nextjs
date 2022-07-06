@@ -9,14 +9,16 @@ const DoctorCard = function DoctorCard() {
   const router = useRouter();
 
   const {
-    query: { doctorName },
+    query: { doctorName, type },
   } = router;
 
-  const { data, error } = useSWR(() => doctorName && `/api/gp/${doctorName}`);
+  const { data, error } = useSWR(
+    () => doctorName && `/api/${type}/${doctorName}`
+  );
 
   if (error) {
     // TODO use some kind of logger for error.status
-    return <Error statusCode={500} url={router.url} />;
+    return <Error statusCode={500} url={router.pathname} />;
   }
 
   // Zrnić Milko has two entries in case i would need doctor with multiple entries
