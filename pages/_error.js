@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Link from 'next/link';
 
 import { useTranslation } from 'next-i18next';
@@ -10,10 +11,14 @@ function Error({ statusCode }) {
   const { t } = useTranslation('common');
   const { description } = t('head', { returnObjects: true });
 
+  console.warn({ description });
+
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
     statusCode,
   });
+
+  console.warn({ link, client, server, seoTitle, h1 });
 
   return (
     <>
