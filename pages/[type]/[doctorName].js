@@ -25,6 +25,68 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
+  // const { doctors } = await getDoctorData({
+  //   type: '',
+  //   field: '',
+  //   value: '',
+  //   isSlug: '',
+  // });
+
+  // const locales = ['sl', 'en', 'it'];
+
+  // const gp = doctors.filter(dr => dr.type === 'gp');
+  // const ped = doctors.filter(dr => dr.type === 'ped');
+  // const gyn = doctors.filter(dr => dr.type === 'gyn');
+  // const den = doctors.filter(dr => dr.type === 'den');
+  // const denS = doctors.filter(dr => dr.type === 'den-s');
+  // const denY = doctors.filter(dr => dr.type === 'den');
+
+  // const pathsGP = locales
+  //   .map(locale => ({
+  //     params: { type: 'gp', doctorName: gp[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+  // const pathsPED = locales
+  //   .map(locale => ({
+  //     params: { type: 'ped', doctorName: ped[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+  // const pathsGYN = locales
+  //   .map(locale => ({
+  //     params: { type: 'gyn', doctorName: gyn[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+  // const pathsDEN = locales
+  //   .map(locale => ({
+  //     params: { type: 'den', doctorName: den[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+  // const pathsDENS = locales
+  //   .map(locale => ({
+  //     params: { type: 'den-s', doctorName: denS[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+  // const pathsDENY = locales
+  //   .map(locale => ({
+  //     params: { type: 'den-y', doctorName: denY[0].nameSlug },
+  //     locale,
+  //   }))
+  //   .flat(Infinity);
+
+  // const paths = [
+  //   ...pathsGP,
+  //   ...pathsPED,
+  //   ...pathsGYN,
+  //   ...pathsDENY,
+  //   ...pathsDENS,
+  //   ...pathsDEN,
+  // ].flat(Infinity);
+
   return {
     paths: [],
     fallback: true,
@@ -74,6 +136,12 @@ export default function DoctorName({ fallback }) {
   const { t } = useTranslation('common');
   const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
+
+  if (!fallback) {
+    // eslint-disable-next-line no-console
+    console.log('FALLBACK NULL');
+    return null;
+  }
 
   if (router.isFallback) {
     return <div>Loading...</div>;
