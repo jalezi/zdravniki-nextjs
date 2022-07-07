@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useTranslation } from 'next-i18next';
+import { useTranslation, withTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 import SEO from '../components/SEO';
@@ -68,7 +68,7 @@ Error.getInitialProps = async ({ res, err }) => {
   };
 };
 
-export default Error;
+export default withTranslation(Error);
 
 Error.propTypes = {
   statusCode: PropTypes.number.isRequired,
