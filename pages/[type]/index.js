@@ -69,14 +69,14 @@ export default function Gp({ doctors, updatedAt }) {
     ssr: false,
   });
 
-  const { isReady, query } = useRouter();
+  const { query } = useRouter();
   const { type } = query;
 
   const { t: tCommon } = useTranslation('common');
 
   const { data, error } = useSWR(`/api/${type}`, fetcher, {
     fallbackData: { doctors, updatedAt },
-    refreshInterval: 30_000,
+    // refreshInterval: 30_000,
     // ? use onErrorRetry
   });
 
@@ -98,7 +98,7 @@ export default function Gp({ doctors, updatedAt }) {
       <SEO title={title} description={description} />
       <HomeLayout>
         <MapContainer>
-          {isReady && <MapWithNoSSR doctors={sortedDoctors} />}
+          <MapWithNoSSR doctors={sortedDoctors} />
         </MapContainer>
         <ToggleProvider initialValue={false}>
           <ToggleFiltersProvider
