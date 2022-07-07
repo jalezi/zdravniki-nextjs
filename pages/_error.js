@@ -27,6 +27,19 @@ function Error({ statusCode }) {
     );
   }
 
+  if (!description) {
+    return (
+      <>
+        <SEO title="Error" description="Error - translations not loaded" />
+        <ErrorLayout>
+          <h1>Error</h1>
+          <p>Translations not loaded!</p>
+          <Link href="/">Home</Link>
+        </ErrorLayout>
+      </>
+    );
+  }
+
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
     statusCode,
