@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import SEO from '../components/SEO';
 import ErrorLayout from '../layouts/ErrorLayout';
+import nextI18NextConfig from '../next-i18next.config';
 
 function Error({ statusCode }) {
   const { t } = useTranslation('common');
@@ -57,11 +58,14 @@ function Error({ statusCode }) {
   );
 }
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = async ({ res, err }) => {
   // eslint-disable-next-line no-nested-ternary
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
 
-  return { statusCode };
+  return {
+    statusCode,
+    nextI18NextConfig,
+  };
 };
 
 export default Error;
