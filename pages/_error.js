@@ -9,6 +9,7 @@ import ErrorLayout from '../layouts/ErrorLayout';
 function Error({ statusCode }) {
   const { t } = useTranslation('common');
   const { description } = t('head', { returnObjects: true });
+
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
     statusCode,
@@ -27,7 +28,9 @@ function Error({ statusCode }) {
 }
 
 Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res.statusCode ?? err.statusCode ?? 404;
+  const statusCode1 = res ? res.statusCode : err;
+  const statusCode = statusCode1 ? err.statusCode : 404;
+
   return { statusCode };
 };
 
