@@ -11,7 +11,7 @@ function Error({ statusCode }) {
   const { t } = useTranslation('common');
   const { description } = t('head', { returnObjects: true });
 
-  console.warn({ description });
+  console.warn({ statusCode, description });
 
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
