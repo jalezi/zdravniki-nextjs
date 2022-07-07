@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
+import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
@@ -150,9 +151,11 @@ export default function DoctorName({ fallback }) {
       <SEO title={title} description={description} />
       <Header />
       <StyledMain>
-        <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
-          <DoctorCard />
-        </SWRConfig>
+        <ErrorBoundary>
+          <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
+            <DoctorCard />
+          </SWRConfig>
+        </ErrorBoundary>
         <button type="button" onClick={goBack} style={{ cursor: 'pointer' }}>
           Nazaj
         </button>

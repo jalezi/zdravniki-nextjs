@@ -11,7 +11,7 @@ function Error({ statusCode }) {
 
   const { description } = t('head', { returnObjects: true });
 
-  if (statusCode && !description) {
+  if (statusCode) {
     return (
       <>
         <SEO
