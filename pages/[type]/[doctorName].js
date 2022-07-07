@@ -10,6 +10,7 @@ import { SWRConfig } from 'swr';
 import { getDoctorData } from '../../lib';
 import nextI18NextConfig from '../../next-i18next.config';
 import { DoctorPropType } from '../../types';
+// import { DOCTOR_TYPES } from '../../constants/common';
 
 const DoctorCard = dynamic(() => import('../../components/DoctorCard'));
 const Header = dynamic(() => import('../../components/Header'));
@@ -24,7 +25,10 @@ const StyledMain = styled.main`
 `;
 
 export async function getStaticPaths() {
-  return { paths: [], fallback: 'blocking' };
+  return {
+    paths: [],
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale, params }) {
@@ -39,10 +43,6 @@ export async function getStaticProps({ locale, params }) {
     value: slug,
     isSlug: true,
   });
-
-  if (!doctors) {
-    return { notFound: true };
-  }
 
   return {
     props: {
@@ -74,6 +74,10 @@ export default function DoctorName({ fallback }) {
   const { t } = useTranslation('common');
   const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   const goBack = () => {
     router.back();
