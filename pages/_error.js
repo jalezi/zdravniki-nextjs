@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-// import Link from 'next/link';
+import Link from 'next/link';
 
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
@@ -12,18 +11,26 @@ function Error({ statusCode }) {
 
   const { description } = t('head', { returnObjects: true });
 
-  if (!description) {
-    return <p>Something went terrible wrong!</p>;
+  if (statusCode && !description) {
+    return (
+      <>
+        <SEO
+          title="Error"
+          description="Error - Something went terrible wrong"
+        />
+        <ErrorLayout>
+          <h1>Error</h1>
+          <p>Something went wrong on server!</p>
+          <Link href="/">Home</Link>
+        </ErrorLayout>
+      </>
+    );
   }
-
-  console.warn({ statusCode, description });
 
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
-    statusCode: `${statusCode}`,
+    statusCode,
   });
-
-  console.warn({ link, client, server, seoTitle, h1 });
 
   return (
     <>
@@ -31,15 +38,13 @@ function Error({ statusCode }) {
       <ErrorLayout>
         <h1>{h1}</h1>
         <p>{statusCode ? server : client}</p>
-        {/* <Link href="/">{link}</Link> */}
+        <Link href="/">{link}</Link>
       </ErrorLayout>
     </>
   );
 }
 
 Error.getInitialProps = ({ res, err }) => {
-  console.warn({ res, err });
-
   // eslint-disable-next-line no-nested-ternary
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
 

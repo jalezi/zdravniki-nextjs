@@ -137,12 +137,6 @@ export default function DoctorName({ fallback }) {
   const { title, description } = t('head', { returnObjects: true });
   const router = useRouter();
 
-  if (!fallback) {
-    // eslint-disable-next-line no-console
-    console.log('FALLBACK NULL');
-    return null;
-  }
-
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
