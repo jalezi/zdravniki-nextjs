@@ -91,6 +91,8 @@ export default function Gp({ doctors, updatedAt }) {
 
   const { title, description } = tCommon('head', { returnObjects: true });
 
+  const [drType, ageGroup = ''] = type.split('-');
+
   return (
     <>
       <SEO title={title} description={description} />
@@ -101,8 +103,8 @@ export default function Gp({ doctors, updatedAt }) {
         <ToggleProvider initialValue={false}>
           <ToggleFiltersProvider
             initialValue={{
-              drType: 'gp',
-              ageGroup: '',
+              drType,
+              ageGroup,
               accepts: '',
               searchValue: '',
             }}
