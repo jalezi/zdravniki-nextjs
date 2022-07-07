@@ -34,8 +34,8 @@ function Error({ statusCode }) {
 
 Error.getInitialProps = ({ res, err }) => {
   console.warn({ res, err });
-  const statusCode1 = res ? res.statusCode : err;
-  const statusCode = statusCode1 ? err.statusCode : 404;
+
+  const statusCode = res?.statusCode ?? err?.statusCode ?? 404;
 
   return { statusCode };
 };
