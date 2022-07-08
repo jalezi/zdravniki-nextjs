@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { useTranslation, withTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
 import { NEXT_URL } from '../../config';
@@ -58,4 +58,4 @@ SEO.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export default withTranslation(SEO);
+export default SEO;
