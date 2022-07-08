@@ -43,7 +43,7 @@ function Error({ statusCode }) {
 
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
-    statusCode,
+    statusCode: statusCode ?? 500,
   });
 
   return (
