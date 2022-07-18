@@ -7,6 +7,7 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
+import { DOCTOR_TYPES } from '../../constants/common';
 import { getDoctorData } from '../../lib';
 import nextI18NextConfig from '../../next-i18next.config';
 import { DoctorPropType } from '../../types';
@@ -32,9 +33,15 @@ export async function getStaticProps({ locale, params }) {
     return { notFound: true };
   }
 
+  const drType = params.type;
+
+  if (!DOCTOR_TYPES.includes(drType)) {
+    return { notFound: true };
+  }
+
   const slug = params.doctorName;
   const { doctors, updatedAt } = await getDoctorData({
-    type: params.type,
+    type: drType,
     field: 'doctor',
     value: slug,
     isSlug: true,
