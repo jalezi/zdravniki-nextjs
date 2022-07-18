@@ -53,7 +53,7 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'header'])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'seo'])),
       // Will be passed to the page component as props
       fallback: {
         [`/api/${params.type}/${slug}`]: {
@@ -78,8 +78,10 @@ const fetcher = async (resource, init) => {
 };
 
 export default function DoctorName({ fallback }) {
-  const { t } = useTranslation('common');
-  const { title, description } = t('head', { returnObjects: true });
+  const { t: tSEO } = useTranslation('seo');
+  const title = tSEO('title.default');
+  const description = tSEO('description');
+
   const router = useRouter();
 
   const goBack = () => {

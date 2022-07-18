@@ -35,7 +35,12 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'header', 'faq'])),
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'header',
+        'faq',
+        'seo',
+      ])),
       // Will be passed to the page component as props
       data,
       errorCode,
@@ -45,15 +50,17 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Faq({ data, errorCode }) {
-  const { t: tCommon } = useTranslation('common');
   const { t: tFaq } = useTranslation('faq');
+  const { t: tSEO } = useTranslation('seo');
 
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
 
-  const title = tFaq('seo.title');
-  const description = tCommon('head.description');
+  const titles = tSEO('title', { returnObjects: true });
+  const title = titles.faq || titles.default;
+  const description = tSEO('description');
+
   const noticeText = tFaq('notice');
   const headings = tFaq('headings', { returnObjects: true });
 

@@ -8,7 +8,7 @@ import ErrorLayout from '../layouts/ErrorLayout';
 
 function Error({ statusCode }) {
   const { t } = useTranslation('common');
-  const { description } = t('head', { returnObjects: true });
+  const { description } = t('seo', { returnObjects: true });
   const { link, client, server, seoTitle, h1 } = t('_error', {
     returnObjects: true,
     statusCode,

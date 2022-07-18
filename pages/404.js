@@ -18,6 +18,7 @@ export async function getStaticProps({ locale }) {
         'common',
         'header',
         'pageNotFound',
+        'seo',
       ])),
       // Will be passed to the page component as props
     },
@@ -25,10 +26,12 @@ export async function getStaticProps({ locale }) {
 }
 
 export default function Custom404() {
-  const { t: tCommon } = useTranslation('common');
   const { t: tPageNotFound } = useTranslation('pageNotFound');
-  const { description } = tCommon('head', { returnObjects: true });
-  const { title } = tPageNotFound('seo', { returnObjects: true });
+  const { t: tSEO } = useTranslation('seo');
+
+  const titles = tSEO('title', { returnObjects: true });
+  const title = titles.pageNotFound || titles.default;
+  const description = tSEO('description');
 
   return (
     <>

@@ -1,0 +1,16 @@
+{
+  "description": "Zdravniki Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o prostih zdravnikih v Sloveniji.",
+  "subtitle": "Zdravniki Sledilnik",
+  "title": {
+    "about": "O projektu",
+    "default": "Zdravniki",
+    "den": "Seznam prostih zobozdravnikov za odrasle",
+    "den-s": "Seznam prostih zobozdravnikov za študente",
+    "den-y": "Seznam prostih zobozdravnikov za mladino",
+    "faq": "Pogosta vprašanja",
+    "gp": "Seznam prostih družinskih zdravnikov",
+    "gyn": "Seznam prostih ginekologov",
+    "pageNotFound": "404: Stran ne obstaja",
+    "ped": "Seznam prostih pediatrov"
+  }
+}

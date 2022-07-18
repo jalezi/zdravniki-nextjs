@@ -68,10 +68,5 @@
     "noPhone": "Phone number not available",
     "showOnMap": "Show on map"
   },
-  "filter": "Filter",
-  "head": {
-    "description": "Doctors tracking - collected, verified, updated, analyzed and reviewed data about available doctors in Slovenia.",
-    "subtitle": "Doctors Tracker",
-    "title": "Doctors"
-  }
+  "filter": "Filter"
 }

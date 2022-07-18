@@ -45,7 +45,12 @@ export async function getStaticProps({ locale, params }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'header', 'map'])),
+      ...(await serverSideTranslations(locale, [
+        'common',
+        'header',
+        'map',
+        'seo',
+      ])),
       // Will be passed to the page component as props
       doctors: [],
       updatedAt,
@@ -72,7 +77,7 @@ export default function Gp({ doctors, updatedAt }) {
   const { query } = useRouter();
   const { type } = query;
 
-  const { t: tCommon } = useTranslation('common');
+  const { t: tSEO } = useTranslation('seo');
 
   const { data, error } = useSWR(`/api/${type}`, fetcher, {
     fallbackData: { doctors, updatedAt },
@@ -89,7 +94,9 @@ export default function Gp({ doctors, updatedAt }) {
     // TODO use some kind of logger for error.status
   }
 
-  const { title, description } = tCommon('head', { returnObjects: true });
+  const titles = tSEO('title', { returnObjects: true });
+  const title = titles[type] || titles.default;
+  const description = tSEO('description');
 
   const [drType, ageGroup = ''] = type.split('-');
 

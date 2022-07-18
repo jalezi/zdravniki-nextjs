@@ -68,10 +68,5 @@
     "noPhone": "Numero telefonico non disponibile",
     "showOnMap": "Visualizza sulla mappa"
   },
-  "filter": "Filtro",
-  "head": {
-    "description": "Monitoraggio dei medici: dati raccolti, verificati, aggiornati, analizzati e rivisti sui medici disponibili in Slovenia.",
-    "subtitle": "Tracciatore di medici",
-    "title": "Medici"
-  }
+  "filter": "Filtro"
 }

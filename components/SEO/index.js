@@ -8,13 +8,13 @@ import { NEXT_URL } from '../../config';
 const SEO = function SEO({ title, description }) {
   const baseUrl = NEXT_URL.includes('http') ? NEXT_URL : `https://${NEXT_URL}`;
   const socialImgUrl = `${baseUrl}/share-card-photo.png`;
-  const { t } = useTranslation('common');
-  const head = t('head', { returnObjects: true });
+  const { t: tSEO } = useTranslation('seo');
+  const subtitle = tSEO('subtitle');
 
   return (
     <Head>
       <title>
-        {title} - {head.subtitle}
+        {title} - {subtitle}
       </title>
       <meta name="description" content={description} />
       <link rel="icon" href="/favicon.ico" />

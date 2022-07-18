@@ -20,7 +20,7 @@ export async function getStaticProps({ locale }) {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'header', 'about'])),
+      ...(await serverSideTranslations(locale, ['common', 'header', 'seo'])),
       // Will be passed to the page component as props
     },
   };
@@ -28,10 +28,10 @@ export async function getStaticProps({ locale }) {
 
 export default function About() {
   const router = useRouter();
-  const { t: tCommon } = useTranslation('common');
-  const { t: tAbout } = useTranslation('about');
-  const title = tAbout('seo.title');
-  const description = tCommon('head.description');
+  const { t: tSEO } = useTranslation('seo');
+  const titles = tSEO('title', { returnObjects: true });
+  const title = titles.about || titles.default;
+  const description = tSEO('description');
 
   useEffect(() => {
     document.querySelectorAll('main a').forEach(el => {
