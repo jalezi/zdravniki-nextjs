@@ -59,14 +59,10 @@ export default async function handler(req, res) {
 
   cache.set(cacheKey, new Map([[ts, doctors]]));
 
-  return res.status(200).json(
-    {
-      data: doctors,
-      slug,
-      success: true,
-      updatedAt: ts,
-      metadata: { ...metadata, cached: false, length: doctors.length },
-    },
-    slug
-  );
+  return res.status(200).json({
+    data: doctors,
+    success: true,
+    updatedAt: ts,
+    metadata: { ...metadata, cached: false, length: doctors.length },
+  });
 }
