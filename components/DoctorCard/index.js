@@ -9,7 +9,7 @@ const DoctorCard = function DoctorCard() {
   const router = useRouter();
 
   const {
-    query: { doctorName, type },
+    query: { doctorName, type, idInst },
   } = router;
 
   const { data, error } = useSWR(
@@ -21,10 +21,15 @@ const DoctorCard = function DoctorCard() {
     return <Error statusCode={500} />;
   }
 
+  const doctors =
+    idInst === undefined
+      ? data.doctors
+      : data.doctors.filter(dr => dr.instId === idInst);
+
   // Zrnić Milko has two entries in case i would need doctor with multiple entries
   return (
     <>
-      {data.doctors.map(doctor => (
+      {doctors.map(doctor => (
         <div
           key={`${doctor.instId}-${doctor.name}`}
           style={{ padding: '16px' }}

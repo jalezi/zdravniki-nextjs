@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { useTranslation } from 'next-i18next';
@@ -7,14 +6,12 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
-import { DOCTOR_TYPES } from '../../constants/common';
-import { getDoctorData } from '../../lib';
-import nextI18NextConfig from '../../next-i18next.config';
-import { DoctorPropType } from '../../types';
-
-const DoctorCard = dynamic(() => import('../../components/DoctorCard'));
-const Header = dynamic(() => import('../../components/Header'));
-const SEO = dynamic(() => import('../../components/SEO'));
+import DoctorCard from '../../../../components/DoctorCard';
+import SEO from '../../../../components/SEO';
+import { DOCTOR_TYPES } from '../../../../constants/common';
+import { getDoctorData } from '../../../../lib';
+import nextI18NextConfig from '../../../../next-i18next.config';
+import { DoctorPropType } from '../../../../types';
 
 const StyledMain = styled.main`
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
@@ -51,13 +48,19 @@ export async function getStaticProps({ locale, params }) {
     return { notFound: true };
   }
 
+  const doctor = doctors.filter(dr => dr.instId === params.idInst);
+
+  if (!doctor) {
+    return { notFound: true };
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'header', 'seo'])),
       // Will be passed to the page component as props
       fallback: {
         [`/api/v1/${params.type}/${slug}`]: {
-          doctors,
+          doctors: doctor,
           updatedAt,
         },
       },
@@ -77,7 +80,7 @@ const fetcher = async (resource, init) => {
   return data;
 };
 
-export default function DoctorName({ fallback }) {
+export default function DoctorNameIdInst({ fallback }) {
   const { t: tSEO } = useTranslation('seo');
   const title = tSEO('title.default');
   const description = tSEO('description');
@@ -91,7 +94,6 @@ export default function DoctorName({ fallback }) {
   return (
     <>
       <SEO title={title} description={description} />
-      <Header />
       <StyledMain>
         <SWRConfig value={{ fallback, fetcher, refreshInterval: 30_000 }}>
           <DoctorCard />
@@ -104,9 +106,9 @@ export default function DoctorName({ fallback }) {
   );
 }
 
-DoctorName.defaultProps = { fallback: undefined };
+DoctorNameIdInst.defaultProps = { fallback: undefined };
 
-DoctorName.propTypes = {
+DoctorNameIdInst.propTypes = {
   fallback: PropTypes.shape({
     doctors: PropTypes.arrayOf(DoctorPropType),
     updatedAt: PropTypes.number,
