@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const response = await fetch(`${NEXT_URL}/api/v1/doctors`);
+  const response = await fetch(`${NEXT_URL}/api/v2/doctors`);
   const { data } = await response.json();
   const doctors = data.filter(doctor => toSlug(doctor.doctor) === slug);
 
