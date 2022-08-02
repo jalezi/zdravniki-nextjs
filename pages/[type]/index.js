@@ -69,7 +69,7 @@ const fetcher = async fetchUrl => {
   return data;
 };
 
-export default function Gp({ doctors, updatedAt }) {
+export default function DoctorsByTpe({ doctors, updatedAt }) {
   const MapWithNoSSR = dynamic(() => import('../../components/Map'), {
     ssr: false,
   });
@@ -125,7 +125,7 @@ export default function Gp({ doctors, updatedAt }) {
   );
 }
 
-Gp.propTypes = {
+DoctorsByTpe.propTypes = {
   doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
   updatedAt: PropTypes.number.isRequired,
 };
