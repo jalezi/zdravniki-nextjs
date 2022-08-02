@@ -1,6 +1,6 @@
 import { NEXT_URL } from '../../../../../../config';
 import { DOCTORS_TS_URL } from '../../../../../../constants/csvURL';
-import { getNowToLocaleString, toSlug } from '../../../../../../lib';
+import { getNowToLocaleString } from '../../../../../../lib';
 
 const cache = new Map();
 
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   const response = await fetch(`${NEXT_URL}/api/v2/doctors`);
   const { data } = await response.json();
   const doctors = data.filter(
-    doctor => toSlug(doctor.doctor) === slug && doctor.id_inst === idInst
+    doctor => doctor.nameSlug === slug && doctor.instId === idInst
   );
 
   if (doctors.length === 0) {
