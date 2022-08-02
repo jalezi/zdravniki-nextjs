@@ -1,4 +1,4 @@
-import { NEXT_URL } from '../../../../../config';
+import { BASE_URL } from '../../../../../config';
 import { DOCTOR_TYPES } from '../../../../../constants/common';
 import { DOCTORS_TS_URL } from '../../../../../constants/csvURL';
 import { getNowToLocaleString } from '../../../../../lib';
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const response = await fetch(`${NEXT_URL}/api/v2/doctors`);
+    const response = await fetch(`${BASE_URL}/api/v2/doctors`);
     const { data } = await response.json();
     const doctors = data.filter(doctor => doctor.type === type);
 
