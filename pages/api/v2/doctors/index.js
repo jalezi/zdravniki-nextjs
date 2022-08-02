@@ -1,7 +1,14 @@
 import Papa from 'papaparse';
 
-import { DOCTORS_CSV_URL, DOCTORS_TS_URL } from '../../../../constants/csvURL';
-import { getNowToLocaleString } from '../../../../lib';
+import {
+  DOCTORS_CSV_URL,
+  DOCTORS_TS_URL,
+  INSTITUTIONS_CSV_URL,
+} from '../../../../constants/csvURL';
+import {
+  populateDoctorWithInstitution,
+  getNowToLocaleString,
+} from '../../../../lib';
 
 const cache = new Map();
 
@@ -27,11 +34,21 @@ export default async function handler(req, res) {
   const result = Papa.parse(text, { header: true });
   const { data } = result;
 
+  const responseInstitutions = await fetch(INSTITUTIONS_CSV_URL);
+  const textInstitutions = await responseInstitutions.text();
+  const resultInstitutions = Papa.parse(textInstitutions, { header: true });
+
+  const { data: institutions } = resultInstitutions;
+
+  const doctorsWithInstitutions = data
+    .filter(dr => dr.doctor) // doctors' csv file has last entry with empty name
+    .map(populateDoctorWithInstitution(institutions));
+
   cache.clear();
-  cache.set(ts, data);
+  cache.set(ts, doctorsWithInstitutions);
 
   return res.status(200).json({
-    data,
+    data: doctorsWithInstitutions,
     success: true,
     updatedAt: ts,
     metadata: { ...metadata, cache: false, length: data.length },
