@@ -1,5 +1,5 @@
-import { DOCTOR_TYPES } from '../../../constants/common';
-import { getDoctorData } from '../../../lib';
+import { DOCTOR_TYPES } from '../../../../constants/common';
+import { getDoctorData } from '../../../../lib';
 
 export default async function handler(req, res) {
   const { query } = req;

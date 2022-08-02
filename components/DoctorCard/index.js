@@ -13,7 +13,7 @@ const DoctorCard = function DoctorCard() {
   } = router;
 
   const { data, error } = useSWR(
-    () => doctorName && `/api/${type}/${doctorName}`
+    () => doctorName && `/api/v1/${type}/${doctorName}`
   );
 
   if (error) {

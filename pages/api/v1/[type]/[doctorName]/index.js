@@ -1,4 +1,4 @@
-import { getDoctorData } from '../../../../lib';
+import { getDoctorData } from '../../../../../lib';
 
 export default async function handler(req, res) {
   const { query } = req;

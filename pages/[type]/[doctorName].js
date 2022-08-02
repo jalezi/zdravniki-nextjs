@@ -56,7 +56,7 @@ export async function getStaticProps({ locale, params }) {
       ...(await serverSideTranslations(locale, ['common', 'header', 'seo'])),
       // Will be passed to the page component as props
       fallback: {
-        [`/api/${params.type}/${slug}`]: {
+        [`/api/v1/${params.type}/${slug}`]: {
           doctors,
           updatedAt,
         },

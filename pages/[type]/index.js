@@ -79,7 +79,7 @@ export default function Gp({ doctors, updatedAt }) {
 
   const { t: tSEO } = useTranslation('seo');
 
-  const { data, error } = useSWR(`/api/${type}`, fetcher, {
+  const { data, error } = useSWR(`/api/v1/${type}`, fetcher, {
     fallbackData: { doctors, updatedAt },
     // refreshInterval: 30_000,
     // ? use onErrorRetry
