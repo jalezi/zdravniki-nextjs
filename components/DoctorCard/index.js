@@ -9,7 +9,7 @@ const DoctorCard = function DoctorCard() {
   const router = useRouter();
 
   const {
-    query: { doctorName, type, idInst },
+    query: { doctorName, type, instId },
   } = router;
 
   const { data, error } = useSWR(
@@ -22,9 +22,9 @@ const DoctorCard = function DoctorCard() {
   }
 
   const doctors =
-    idInst === undefined
+    instId === undefined
       ? data.doctors
-      : data.doctors.filter(dr => dr.instId === idInst);
+      : data.doctors.filter(dr => dr.instId === instId);
 
   // Zrnić Milko has two entries in case i would need doctor with multiple entries
   return (

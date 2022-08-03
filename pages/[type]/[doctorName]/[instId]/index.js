@@ -48,7 +48,7 @@ export async function getStaticProps({ locale, params }) {
     return { notFound: true };
   }
 
-  const doctor = doctors.filter(dr => dr.instId === params.idInst);
+  const doctor = doctors.filter(dr => dr.instId === params.instId);
 
   if (!doctor) {
     return { notFound: true };

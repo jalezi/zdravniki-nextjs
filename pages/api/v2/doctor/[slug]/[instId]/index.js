@@ -10,10 +10,10 @@ const NOT_FOUND_MAP_VALUE = '404 - Not Found';
 
 // TODO Error handling
 export default async function handler(req, res) {
-  const { slug, idInst } = req.query;
+  const { slug, instId } = req.query;
   const metadata = { url: req.url, time: getNowToLocaleString() };
 
-  const cacheKey = `${slug}_${idInst}`;
+  const cacheKey = `${slug}_${instId}`;
 
   const responseTs = await fetch(DOCTORS_TS_URL);
   const ts = await responseTs.json();
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   const response = await fetch(`${BASE_URL}/api/v2/doctors`);
   const { data } = await response.json();
   const doctors = data.filter(
-    doctor => doctor.nameSlug === slug && doctor.instId === idInst
+    doctor => doctor.nameSlug === slug && doctor.instId === instId
   );
 
   if (doctors.length === 0) {
