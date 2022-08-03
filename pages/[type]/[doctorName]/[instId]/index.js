@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { useTranslation } from 'next-i18next';
@@ -6,12 +7,13 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { SWRConfig } from 'swr';
 
-import DoctorCard from '../../../../components/DoctorCard';
-import SEO from '../../../../components/SEO';
 import { DOCTOR_TYPES } from '../../../../constants/common';
 import { getDoctorData } from '../../../../lib';
 import nextI18NextConfig from '../../../../next-i18next.config';
 import { DoctorPropType } from '../../../../types';
+
+const DoctorCard = dynamic(() => import('../../../../components/DoctorCard'));
+const SEO = dynamic(() => import('../../../../components/SEO'));
 
 const StyledMain = styled.main`
   height: calc(100% - ${({ theme }) => theme.mobileHeaderHeight});
