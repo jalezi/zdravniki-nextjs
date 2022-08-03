@@ -96,3 +96,7 @@ export const ACCEPTS_ICON_MAP = {
   y: CheckIcon,
   n: BanIcon,
 };
+
+// Api
+
+export const ALLOWED_HTTP_METHODS = ['GET'];
