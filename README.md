@@ -1,10 +1,34 @@
-# Zdravniki - availbale doctors in Slovenia
+# Zdravniki - availbale doctors in Slovenia ( :construction: - work in progress)
 
-Rewrite of [Zdravniki](https://github.com/sledilnik/zdravniki) with [Next.js](https://nextjs.org/)
+Rewrite of [Zdravniki](https://github.com/sledilnik/zdravniki) with [Next.js](https://nextjs.org/).
+
+You can check it [here](https://zdravniki-nextjs.vercel.app/sl/gp/).
+
+## Develop
+
+For setting up development environment locally run:
+
+1. `yarn install`
 
 ## Data source
 
-See .csv files in the csv/ directory of zdravniki-data repository.
+See .csv files in the [csv/](https://github.com/sledilnik/zdravniki-data/tree/main/csv) directory of [zdravniki-data](https://github.com/sledilnik/zdravniki-data) repository.
+
+## API
+
+### /api/v1
+
+- /api/v1/:type
+- /api/v1/:type/:doctorName
+
+### /api/v2
+
+- /api/v2/doctors
+- /api/v2/doctors/:type
+- /api/v2/doctor/:doctorName
+- /api/v2/doctor/:doctorName/:instId
+- /api/v2/institutions
+- /api/v2/healthcheck
 
 ## Generic Next.js instructions (to be removed or minimized)
 
