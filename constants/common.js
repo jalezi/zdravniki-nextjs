@@ -57,6 +57,7 @@ export const MAP = {
 
 // INSTITUTIONS
 export const DUMMY_INSTITUTION = {
+  id_inst: 'neznan',
   unit: '',
   name: '',
   website: '',
