@@ -1,6 +1,10 @@
 import {
   ALLOWED_HTTP_METHODS,
   DOCTOR_TYPES,
+  RATE_LIMIT_ATTEMPTS,
+  RATE_LIMIT_CACHE_TOKEN,
+  RATE_LIMIT_INTERVAL,
+  RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
 } from '../../../../constants/common';
 import { getDoctorData } from '../../../../lib';
 import {
@@ -8,6 +12,12 @@ import {
   withMethodsGuard,
   withMiddleware,
 } from '../../../../lib/apiMiddlewarePiping';
+import rateLimit from '../../../../lib/rateLimit';
+
+const limiter = rateLimit({
+  interval: RATE_LIMIT_INTERVAL,
+  uniqueTokenPerInterval: RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
+});
 
 export default async function doctorTypeV1(req, res) {
   const doctorTypeV1Handler = async () => {
@@ -33,6 +43,7 @@ export default async function doctorTypeV1(req, res) {
   };
 
   const handler = withMiddleware(
+    limiter.check(req, res, RATE_LIMIT_ATTEMPTS, RATE_LIMIT_CACHE_TOKEN),
     withMethodsGuard(ALLOWED_HTTP_METHODS),
     doctorTypeV1Handler
   );

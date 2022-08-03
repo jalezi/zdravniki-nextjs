@@ -76,6 +76,7 @@ export default async function institutions(req, res) {
   };
 
   const handler = withMiddleware(
+    limiter.check(req, res, RATE_LIMIT_ATTEMPTS, RATE_LIMIT_CACHE_TOKEN),
     withMethodsGuard(ALLOWED_HTTP_METHODS),
     institutionsHandler
   );

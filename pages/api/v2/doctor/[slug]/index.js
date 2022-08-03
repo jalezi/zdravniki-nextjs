@@ -1,5 +1,11 @@
 import { BASE_URL } from '../../../../../config';
-import { ALLOWED_HTTP_METHODS } from '../../../../../constants/common';
+import {
+  ALLOWED_HTTP_METHODS,
+  RATE_LIMIT_ATTEMPTS,
+  RATE_LIMIT_CACHE_TOKEN,
+  RATE_LIMIT_INTERVAL,
+  RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
+} from '../../../../../constants/common';
 import { DOCTORS_TS_URL } from '../../../../../constants/csvURL';
 import { getNowToLocaleString } from '../../../../../lib';
 import {
@@ -7,6 +13,7 @@ import {
   withMethodsGuard,
   withMiddleware,
 } from '../../../../../lib/apiMiddlewarePiping';
+import rateLimit from '../../../../../lib/rateLimit';
 
 const cache = new Map();
 
@@ -14,7 +21,11 @@ const notExistCache = new Map();
 
 const NOT_FOUND_MAP_VALUE = '404 - Not Found';
 
-// TODO Error handling
+const limiter = rateLimit({
+  interval: RATE_LIMIT_INTERVAL,
+  uniqueTokenPerInterval: RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
+});
+
 export default async function doctor(req, res) {
   const doctorHandler = async () => {
     const { slug } = req.query;
@@ -71,6 +82,7 @@ export default async function doctor(req, res) {
   };
 
   const handler = withMiddleware(
+    limiter.check(req, res, RATE_LIMIT_ATTEMPTS, RATE_LIMIT_CACHE_TOKEN),
     withMethodsGuard(ALLOWED_HTTP_METHODS),
     doctorHandler
   );
