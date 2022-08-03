@@ -100,3 +100,12 @@ export const ACCEPTS_ICON_MAP = {
 // Api
 
 export const ALLOWED_HTTP_METHODS = ['GET'];
+export const RATE_LIMIT_INTERVAL =
+  process.env.NODE_ENV === 'development' ? 60000 : 1000; // 1000 = 1 second
+export const RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL =
+  process.env.NODE_ENV === 'development' ? 2 : 500; // Max 500 users interval
+export const RATE_LIMIT_ATTEMPTS = process.env.NODE_ENV ? 3 : 5; // Max 5 attempts
+export const RATE_LIMIT_CACHE_TOKEN = 'CACHE_TOKEN';
+export const RATE_LIMIT_ERROR_CODE = 429;
+export const RATE_LIMIT_ERROR_MESSAGE = 'Too Many Requests';
+export const RATE_LIMIT_RESET_TIME = 5000;
