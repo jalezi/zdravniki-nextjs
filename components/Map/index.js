@@ -65,7 +65,7 @@ const withMap = function withMap(Component) {
         </MarkerClusterGroup>
         <MapTotalResults number={doctors.length} />
 
-        {!isSafari && (
+        {!isSafari() && (
           <LocateControl flyTo initialZoomLevel={13} returnToPrevBounds />
         )}
       </Component>
