@@ -19,14 +19,20 @@ const Filters = function Filters() {
   const [filterState, setFilterState] = useToggleFiltersContext();
   const { t: tCommon } = useTranslation('common');
 
+  const { drType, ageGroup, accepts } = filterState;
+
   const handleOpenClick = useCallback(() => {
     setExpandFilters(prev => !prev);
   }, [setExpandFilters]);
 
-  const { drType, ageGroup, accepts } = filterState;
-
   const onDrTypeChange = useCallback(
-    val => setFilterState(prev => ({ ...prev, drType: val })),
+    val => {
+      setFilterState(prev => ({
+        ...prev,
+        drType: val,
+        ageGroup: val !== 'den' ? '' : prev.ageGroup,
+      }));
+    },
     [setFilterState]
   );
   const onAgeGroupChange = useCallback(
@@ -52,12 +58,14 @@ const Filters = function Filters() {
           buttons={DR_GROUP}
           onChange={onDrTypeChange}
           initialValue={drType ?? ''}
+          as="a"
         />
         {filterState.drType?.includes('den') && (
           <FilterGroup
             buttons={AGE_GROUP}
             onChange={onAgeGroupChange}
             initialValue={ageGroup ?? ''}
+            as="a"
           />
         )}
         <FilterGroup

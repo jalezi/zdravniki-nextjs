@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 
 import * as FilterGroupsStyled from '../FilterGroups/styles';
 
-const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
+const FilterGroup = function FilterGroup({
+  buttons,
+  onChange,
+  initialValue,
+  as = 'button',
+}) {
   const [value, setValue] = useState(initialValue);
   const { t: tCommon } = useTranslation('common');
 
@@ -28,12 +33,13 @@ const FilterGroup = function FilterGroup({ buttons, onChange, initialValue }) {
     <FilterGroupsStyled.Filter>
       {buttons.map(btn => (
         <FilterGroupsStyled.FilterItem
-          as="button"
+          as={as}
           key={btn.value}
           value={btn.value}
           onClick={() => handleBtnClick(btn.value)}
           aria-label={btn.label}
           aria-pressed={value === btn.value}
+          href={as === 'a' ? btn.href : undefined}
         >
           <btn.Icon />
           <span>{translations[btn.label]}</span>
@@ -48,6 +54,7 @@ export default memo(FilterGroup);
 FilterGroup.defaultProps = {
   initialValue: '',
   onChange: () => {},
+  as: 'button',
 };
 
 FilterGroup.propTypes = {
@@ -60,4 +67,5 @@ FilterGroup.propTypes = {
   ).isRequired,
   initialValue: PropTypes.string,
   onChange: PropTypes.func,
+  as: PropTypes.oneOf(['button', 'a']),
 };

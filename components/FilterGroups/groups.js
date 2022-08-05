@@ -15,21 +15,25 @@ export const DR_GROUP = [
     value: 'gp',
     Icon: GPIcon,
     label: 'generalPractitioner',
+    href: '/gp',
   },
   {
     value: 'ped',
     Icon: KidsIcon,
     label: 'pediatrician',
+    href: '/ped',
   },
   {
     value: 'gyn',
     Icon: GynIcon,
     label: 'gynecologist',
+    href: '/gyn',
   },
   {
     value: 'den',
     Icon: DentistIcon,
     label: 'dentist',
+    href: '/den',
   },
 ];
 
@@ -38,16 +42,19 @@ export const AGE_GROUP = [
     value: '',
     Icon: AdultsIcon,
     label: 'adults',
+    href: '/den',
   },
   {
     value: 'y',
     Icon: KidsIcon,
     label: 'youth',
+    href: '/den-y',
   },
   {
     value: 's',
     Icon: StudentsIcon,
     label: 'students',
+    href: '/den-s',
   },
 ];
 export const ACCEPTS_GROUP = [
