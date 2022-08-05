@@ -101,7 +101,7 @@ export const ACCEPTS_ICON_MAP = {
 
 export const ALLOWED_HTTP_METHODS = ['GET'];
 export const RATE_LIMIT_INTERVAL =
-  process.env.NODE_ENV === 'development' ? 60000 : 1000; // 1000 = 1 second
+  process.env.NODE_ENV === 'development' ? 10000 : 1000; // 1000 = 1 second
 export const RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL =
   process.env.NODE_ENV === 'development' ? 2 : 500; // Max 500 users interval
 export const RATE_LIMIT_ATTEMPTS = process.env.NODE_ENV ? 3 : 5; // Max 5 attempts
