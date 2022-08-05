@@ -29,6 +29,10 @@ const ToggleFiltersProvider = dynamic(() =>
   )
 );
 
+const Loader = dynamic(() =>
+  import('../../components/Shared/Loaders').then(mod => mod.BasicLoader)
+);
+
 export async function getStaticPaths() {
   const paths = ['sl', 'en', 'it']
     .map(locale => DOCTOR_TYPES.map(type => ({ params: { type }, locale })))
@@ -79,7 +83,7 @@ export default function DoctorsByTpe({ doctors, updatedAt }) {
 
   const { t: tSEO } = useTranslation('seo');
 
-  const { data, error } = useSWR(`/api/v1/${type}`, fetcher, {
+  const { data, error, isValidating } = useSWR(`/api/v1/${type}`, fetcher, {
     fallbackData: { doctors, updatedAt },
     // refreshInterval: 30_000,
     // ? use onErrorRetry
@@ -105,7 +109,13 @@ export default function DoctorsByTpe({ doctors, updatedAt }) {
       <SEO title={title} description={description} />
       <HomeLayout>
         <MapContainer>
-          <MapWithNoSSR doctors={sortedDoctors} />
+          {isValidating ? (
+            <Loader>
+              <div>Validating data</div>
+            </Loader>
+          ) : (
+            <MapWithNoSSR doctors={sortedDoctors} />
+          )}
         </MapContainer>
         <ToggleProvider initialValue={false}>
           <ToggleFiltersProvider
