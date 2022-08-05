@@ -1,5 +1,3 @@
-import Papa from 'papaparse';
-
 import {
   ALLOWED_HTTP_METHODS,
   RATE_LIMIT_ATTEMPTS,
@@ -7,15 +5,8 @@ import {
   RATE_LIMIT_INTERVAL,
   RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
 } from '../../../../constants/common';
-import {
-  DOCTORS_CSV_URL,
-  DOCTORS_TS_URL,
-  INSTITUTIONS_CSV_URL,
-} from '../../../../constants/csvURL';
-import {
-  populateDoctorWithInstitution,
-  getNowToLocaleString,
-} from '../../../../lib';
+import { DOCTORS_TS_URL } from '../../../../constants/csvURL';
+import { getNowToLocaleString, getDoctorData } from '../../../../lib';
 import {
   withExceptionFilter,
   withMethodsGuard,
@@ -47,29 +38,16 @@ export default async function doctors(req, res) {
       });
     }
 
-    const response = await fetch(DOCTORS_CSV_URL);
-    const text = await response.text();
-    const result = Papa.parse(text, { header: true });
-    const { data } = result;
-
-    const responseInstitutions = await fetch(INSTITUTIONS_CSV_URL);
-    const textInstitutions = await responseInstitutions.text();
-    const resultInstitutions = Papa.parse(textInstitutions, { header: true });
-
-    const { data: institutions } = resultInstitutions;
-
-    const doctorsWithInstitutions = data
-      .filter(dr => dr.doctor) // doctors' csv file has last entry with empty name
-      .map(populateDoctorWithInstitution(institutions));
+    const { doctors: populatedDoctors } = await getDoctorData();
 
     cache.clear();
-    cache.set(ts, doctorsWithInstitutions);
+    cache.set(ts, populatedDoctors);
 
     return res.status(200).json({
-      data: doctorsWithInstitutions,
+      data: populatedDoctors,
       success: true,
       updatedAt: ts,
-      metadata: { ...metadata, cache: false, length: data.length },
+      metadata: { ...metadata, cache: false, length: populatedDoctors.length },
     });
   };
 
