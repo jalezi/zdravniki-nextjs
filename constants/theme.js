@@ -27,6 +27,8 @@ const theme = {
   bgColor1: '#F4F8F8',
   bgColor2: '#E8EFF0',
   brand: '#26c5ed',
+  brandAccent: '#197a93',
+  textColor4Accent: '#3E4C57',
 
   LIST_HEADER: {
     color: '#6c7074',

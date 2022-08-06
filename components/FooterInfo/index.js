@@ -7,7 +7,7 @@ import { useTimestamps } from '../../context/timestampsContext';
 export const FooterInfo = styled('footer')(({ theme }) => ({
   fontSize: '0.75rem',
   padding: '0 24px 50px',
-  color: theme.textColor4,
+  color: theme.textColor4Accent,
 
   '&.is-dr-page': {
     borderTop: '1px dashed #CDCDCD',
@@ -23,7 +23,7 @@ export const FooterInfo = styled('footer')(({ theme }) => ({
   },
 
   a: {
-    color: theme.brand,
+    color: theme.brandAccent,
     fontWeight: 600,
     textDecoration: 'none',
   },
