@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useTimestamps } from '../../context/timestampsContext';
 
 export const FooterInfo = styled('footer')(({ theme }) => ({
-  fontSize: '12px',
+  fontSize: '0.75rem',
   padding: '0 24px 50px',
   color: theme.textColor4,
 
