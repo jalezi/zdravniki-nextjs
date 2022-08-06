@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import Markdown from 'markdown-to-jsx';
 import PropTypes from 'prop-types';
 
+import { BASE_URL } from '../../config';
 import * as MDXLayoutStyles from '../../layouts/MDXLayout/styles';
 import { GlossaryPropType, QuestionPropType } from '../../types';
 import SummaryContent from './SummaryContent';
@@ -47,17 +48,7 @@ const Collapsable = function Collapsable({ section }) {
     e.stopPropagation();
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 1000);
-    navigator.clipboard.writeText(id);
-  };
-
-  const handleExpand = e => {
-    e.stopPropagation();
-    setIsExpanded(true);
-  };
-
-  const handleClose = e => {
-    e.stopPropagation();
-    setIsExpanded(false);
+    navigator.clipboard.writeText(`${BASE_URL}/faq/#${id}`); // does not work locally on mobile devices; see: Security and Privacy at https://webkit.org/blog/10855/async-clipboard-api/
   };
 
   const handleSummaryClick = e => {
@@ -80,9 +71,7 @@ const Collapsable = function Collapsable({ section }) {
         <SummaryContent
           title={section.question ?? section.term}
           btnContainerId={btnContainerId}
-          handleClose={handleClose}
-          handleCopy={handleCopy}
-          handleExpand={handleExpand}
+          handleCopy={e => handleCopy(e, detailsId)}
           isCopied={isCopied}
           isExpanded={isExpanded}
         />
