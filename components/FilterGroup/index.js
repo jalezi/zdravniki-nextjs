@@ -63,6 +63,7 @@ FilterGroup.propTypes = {
       value: PropTypes.string,
       label: PropTypes.string,
       Icon: PropTypes.elementType,
+      href: PropTypes.string,
     })
   ).isRequired,
   initialValue: PropTypes.string,
