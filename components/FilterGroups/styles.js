@@ -148,7 +148,7 @@ export const FilterItem = styled.span.attrs(({ as }) => ({
     opacity: 0.56;
   }
 
-  &[aria-pressed='false'] {
+  &[data-active='false'] {
     background: transparent;
 
     > svg > path {

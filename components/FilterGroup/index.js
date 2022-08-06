@@ -38,8 +38,9 @@ const FilterGroup = function FilterGroup({
           value={btn.value}
           onClick={() => handleBtnClick(btn.value)}
           aria-label={btn.label}
-          aria-pressed={value === btn.value}
+          aria-pressed={as === 'a' ? undefined : value === btn.value}
           href={as === 'a' ? btn.href : undefined}
+          data-active={value === btn.value}
         >
           <btn.Icon />
           <span>{translations[btn.label]}</span>
