@@ -144,6 +144,7 @@ export const Summary = styled.summary`
   cursor: pointer;
   font-weight: 600;
   color: ${({ theme }) => theme.MD.summaryColor};
+  min-height: 24px;
 
   h3 {
     display: inline;
@@ -175,9 +176,14 @@ export const SummaryContentContainer = styled.div`
 export const ButtonsContainer = styled.div`
   display: inline-flex;
   margin-left: auto;
-  gap: 1rem;
+  gap: 8px;
   cursor: initial;
   align-items: center;
+
+  *:first-child {
+    /* margin-top: 2px;
+    margin-left: 4px; */
+  }
 `;
 
 export const IconButton = styled.button`
@@ -185,8 +191,7 @@ export const IconButton = styled.button`
   height: 23px;
   cursor: pointer;
 
-  &.make-smaller {
-    width: 21px;
-    height: 21px;
+  &.copy {
+    padding: 2px;
   }
 `;
