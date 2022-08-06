@@ -23,6 +23,7 @@ const theme = {
   textColor1: 'rgba(0, 0, 0, 0.87)',
   textColor2: 'rgba(0,0,0,0.66)',
   textColor3: '#212529',
+  textColor4: colors.textLight,
   bgColor1: '#F4F8F8',
   bgColor2: '#E8EFF0',
   brand: '#26c5ed',
