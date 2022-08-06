@@ -33,6 +33,10 @@ const FooterInfoCard = function FooterInfoCard({ isDrPage = false }) {
   const { t: tCommon } = useTranslation('common');
   const { timestamp } = useTimestamps();
 
+  if (!timestamp) {
+    return null;
+  }
+
   const date = tCommon('timestamps.datetime', {
     val: new Date(timestamp),
     formatParams: {
