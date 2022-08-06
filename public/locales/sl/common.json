@@ -68,5 +68,13 @@
     "noPhone": "Ni telefonske številke",
     "showOnMap": "Pokaži na zemljevidu"
   },
-  "filter": "Filter"
+  "filter": "Filter",
+  "footer": {
+    "dataSource": "Vir podatkov",
+    "lastChange": "Zadnja sprememba"
+  },
+  "timestamps": {
+    "datetime": "{{val, datetime}}",
+    "at": "ob"
+  }
 }

@@ -68,5 +68,13 @@
     "noPhone": "Numero telefonico non disponibile",
     "showOnMap": "Visualizza sulla mappa"
   },
-  "filter": "Filtro"
+  "filter": "Filtro",
+  "footer": {
+    "dataSource": "Origine dei dati",
+    "lastChange": "Ultimo aggiornamento dei dati"
+  },
+  "timestamps": {
+    "datetime": "{{val, datetime}}",
+    "at": "alle"
+  }
 }
