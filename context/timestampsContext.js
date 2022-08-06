@@ -34,7 +34,7 @@ TimestampsProvider.propTypes = {
 function useTimestamps() {
   const context = useContext(TimestampsContext);
   if (!context) {
-    throw new Error(`useTimestamps must be used within a DoctorsProvider`);
+    throw new Error(`useTimestamps must be used within a TimestampsProvider`);
   }
   return context;
 }
