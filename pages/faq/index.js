@@ -21,6 +21,7 @@ const Notice = dynamic(() =>
   import('../../layouts/MDXLayout/styles').then(mod => mod.Notice)
 );
 const Error = dynamic(() => import('../_error'));
+const FooterInfoCard = dynamic(() => import('../../components/FooterInfo'));
 
 export async function getStaticProps({ locale }) {
   if (locale === 'default') {
@@ -74,6 +75,7 @@ export default function Faq({ data, errorCode }) {
           <Sections data={data} />
         </Suspense>
       </MDXLayout>
+      <FooterInfoCard isDrPage />
     </>
   );
 }

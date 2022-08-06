@@ -12,6 +12,7 @@ const LanguagePageMDX = dynamic(() =>
   import('../../components/LanguagePageMDX')
 );
 const MDXLayout = dynamic(() => import('../../layouts/MDXLayout'));
+const FooterInfoCard = dynamic(() => import('../../components/FooterInfo'));
 
 export async function getStaticProps({ locale }) {
   if (locale === 'default') {
@@ -47,6 +48,7 @@ export default function About() {
       <MDXLayout>
         <LanguagePageMDX slug="about" name={router.locale} />
       </MDXLayout>
+      <FooterInfoCard isDrPage />
     </>
   );
 }

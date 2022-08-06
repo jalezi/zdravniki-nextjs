@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { DoctorPropType } from '../../types';
 import Info from '../DoctorCard/Info';
+import FooterInfoCard from '../FooterInfo';
 import * as Styled from './styles';
 
 const getGroupsByLetter = (acc, doctor) => {
@@ -85,7 +86,10 @@ const DoctorCards = function DoctorCards({ doctors }) {
       <Styled.Header>
         <span>{tMap('totalResults', { count })}</span>
       </Styled.Header>
-      <Styled.DoctorsContainer>{visibleCards}</Styled.DoctorsContainer>
+      <Styled.DoctorsContainer>
+        {visibleCards}
+        <FooterInfoCard />
+      </Styled.DoctorsContainer>
     </>
   );
 };
