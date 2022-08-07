@@ -92,6 +92,7 @@ export default function DoctorsByTpe({ doctors, updatedAt }) {
 
   if (error) {
     // TODO use some kind of logger for error.status
+    return <Error statusCode={error.status || 500} />;
   }
 
   const titles = tSEO('title', { returnObjects: true });

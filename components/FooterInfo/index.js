@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useTimestamps } from '../../context/timestampsContext';
+import Error from '../../pages/_error';
 
 export const FooterInfo = styled('footer')(({ theme }) => ({
   fontSize: '0.75rem',
@@ -31,10 +32,15 @@ export const FooterInfo = styled('footer')(({ theme }) => ({
 
 const FooterInfoCard = function FooterInfoCard({ isDrPage = false }) {
   const { t: tCommon } = useTranslation('common');
-  const { timestamp } = useTimestamps();
+  const { timestamp, error } = useTimestamps();
 
   if (!timestamp) {
     return null;
+  }
+
+  if (error) {
+    // TODO needs different component - it will do for now
+    return <Error statusCode={error?.status || 500} />;
   }
 
   const date = tCommon('timestamps.datetime', {
