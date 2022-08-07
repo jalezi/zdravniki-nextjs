@@ -11,11 +11,11 @@ const SEO = function SEO({ title, description }) {
   const { t: tSEO } = useTranslation('seo');
   const subtitle = tSEO('subtitle');
 
+  const combinedTitle = `${title} - ${subtitle}`;
+
   return (
     <Head>
-      <title>
-        {title} - {subtitle}
-      </title>
+      <title>{combinedTitle}</title>
       <meta name="description" content={description} />
       <link rel="icon" href="/favicon.ico" />
       <link
