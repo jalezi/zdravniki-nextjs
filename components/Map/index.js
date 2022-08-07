@@ -1,11 +1,10 @@
 import { createRef, memo } from 'react';
 
 import L from 'leaflet';
-import PropTypes from 'prop-types';
 import { Popup } from 'react-leaflet';
 
 import { MAP } from '../../constants/common';
-import { DoctorPropType } from '../../types/index';
+import { useFilteredDoctors } from '../../context/filteredDoctorsContext';
 import LocateControl from './LocateControl';
 import Map from './Map';
 import MapTotalResults from './MapTotalResults';
@@ -15,8 +14,14 @@ import MarkerClusterGroup, {
 import { DoctorMarker } from './Markers';
 
 const withMap = function withMap(Component) {
-  const DoctorsMap = function DoctorsMap({ doctors }) {
-    const markers = doctors?.map(doctor => {
+  const DoctorsMap = function DoctorsMap() {
+    const { filteredDoctors, error } = useFilteredDoctors();
+
+    if (error) {
+      return <div>Error</div>;
+    }
+
+    const markers = filteredDoctors?.map(doctor => {
       const key = doctor.name + doctor.instId + Math.random() * Date.now();
       const ref = createRef();
       const accepts = doctor.accepts_override || doctor.accepts;
@@ -63,17 +68,13 @@ const withMap = function withMap(Component) {
         >
           {markers}
         </MarkerClusterGroup>
-        <MapTotalResults number={doctors.length} />
+        <MapTotalResults number={filteredDoctors.length} />
 
         {!isSafari() && (
           <LocateControl flyTo initialZoomLevel={13} returnToPrevBounds />
         )}
       </Component>
     );
-  };
-
-  DoctorsMap.propTypes = {
-    doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
   };
 
   return DoctorsMap;
