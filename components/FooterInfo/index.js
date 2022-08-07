@@ -34,7 +34,7 @@ const FooterInfoCard = function FooterInfoCard({ isDrPage = false }) {
   const { t: tCommon } = useTranslation('common');
   const { timestamp, error } = useTimestamps();
 
-  if (!timestamp) {
+  if (!timestamp && !error) {
     return null;
   }
 
