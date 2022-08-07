@@ -1,11 +1,29 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
+import { useFilteredDoctors } from '../../context/filteredDoctorsContext';
+import useDebounce from '../../hooks/useDebounce';
 import { SearchIcon } from '../Shared/Icons';
 import * as Styled from './styles';
 
 const Search = function Search() {
   const inputRef = useRef();
   const [value, setValue] = useState('');
+  const { doctors, setFilteredDoctors } = useFilteredDoctors();
+
+  const searchByValue = useMemo(
+    () =>
+      doctors.filter(dr => {
+        const isInName = dr.name.toLowerCase().includes(value.toLowerCase());
+        const isInSearchAddress = dr.searchAddress
+          .toLowerCase()
+          .includes(value.toLowerCase());
+
+        return isInName || isInSearchAddress;
+      }),
+    [doctors, value]
+  );
+
+  useDebounce(() => setFilteredDoctors(searchByValue), 500, [searchByValue]);
 
   const handleChange = e => {
     setValue(e.target.value);
