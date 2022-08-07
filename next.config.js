@@ -50,7 +50,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '[locale]/gp',
+        destination: '/gp',
         permanent: true,
       },
     ];
