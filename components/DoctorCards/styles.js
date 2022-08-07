@@ -22,9 +22,10 @@ export const DoctorsContainer = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.bgColor1};
+  height: calc(100% - 36px); // 36px height Header
 
   @media screen and (min-width: 768px) {
-    height: 100%;
+    height: fit-content;
   }
 `;
 

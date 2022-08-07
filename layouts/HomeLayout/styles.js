@@ -1,25 +1,6 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
 
-/*
-.container {  display: grid;
-  grid-template-columns: 1fr 450px;
-  grid-template-rows: 300px 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "filters filters"
-    "map list";
-}
-
-.filters { grid-area: filters; }
-
-.map { grid-area: map; }
-
-.list { grid-area: list; }
-
-*/
-
 export const Main = styled.main`
   position: fixed;
   top: ${({ theme }) => theme.mobileHeaderHeight};
@@ -157,20 +138,20 @@ export const ListContainer = styled.div`
   transition: all 300ms ease-in 0s;
   z-index: 10;
 
-  > div {
-    padding-bottom: 120px;
+  footer {
+    margin-top: 36px;
   }
 
   @media only screen and (min-width: 768px) {
     left: 0;
     right: 0;
-    height: 100%;
+    height: fit-content;
     grid-area: list;
     z-index: 1;
 
     position: relative;
     height: calc(100% - 64px);
     overflow-y: auto;
-    padding-bottom: 128px;
+    /* padding-bottom: 128px; */
   }
 `;
