@@ -29,6 +29,7 @@ const theme = {
   brand: '#26c5ed',
   brandAccent: '#197a93',
   textColor4Accent: '#3E4C57',
+  danger: '#DC3435',
 
   LIST_HEADER: {
     color: '#6c7074',
