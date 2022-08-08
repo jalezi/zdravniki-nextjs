@@ -16,6 +16,8 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
   doctors,
 }) {
   const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [map, setMap] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
 
   const { data, error } = useSWR(`/api/v1/${type}`, fetchJson, {
     fallbackData: { doctors },
@@ -38,8 +40,20 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
       filteredDoctors,
       setFilteredDoctors,
       error,
+      map,
+      setMap,
+      searchValue,
+      setSearchValue,
     }),
-    [sortedDoctors, filteredDoctors, error]
+    [
+      sortedDoctors,
+      filteredDoctors,
+      error,
+      map,
+      setMap,
+      searchValue,
+      setSearchValue,
+    ]
   );
 
   return (

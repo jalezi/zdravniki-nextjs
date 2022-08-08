@@ -22,6 +22,7 @@ const Map = function Map({
   minZoom,
   style,
   zoom,
+  setMap,
 }) {
   return (
     <MapContainer
@@ -32,6 +33,7 @@ const Map = function Map({
       minZoom={minZoom}
       style={style}
       zoom={zoom}
+      ref={setMap}
     >
       <AttributionControl prefix="" />
       <TileLayer
@@ -51,6 +53,7 @@ Map.defaultProps = {
   minZoom: MAP.MIN_ZOOM,
   style: undefined,
   zoom: MAP.ZOOM,
+  setMap: undefined,
 };
 
 Map.propTypes = {
@@ -64,6 +67,7 @@ Map.propTypes = {
   minZoom: PropTypes.number,
   style: StylePropType,
   zoom: PropTypes.number,
+  setMap: PropTypes.func,
 };
 
 export default memo(Map);

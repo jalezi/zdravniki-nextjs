@@ -7,6 +7,7 @@ import { MAP } from '../../constants/common';
 import { useFilteredDoctors } from '../../context/filteredDoctorsContext';
 import LocateControl from './LocateControl';
 import Map from './Map';
+import MapEvents from './MapEvents';
 import MapTotalResults from './MapTotalResults';
 import MarkerClusterGroup, {
   createClusterCustomIcon,
@@ -16,6 +17,7 @@ import { DoctorMarker } from './Markers';
 const withMap = function withMap(Component) {
   const DoctorsMap = function DoctorsMap() {
     const { filteredDoctors, error } = useFilteredDoctors();
+    const { setMap } = useFilteredDoctors();
 
     if (error) {
       return <div>Error</div>;
@@ -61,6 +63,7 @@ const withMap = function withMap(Component) {
         maxZoom={MAP.MAX_ZOOM}
         minZoom={MAP.MIN_ZOOM}
         zoom={MAP.ZOOM}
+        setMap={setMap}
       >
         <MarkerClusterGroup
           iconCreateFunction={createClusterCustomIcon}
@@ -73,6 +76,7 @@ const withMap = function withMap(Component) {
         {!isSafari() && (
           <LocateControl flyTo initialZoomLevel={13} returnToPrevBounds />
         )}
+        <MapEvents />
       </Component>
     );
   };
