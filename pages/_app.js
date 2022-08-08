@@ -15,9 +15,7 @@ import '../styles/globals.css';
 import 'rc-tooltip/assets/bootstrap.css';
 
 const Layout = dynamic(() => import('../layouts/Layout'));
-const TimestampsProvider = dynamic(() =>
-  import('../context/timestampsContext').then(mod => mod.TimestampsProvider)
-);
+
 const AppErrorFallback = dynamic(() =>
   import('../components/Shared/ErrorBoundary/AppErrorFallback')
 );
@@ -40,11 +38,9 @@ function MyApp({ Component, pageProps }) {
         <AppErrorFallback {...fallbackProps} errorInfo={errorInfo} />
       )}
     >
-      <TimestampsProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </TimestampsProvider>
     </ErrorBoundary>
   );
 }
