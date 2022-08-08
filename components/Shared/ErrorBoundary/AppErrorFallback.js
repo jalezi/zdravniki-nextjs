@@ -1,8 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import ErrorLayout from '../../../layouts/ErrorLayout';
-import { Details, Summary } from '../../../layouts/MDXLayout/styles';
-
 /* eslint-disable react/prop-types */
 const sliceErrorStack = (stackTrace = '', numLines = 10) => {
   const lines = stackTrace.split('\n');
@@ -11,13 +8,14 @@ const sliceErrorStack = (stackTrace = '', numLines = 10) => {
   return joinedLines;
 };
 
+// TODO needs styling
 export default function AppErrorFallback({
   error,
   errorInfo,
   resetErrorBoundary,
 }) {
   return (
-    <ErrorLayout>
+    <main>
       <div>
         <h2>An Error Occurred</h2>
         <p>
@@ -37,14 +35,14 @@ export default function AppErrorFallback({
         <h3>Error Details</h3>
         <h4>Message</h4>
         <pre>{error.message}</pre>
-        <Details>
-          <Summary>Expand to Show Error Stack Traces</Summary>
+        <details>
+          <summary>Expand to Show Error Stack Traces</summary>
           <h4>Stack Trace</h4>
           <pre>{sliceErrorStack(error.stack)}</pre>
           <h4>Component Stack</h4>
           <pre>{sliceErrorStack(errorInfo?.componentStack)}</pre>
-        </Details>
+        </details>
       </div>
-    </ErrorLayout>
+    </main>
   );
 }
