@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import useSWR from 'swr';
 
 import { fetchJson, sortByField } from '../lib';
+import filterBySearchValueInMapBounds from '../lib/filterBySearchValueInMapBounds';
 import { ChildrenPropType, DoctorPropType } from '../types';
 
 const FilteredDoctorsContext = createContext();
@@ -29,6 +30,17 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
     () => data.doctors.sort(sortByField('name')),
     [data.doctors]
   );
+
+  useEffect(() => {
+    const bounds = map?.getBounds();
+    setFilteredDoctors(
+      filterBySearchValueInMapBounds({
+        searchValue,
+        filtered: sortedDoctors,
+        bounds,
+      })
+    );
+  }, [map, searchValue, sortedDoctors]);
 
   useEffect(() => {
     setFilteredDoctors(sortedDoctors);
