@@ -64,6 +64,9 @@ export default function DoctorsByTpe({ doctors }) {
   const { query } = useRouter();
   const { type } = query;
 
+  // eslint-disable-next-line no-console
+  console.log(query);
+
   const { t: tSEO } = useTranslation('seo');
 
   const titles = tSEO('title', { returnObjects: true });
