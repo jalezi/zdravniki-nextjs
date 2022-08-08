@@ -80,7 +80,7 @@ const Header = function Header({ noAnimation }) {
 
   return (
     <Styled.Header ref={headerRef}>
-      <Link href={`/${router.locale}/gp`}>
+      <Link href="/gp">
         <Styled.Logo role="link" aria-label="link to home">
           <LogoIcon role="link" aria-label="link to home" />
         </Styled.Logo>
