@@ -33,6 +33,9 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
 
   useEffect(() => {
     const bounds = map?.getBounds();
+    if (!bounds) {
+      return;
+    }
     setFilteredDoctors(
       filterBySearchValueInMapBounds({
         searchValue,
