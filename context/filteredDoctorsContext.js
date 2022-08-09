@@ -23,6 +23,7 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [map, setMap] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+  const [accepts, setAccepts] = useState('');
 
   const { data, error } = useSWR(`/api/v1/${type}`, fetchJson, {
     fallbackData: { doctors },
@@ -40,14 +41,22 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
     if (!bounds) {
       return;
     }
+
+    let filteredByAccepts = sortedDoctors;
+    if (accepts) {
+      filteredByAccepts = filteredByAccepts.filter(
+        doctor => doctor.accepts === accepts
+      );
+    }
+
     setFilteredDoctors(
       filterBySearchValueInMapBounds({
         searchValue,
-        filtered: sortedDoctors,
+        filtered: filteredByAccepts,
         bounds,
       })
     );
-  }, [map, searchValue, sortedDoctors]);
+  }, [map, searchValue, sortedDoctors, accepts]);
 
   const value = useMemo(
     () => ({
@@ -59,6 +68,8 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
       setMap,
       searchValue,
       setSearchValue,
+      accepts,
+      setAccepts,
     }),
     [
       sortedDoctors,
@@ -68,6 +79,8 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
       setMap,
       searchValue,
       setSearchValue,
+      accepts,
+      setAccepts,
     ]
   );
 

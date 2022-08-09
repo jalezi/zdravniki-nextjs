@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
@@ -8,6 +8,7 @@ import {
   DR_TYPES_I18_MAP,
   DR_TYPES_ICON_MAP,
 } from '../../constants/common';
+import { useFilteredDoctors } from '../../context/filteredDoctorsContext';
 import { useToggleFiltersContext } from '../../context/toggleFiltersContext';
 import FilterGroup from '../FilterGroup/index';
 import { FilterIcon } from '../Shared/Icons';
@@ -19,7 +20,13 @@ const Filters = function Filters() {
   const [filterState, setFilterState] = useToggleFiltersContext();
   const { t: tCommon } = useTranslation('common');
 
+  const { setAccepts } = useFilteredDoctors();
+
   const { drType, ageGroup, accepts } = filterState;
+
+  useEffect(() => {
+    setAccepts(accepts);
+  }, [accepts, setAccepts]);
 
   const handleOpenClick = useCallback(() => {
     setExpandFilters(prev => !prev);
