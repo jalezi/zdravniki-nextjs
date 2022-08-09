@@ -78,11 +78,9 @@ const Header = function Header({ noAnimation }) {
     headerRef.current.classList.remove('menuOpen');
   };
 
-  const homePath = '/gp';
-
   return (
     <Styled.Header ref={headerRef}>
-      <Link href={homePath}>
+      <Link href="/gp" passHref>
         <Styled.Logo role="link" aria-label="link to home">
           <LogoIcon role="link" aria-label="link to home" />
         </Styled.Logo>
@@ -92,7 +90,7 @@ const Header = function Header({ noAnimation }) {
         <Styled.Heading>Menu</Styled.Heading>
         <Styled.List>
           <li>
-            <Link href={homePath} passHref>
+            <Link href="/gp" passHref>
               <Styled.A
                 onClick={onLinkClick}
                 className={router.pathname === '/[type]' ? 'active' : ''}

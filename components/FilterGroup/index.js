@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { memo, useCallback, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -10,11 +12,17 @@ const FilterGroup = function FilterGroup({
   onChange,
   initialValue,
   as = 'button',
+  nextjsLink,
 }) {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState();
   const { t: tCommon } = useTranslation('common');
 
   useEffect(() => {
+    if (!value) {
+      setValue(initialValue);
+      return;
+    }
+
     if (value !== initialValue) {
       onChange(value);
     }
@@ -31,21 +39,42 @@ const FilterGroup = function FilterGroup({
 
   return (
     <FilterGroupsStyled.Filter>
-      {buttons.map(btn => (
-        <FilterGroupsStyled.FilterItem
-          as={as}
-          key={btn.value}
-          value={btn.value}
-          onClick={() => handleBtnClick(btn.value)}
-          aria-label={btn.label}
-          aria-pressed={as === 'a' ? undefined : value === btn.value}
-          href={as === 'a' ? btn.href : undefined}
-          data-active={value === btn.value}
-        >
-          <btn.Icon />
-          <span>{translations[btn.label]}</span>
-        </FilterGroupsStyled.FilterItem>
-      ))}
+      {nextjsLink
+        ? buttons.map(btn => (
+            <Link
+              key={btn.label}
+              href={btn.href}
+              passHref={as === 'a' ? undefined : true}
+            >
+              <FilterGroupsStyled.FilterItem
+                as={as}
+                value={btn.value}
+                onClick={() => handleBtnClick(btn.value)}
+                aria-label={btn.label}
+                aria-pressed={as === 'a' ? undefined : value === btn.value}
+                href={undefined}
+                data-active={value === btn.value}
+              >
+                <btn.Icon />
+                <span>{translations[btn.label]}</span>
+              </FilterGroupsStyled.FilterItem>
+            </Link>
+          ))
+        : buttons.map(btn => (
+            <FilterGroupsStyled.FilterItem
+              as={as}
+              key={btn.label}
+              value={btn.value}
+              onClick={() => handleBtnClick(btn.value)}
+              aria-label={btn.label}
+              aria-pressed={as === 'a' ? undefined : value === btn.value}
+              href={as === 'a' ? btn.href : undefined}
+              data-active={value === btn.value}
+            >
+              <btn.Icon />
+              <span>{translations[btn.label]}</span>
+            </FilterGroupsStyled.FilterItem>
+          ))}
     </FilterGroupsStyled.Filter>
   );
 };
@@ -56,6 +85,7 @@ FilterGroup.defaultProps = {
   initialValue: '',
   onChange: () => {},
   as: 'button',
+  nextjsLink: undefined,
 };
 
 FilterGroup.propTypes = {
@@ -70,4 +100,5 @@ FilterGroup.propTypes = {
   initialValue: PropTypes.string,
   onChange: PropTypes.func,
   as: PropTypes.oneOf(['button', 'a']),
+  nextjsLink: PropTypes.bool,
 };

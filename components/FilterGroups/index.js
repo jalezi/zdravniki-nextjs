@@ -66,6 +66,7 @@ const Filters = function Filters() {
           onChange={onDrTypeChange}
           initialValue={drType ?? ''}
           as="a"
+          nextjsLink
         />
         {filterState.drType?.includes('den') && (
           <FilterGroup
@@ -73,6 +74,7 @@ const Filters = function Filters() {
             onChange={onAgeGroupChange}
             initialValue={ageGroup ?? ''}
             as="a"
+            nextjsLink
           />
         )}
         <FilterGroup
