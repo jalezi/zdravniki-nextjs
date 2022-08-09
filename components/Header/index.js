@@ -15,6 +15,8 @@ import Hamburger from './Hamburger';
 import * as Styled from './styles';
 
 const Header = function Header({ noAnimation }) {
+  const { query } = useRouter();
+  const { type } = query;
   const headerRef = useRef();
   const bodyRef = useRef();
   const timeoutRef = useRef();
@@ -78,9 +80,11 @@ const Header = function Header({ noAnimation }) {
     headerRef.current.classList.remove('menuOpen');
   };
 
+  const homePath = `/${type ?? 'gp'}`; // there is an error if user switch from not /[type] page to /[type] (if 'logo' or 'home' is clicked with href set to '/gp')
+
   return (
     <Styled.Header ref={headerRef}>
-      <Link href="/gp">
+      <Link href={homePath}>
         <Styled.Logo role="link" aria-label="link to home">
           <LogoIcon role="link" aria-label="link to home" />
         </Styled.Logo>
@@ -90,7 +94,7 @@ const Header = function Header({ noAnimation }) {
         <Styled.Heading>Menu</Styled.Heading>
         <Styled.List>
           <li>
-            <Link href="/gp" passHref>
+            <Link href={homePath} passHref>
               <Styled.A
                 onClick={onLinkClick}
                 className={router.pathname === '/[type]' ? 'active' : ''}

@@ -70,25 +70,16 @@ export default function DoctorsByTpe({ doctors }) {
   const title = titles[type] || titles.default;
   const description = tSEO('description');
 
-  const [drType, ageGroup = ''] = type.split('-');
-
   return (
     <>
       <SEO title={title} description={description} />
       <HomeLayout>
-        <FilteredDoctorsProvider type={drType} doctors={doctors}>
+        <FilteredDoctorsProvider doctors={doctors}>
           <MapContainer>
             <MapWithNoSSR />
           </MapContainer>
           <ToggleProvider initialValue={false}>
-            <ToggleFiltersProvider
-              initialValue={{
-                drType,
-                ageGroup,
-                accepts: '',
-                searchValue: '',
-              }}
-            >
+            <ToggleFiltersProvider>
               <Filters />
               <Doctors />
             </ToggleFiltersProvider>

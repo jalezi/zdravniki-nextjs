@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import PropTypes from 'prop-types';
@@ -13,9 +15,11 @@ export const FilteredDoctorsConsumer = FilteredDoctorsContext.Consumer;
 
 const FilteredDoctorsProvider = function FilteredDoctorsProvider({
   children,
-  type,
   doctors,
 }) {
+  const { query } = useRouter();
+  const { type } = query;
+
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [map, setMap] = useState(null);
   const [searchValue, setSearchValue] = useState('');
@@ -44,10 +48,6 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
       })
     );
   }, [map, searchValue, sortedDoctors]);
-
-  useEffect(() => {
-    setFilteredDoctors(sortedDoctors);
-  }, [sortedDoctors]);
 
   const value = useMemo(
     () => ({
@@ -80,7 +80,6 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
 
 FilteredDoctorsProvider.propTypes = {
   children: ChildrenPropType.isRequired,
-  type: PropTypes.string.isRequired,
   doctors: PropTypes.arrayOf(DoctorPropType.isRequired).isRequired,
 };
 

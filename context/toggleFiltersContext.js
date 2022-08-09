@@ -1,6 +1,6 @@
-import { createContext, useState, useContext, useMemo } from 'react';
+import { useRouter } from 'next/router';
 
-import PropTypes from 'prop-types';
+import { createContext, useState, useContext, useMemo } from 'react';
 
 import { ChildrenPropType } from '../types';
 
@@ -10,9 +10,18 @@ export const ToggleFiltersConsumer = toggleFiltersContext.Consumer;
 
 export const ToggleFiltersProvider = function ToggleFiltersProvider({
   children,
-  initialValue,
 }) {
-  const [state, setState] = useState(initialValue);
+  const { query } = useRouter();
+  const { type } = query;
+
+  const [drType, ageGroup = ''] = type.split('-');
+
+  const [state, setState] = useState({
+    drType,
+    ageGroup,
+    accepts: '',
+    searchValue: '',
+  });
 
   const memoState = useMemo(() => state, [state]);
 
@@ -24,22 +33,8 @@ export const ToggleFiltersProvider = function ToggleFiltersProvider({
   );
 };
 
-ToggleFiltersProvider.defaultProps = {
-  initialValue: undefined,
-};
-
 ToggleFiltersProvider.propTypes = {
   children: ChildrenPropType.isRequired,
-  initialValue: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.string,
-    PropTypes.exact({
-      drType: PropTypes.string,
-      ageGroup: PropTypes.string,
-      accepts: PropTypes.string,
-      searchValue: PropTypes.string,
-    }),
-  ]),
 };
 
 export function useToggleFiltersContext() {
