@@ -80,24 +80,21 @@ const Header = function Header({ noAnimation }) {
 
   return (
     <Styled.Header ref={headerRef}>
-      <Link href="/gp" passHref>
-        <Styled.Logo role="link" aria-label="link to home">
-          <LogoIcon role="link" aria-label="link to home" />
-        </Styled.Logo>
-      </Link>
+      <Styled.Logo href="/gp" role="link" aria-label="link to home">
+        <LogoIcon role="link" aria-label="link to home" />
+      </Styled.Logo>
       <Hamburger onClick={onHamburgerClick} isOpen={open} />
       <Styled.Nav isOpen={open}>
         <Styled.Heading>Menu</Styled.Heading>
         <Styled.List>
           <li>
-            <Link href="/gp" passHref>
-              <Styled.A
-                onClick={onLinkClick}
-                className={router.pathname === '/[type]' ? 'active' : ''}
-              >
-                {tHeader('home')}
-              </Styled.A>
-            </Link>
+            <Styled.A
+              href="/gp"
+              onClick={onLinkClick}
+              className={router.pathname === '/[type]' ? 'active' : ''}
+            >
+              {tHeader('home')}
+            </Styled.A>
           </li>
           <li>
             <Link href="/faq" passHref>
