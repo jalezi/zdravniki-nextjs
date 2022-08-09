@@ -86,13 +86,13 @@ export const DR_TYPES_ICON_MAP = {
 };
 
 export const AGE_GROUP_ICON_MAP = {
-  '': AdultsIcon,
+  all: AdultsIcon,
   y: KidsIcon,
   s: StudentsIcon,
 };
 
 export const ACCEPTS_ICON_MAP = {
-  '': AllIcon,
+  all: AllIcon,
   y: CheckIcon,
   n: BanIcon,
 };

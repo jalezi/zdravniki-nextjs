@@ -39,7 +39,7 @@ export const DR_GROUP = [
 
 export const AGE_GROUP = [
   {
-    value: '',
+    value: 'all',
     Icon: AdultsIcon,
     label: 'adults',
     href: '/den',
@@ -69,7 +69,7 @@ export const ACCEPTS_GROUP = [
     label: 'rejects',
   },
   {
-    value: '',
+    value: 'all',
     Icon: AllIcon,
     label: 'all',
   },

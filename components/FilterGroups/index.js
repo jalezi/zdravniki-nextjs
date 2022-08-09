@@ -37,7 +37,7 @@ const Filters = function Filters() {
       setFilterState(prev => ({
         ...prev,
         drType: val,
-        ageGroup: val !== 'den' ? '' : prev.ageGroup,
+        ageGroup: val !== 'den' ? 'all' : prev.ageGroup,
       }));
     },
     [setFilterState]
@@ -72,7 +72,7 @@ const Filters = function Filters() {
           <FilterGroup
             buttons={AGE_GROUP}
             onChange={onAgeGroupChange}
-            initialValue={ageGroup ?? ''}
+            initialValue={ageGroup ?? 'all'}
             as="a"
             nextjsLink
           />
@@ -80,7 +80,7 @@ const Filters = function Filters() {
         <FilterGroup
           buttons={ACCEPTS_GROUP}
           onChange={onAcceptsChange}
-          initialValue={accepts ?? ''}
+          initialValue={accepts ?? 'all<'}
         />
       </Styled.Filters>
       <Styled.Summary open={expandFilters}>

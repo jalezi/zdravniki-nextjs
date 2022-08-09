@@ -23,7 +23,7 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
   const [filteredDoctors, setFilteredDoctors] = useState([]);
   const [map, setMap] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  const [accepts, setAccepts] = useState('');
+  const [accepts, setAccepts] = useState('all');
 
   const { data, error } = useSWR(`/api/v1/${type}`, fetchJson, {
     fallbackData: { doctors },
@@ -40,7 +40,7 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
     const bounds = map?.getBounds();
     if (bounds) {
       let filteredByAccepts = sortedDoctors;
-      if (accepts) {
+      if (['y', 'n'].includes(accepts)) {
         filteredByAccepts = filteredByAccepts.filter(
           doctor => doctor.accepts === accepts
         );

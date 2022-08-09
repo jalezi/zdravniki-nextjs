@@ -14,12 +14,12 @@ export const ToggleFiltersProvider = function ToggleFiltersProvider({
   const { query } = useRouter();
   const { type } = query;
 
-  const [drType, ageGroup = ''] = type.split('-');
+  const [drType, ageGroup = 'all'] = type.split('-');
 
   const [state, setState] = useState({
     drType,
     ageGroup,
-    accepts: '',
+    accepts: 'all',
     searchValue: '',
   });
 
