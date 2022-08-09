@@ -38,24 +38,22 @@ const FilteredDoctorsProvider = function FilteredDoctorsProvider({
 
   useEffect(() => {
     const bounds = map?.getBounds();
-    if (!bounds) {
-      return;
-    }
+    if (bounds) {
+      let filteredByAccepts = sortedDoctors;
+      if (accepts) {
+        filteredByAccepts = filteredByAccepts.filter(
+          doctor => doctor.accepts === accepts
+        );
+      }
 
-    let filteredByAccepts = sortedDoctors;
-    if (accepts) {
-      filteredByAccepts = filteredByAccepts.filter(
-        doctor => doctor.accepts === accepts
+      setFilteredDoctors(
+        filterBySearchValueInMapBounds({
+          searchValue,
+          filtered: filteredByAccepts,
+          bounds,
+        })
       );
     }
-
-    setFilteredDoctors(
-      filterBySearchValueInMapBounds({
-        searchValue,
-        filtered: filteredByAccepts,
-        bounds,
-      })
-    );
   }, [map, searchValue, sortedDoctors, accepts]);
 
   const value = useMemo(

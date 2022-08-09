@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
+import { useMemo } from 'react';
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
@@ -56,10 +58,24 @@ export async function getStaticProps({ locale }) {
   };
 }
 
+const MapSkeleton = function MapSkeleton() {
+  return (
+    <div className="map-skeleton">
+      <div className="map-skeleton__map" />
+      <div className="map-skeleton__filters" />
+    </div>
+  );
+};
+
 export default function DoctorsByTpe({ doctors }) {
-  const MapWithNoSSR = dynamic(() => import('../../components/Map'), {
-    ssr: false,
-  });
+  const MapWithNoSSR = useMemo(
+    () =>
+      dynamic(() => import('../../components/Map'), {
+        ssr: false,
+        loading: MapSkeleton,
+      }),
+    []
+  );
 
   const { query } = useRouter();
   const { type } = query;

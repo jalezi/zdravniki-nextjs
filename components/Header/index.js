@@ -15,8 +15,6 @@ import Hamburger from './Hamburger';
 import * as Styled from './styles';
 
 const Header = function Header({ noAnimation }) {
-  const { query } = useRouter();
-  const { type } = query;
   const headerRef = useRef();
   const bodyRef = useRef();
   const timeoutRef = useRef();
@@ -80,7 +78,7 @@ const Header = function Header({ noAnimation }) {
     headerRef.current.classList.remove('menuOpen');
   };
 
-  const homePath = `/${type ?? 'gp'}`; // there is an error if user switch from not /[type] page to /[type] (if 'logo' or 'home' is clicked with href set to '/gp')
+  const homePath = '/gp';
 
   return (
     <Styled.Header ref={headerRef}>
