@@ -11,10 +11,11 @@ export const ToggleFiltersConsumer = toggleFiltersContext.Consumer;
 export const ToggleFiltersProvider = function ToggleFiltersProvider({
   children,
 }) {
-  const { query } = useRouter();
+  const { query, asPath } = useRouter();
   const { type } = query;
 
-  const [drType, ageGroup = 'all'] = type.split('-');
+  const [drType, ageGroup = 'all'] =
+    type?.split('-') ?? asPath.split('/').slice(1, 3); // if type not exist (deployed on vercel)
 
   const [state, setState] = useState({
     drType,
