@@ -44,7 +44,7 @@ const FilterGroup = function FilterGroup({
             <Link
               key={btn.label}
               href={btn.href}
-              passHref={as === 'a' ? undefined : true}
+              passHref={as === 'a' ? true : undefined}
             >
               <FilterGroupsStyled.FilterItem
                 as={as}
