@@ -10,7 +10,7 @@ export const Main = styled.main`
 
   @media only screen and (min-width: 768px) {
     top: calc(${({ theme }) => theme.headerHeight});
-    height: 100%;
+    height: calc(100% - ${({ theme }) => theme.headerHeight});
     display: grid;
     grid-template-columns: auto 450px;
     grid-template-rows: 64px 1fr;
@@ -150,8 +150,7 @@ export const ListContainer = styled.div`
     z-index: 1;
 
     position: relative;
-    height: calc(100% - 64px);
+    height: 100%;
     overflow-y: auto;
-    /* padding-bottom: 128px; */
   }
 `;
