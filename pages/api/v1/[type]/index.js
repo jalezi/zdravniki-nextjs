@@ -6,7 +6,7 @@ import {
   RATE_LIMIT_INTERVAL,
   RATE_LIMIT_UNIQUE_TOKEN_PER_INTERVAL,
 } from '../../../../constants/common';
-import { getDoctorData } from '../../../../lib';
+import { getDoctorData, getNowToLocaleString } from '../../../../lib';
 import {
   withExceptionFilter,
   withMethodsGuard,
@@ -29,6 +29,7 @@ export default async function doctorTypeV1(req, res) {
       return res.status(404).send({
         success: false,
         error: { code: 404, message: error.message },
+        metadata: { url: req.url, time: getNowToLocaleString() },
       });
     }
 

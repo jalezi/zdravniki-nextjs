@@ -20,7 +20,10 @@ const withMap = function withMap(Component) {
     const { setMap } = useFilteredDoctors();
 
     if (error) {
-      return <div>Error</div>;
+      if (error.status === 429) {
+        return <div>Too many requests. Wait a second.....</div>;
+      }
+      return <div>Somethin went wrong!</div>;
     }
 
     const markers = filteredDoctors?.map(doctor => {
