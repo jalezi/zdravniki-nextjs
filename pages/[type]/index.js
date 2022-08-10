@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
 
-import { DOCTOR_TYPES } from '../../constants/common';
+// import { DOCTOR_TYPES } from '../../constants/common';
 import { DoctorPropType } from '../../types';
 
 const SEO = dynamic(() => import('../../components/SEO'));
@@ -31,14 +31,14 @@ const FilteredDoctorsProvider = dynamic(() =>
   )
 );
 
-export async function getStaticPaths() {
-  const paths = ['sl', 'en', 'it']
-    .map(locale => DOCTOR_TYPES.map(type => ({ params: { type }, locale })))
-    .flat(Infinity);
+// export async function getStaticPaths() {
+//   // const paths = ['sl', 'en', 'it']
+//   //   .map(locale => DOCTOR_TYPES.map(type => ({ params: { type }, locale })))
+//   //   .flat(Infinity);
 
-  return { paths, fallback: false };
-}
-export async function getStaticProps({ locale }) {
+//   return { paths: [], fallback: false };
+// }
+export async function getServerSideProps({ locale }) {
   if (locale === 'default') {
     return { notFound: true };
   }
@@ -54,7 +54,6 @@ export async function getStaticProps({ locale }) {
       // Will be passed to the page component as props
       doctors: [],
     },
-    revalidate: 1,
   };
 }
 
