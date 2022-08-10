@@ -8,6 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PropTypes } from 'prop-types';
 
 // import { DOCTOR_TYPES } from '../../constants/common';
+import { getDoctorData } from '../../lib';
 import { DoctorPropType } from '../../types';
 
 const SEO = dynamic(() => import('../../components/SEO'));
@@ -38,10 +39,17 @@ const FilteredDoctorsProvider = dynamic(() =>
 
 //   return { paths: [], fallback: false };
 // }
-export async function getServerSideProps({ locale }) {
+export async function getServerSideProps({ locale, query }) {
   if (locale === 'default') {
     return { notFound: true };
   }
+
+  const { doctors } = await getDoctorData({
+    type: query.type,
+    filed: '',
+    value: '',
+    isSlug: false,
+  });
 
   return {
     props: {
@@ -52,7 +60,7 @@ export async function getServerSideProps({ locale }) {
         'seo',
       ])),
       // Will be passed to the page component as props
-      doctors: [],
+      doctors,
     },
   };
 }
