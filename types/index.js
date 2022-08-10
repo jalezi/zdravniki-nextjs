@@ -104,3 +104,8 @@ export const DoctorPropType = PropTypes.exact({
   updatedAt: PropTypes.string,
   website: PropTypes.string.isRequired,
 });
+
+export const LinkHrefObjectPropType = {
+  pathname: PropTypes.string.isRequired,
+  query: PropTypes.object,
+};

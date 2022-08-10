@@ -5,6 +5,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 
+import { LinkHrefObjectPropType } from '../../types';
 import * as FilterGroupsStyled from '../FilterGroups/styles';
 
 const FilterGroup = function FilterGroup({
@@ -94,7 +95,10 @@ FilterGroup.propTypes = {
       value: PropTypes.string,
       label: PropTypes.string,
       Icon: PropTypes.elementType,
-      href: PropTypes.string,
+      href: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape(LinkHrefObjectPropType),
+      ]),
     })
   ).isRequired,
   initialValue: PropTypes.string,
